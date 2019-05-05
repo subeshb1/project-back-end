@@ -3,10 +3,10 @@
 module Api
   module V1
     class TestController < BaseController
-      before_action :validate_schema
+      # before_action :validate_schema
 
       def index
-        render json: {data: "Hello"}, status: 200
+        render json: { data: 'Hello' }, status: 200
       end
     end
   end

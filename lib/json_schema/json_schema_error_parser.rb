@@ -17,7 +17,7 @@ class JSONSchemaErrorParser
     humanize_field = field.tr('_', '-').split('-').map(&:humanize).join(' ')
     {
       field: field,
-      message: "#{humanize_field} #{specific_error.split(error_field)[1].strip}".strip
+      message: "#{specific_error.split(error_field)[1].strip}".strip
     }
   end
 end

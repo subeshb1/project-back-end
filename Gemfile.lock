@@ -114,8 +114,6 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     json (2.2.0)
-    json-schema (2.8.1)
-      addressable (>= 2.4)
     jsonapi-renderer (0.2.0)
     kwalify (0.7.2)
     launchy (2.4.3)
@@ -300,7 +298,6 @@ DEPENDENCIES
   faker
   httparty
   jbuilder
-  json-schema
   listen
   pg
   pry

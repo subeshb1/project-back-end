@@ -12,7 +12,6 @@ gem 'activerecord'
 # Query web services through api and examine the resulting output
 gem 'httparty'
 
-gem 'json-schema'
 gem 'active_model_serializers'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -78,7 +77,6 @@ end
 group :test do
   # Code coverage analysis tool for Ruby
   gem 'simplecov', require: false
-  # Testing framework for rails; go-to test framework in CloudFactory
   gem 'rspec-rails'
   # Add :retry option for intermittently failing rspec examples
   # gem 'rspec-retry'
