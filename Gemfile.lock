@@ -115,6 +115,7 @@ GEM
       multi_json (>= 1.2)
     json (2.2.0)
     jsonapi-renderer (0.2.0)
+    jwt (2.1.0)
     kwalify (0.7.2)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -299,6 +300,7 @@ DEPENDENCIES
   faker
   httparty
   jbuilder
+  jwt
   listen
   pg
   pry
