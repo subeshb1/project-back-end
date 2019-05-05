@@ -1,15 +1,15 @@
+# frozen_string_literal: true
 require_relative 'boot'
 
-require "rails"
+require 'rails'
 # Pick the frameworks you want:
-require "active_model/railtie"
+# require "active_model/railtie"
 require "active_job/railtie"
-require "active_record/railtie"
-require "active_storage/engine"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "action_cable/engine"
+require 'active_record/railtie'
+require 'action_controller/railtie'
+# require "action_mailer/railtie"
+# require "action_view/railtie"
+# require "action_cable/engine"
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -17,19 +17,37 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module BackEnd
+module RailsApiTemplate
+  # :nodoc:
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
-
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
+    Dir["#{Rails.root}/lib/**/*.rb"].each { |file| require(file) }
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+    Dir["#{Rails.root}/app/middleware/*.rb"].each { |file| require(file) }
+
+    # Configuration for production, staging and test environment.
+
+    # Code is not reloaded between requests.
+    config.cache_classes = true
+
+    # Configuration for production, staging environment.
+
+    # Eager load code on boot. This eager loads most of Rails and
+    # your application in memory, allowing both threaded web servers
+    # and those relying on copy on write to perform better.
+    # Rake tasks automatically ignore this option for performance.
+    config.eager_load = true
+
+    # Full error reports are disabled and caching is turned on.
+    config.consider_all_requests_local       = false
+    config.action_controller.perform_caching = true
+
     config.api_only = true
+    config.middleware.insert_after Rack::Runtime, CatchJsonParseErrors
   end
 end
