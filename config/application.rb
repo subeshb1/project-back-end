@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails'
 # Pick the frameworks you want:
 # require "active_model/railtie"
-require "active_job/railtie"
+require 'active_job/railtie'
 require 'active_record/railtie'
 require 'action_controller/railtie'
 # require "action_mailer/railtie"
@@ -17,7 +18,7 @@ require 'action_controller/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module RailsApiTemplate
+module BackEnd
   # :nodoc:
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -49,5 +50,12 @@ module RailsApiTemplate
 
     config.api_only = true
     config.middleware.insert_after Rack::Runtime, CatchJsonParseErrors
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: %i[get post options]
+      end
+    end
   end
 end
