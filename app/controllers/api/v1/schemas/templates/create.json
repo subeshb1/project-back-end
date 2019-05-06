@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "field_name": {
+      "type": "string",
+      "minLength": 1,
+      "invalidMessage": "'field_name' must be a non-blank string"
+    }
+  },
+  "required": [
+    "field_name"
+  ]
+}
