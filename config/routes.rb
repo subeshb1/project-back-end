@@ -10,4 +10,7 @@ Rails.application.routes.draw do
       get 'status', to: 'base#status'
     end
   end
+  resources :auth, only: %i[login] do
+    post :login, on: :collection
+  end
 end
