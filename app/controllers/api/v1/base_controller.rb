@@ -58,7 +58,7 @@ module Api
 
       # Returns 401 response. To handle malformed / invalid requests.
       def invalid_authentication
-        render json: { error: 'Invalid Request' }, status: :unauthorized
+        render json: { error: 'Unauthorized' }, status: :unauthorized
       end
 
       private
