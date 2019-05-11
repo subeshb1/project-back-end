@@ -2,11 +2,10 @@
 
 class User < ApplicationRecord
   include RandomAlphaNumeric
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   before_create :assign_unique_id
+
   JOB_SEEKER = 0
   JOB_PROVIDER = 1
   ADMIN = 2
