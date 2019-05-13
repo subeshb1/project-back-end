@@ -9,9 +9,9 @@ Rails.application.routes.draw do
       end
       resources :test
       get 'status', to: 'base#status'
+      resources :users
     end
   end
-  resources :users
   resources :auth, only: %i[login] do
     post :login, on: :collection
   end
