@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_05_11_184817) do
   end
 
   create_table "job_providers", force: :cascade do |t|
-    t.string "name"
+    t.string "company_name"
     t.jsonb "address", default: {}
     t.jsonb "phone_numbers", default: {}
     t.jsonb "social_profiles", default: {}
