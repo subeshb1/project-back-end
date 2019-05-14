@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       namespace 'job_seeker' do
+        resources :profiles
       end
       resources :test
       get 'status', to: 'base#status'
