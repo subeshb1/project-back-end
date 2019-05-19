@@ -3,6 +3,6 @@ module ApiHelper
   include Rack::Test::Methods
 
   def app
-    RailsApiTemplate::Application
+    BackEnd::Application
   end
 end

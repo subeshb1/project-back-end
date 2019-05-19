@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.6.3'
 
 gem 'devise'
+gem 'cancancan'
 gem 'rake'
 
 # Manage databases by mapping the tables to Ruby classes
@@ -81,15 +82,18 @@ group :test do
   # Code coverage analysis tool for Ruby
   gem 'simplecov', require: false
   gem 'rspec-rails'
+  gem 'database_cleaner'
   # Add :retry option for intermittently failing rspec examples
   # gem 'rspec-retry'
   # set ruby objects as test data with support for multiple factories for the same class
   gem 'factory_bot_rails'
   # easily generate fake data
+  gem 'rack-test', require: 'rack/test'
+  gem 'rspec-rails'
+
   gem 'faker'
   # Select from many strategies for cleaning your database in Ruby,
   # especially to ensure a clean state during tests
-  gem 'database_cleaner'
   # For more understandable, maintainable Rails-specific tests
   gem 'shoulda'
   # Use time travel capabilities to easily test time-dependent code

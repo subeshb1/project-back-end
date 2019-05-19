@@ -8,6 +8,7 @@ require 'rails'
 require 'active_job/railtie'
 require 'active_record/railtie'
 require 'action_controller/railtie'
+require 'active_storage/engine'
 # require "action_mailer/railtie"
 # require "action_view/railtie"
 # require "action_cable/engine"
@@ -24,13 +25,18 @@ module BackEnd
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    Dir["#{Rails.root}/lib/**/*.rb"].each { |file| require(file) }
+    Dir[Rails.root.join('lib', '**', '*.rb').to_s].each { |f| require(f) }
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     Dir["#{Rails.root}/app/middleware/*.rb"].each { |file| require(file) }
-
+    Dir[Rails.root.join('app', 'middleware', '*.rb').to_s].each { |f| require(f) }
+    Dir[Rails.root.join('app', 'error_objects', '*.rb').to_s].each { |f| require(f) }
+    Dir[Rails.root.join('app', 'form_objects', '**', '*.rb').to_s].sort.each do |file|
+      require(file)
+    end
+    Dir[Rails.root.join('app', 'service_objects', '*.rb').to_s].each { |f| require(f) }
     # Configuration for production, staging and test environment.
 
     # Code is not reloaded between requests.

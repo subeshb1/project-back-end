@@ -2,11 +2,11 @@
 
 class User < ApplicationRecord
   include RandomAlphaNumeric
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   before_create :assign_unique_id
+  after_create :build_profile
+
   JOB_SEEKER = 0
   JOB_PROVIDER = 1
   ADMIN = 2
@@ -15,4 +15,19 @@ class User < ApplicationRecord
     1 => 'job_provider',
     2 => 'admin'
   }.freeze
+
+  def profile
+    JobSeeker.where(user_id: id).last
+  end
+
+  def build_profile
+    case role
+    when JOB_SEEKER
+      JobSeeker.create!(user_id: id)
+    when JOB_PROVIDER
+      JobProvider.create!(user_id: id)
+    else
+      Admin.create!(user_id: id)
+    end
+  end
 end

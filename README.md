@@ -1,24 +1,43 @@
-# README
+# Project Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
 
-Things you may want to cover:
+Install all the requirement for the app
 
-* Ruby version
+### 1. Ruby
 
-* System dependencies
+Install ruby version `2.6.3`
 
-* Configuration
+For Windows: https://rubyinstaller.org/downloads/
+Download and install from above link
 
-* Database creation
+### 2. Postgres
 
-* Database initialization
+Install Postgres Sql 10.8
+For Windows: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
-* How to run the test suite
+**Important! Set Password: `postgres`**
+**Note: Add to PATH environment variable**
 
-* Services (job queues, cache servers, search engines, etc.)
+## Setup
 
-* Deployment instructions
+After all the installation completes we need to setup the app.
+Open ruby 2.6.3 command prompt on windows and run the following
 
-* ...
+Download and unpack all the dependent gems
+```
+bundle install
+```
+
+DB Setup
+```
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+```
+
+Run the server
+
+```
+rails s
+```
