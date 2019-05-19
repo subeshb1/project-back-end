@@ -62,6 +62,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
    # Get notified about the file modifications made
   gem 'listen'
   # Speed up development by keeping your application
