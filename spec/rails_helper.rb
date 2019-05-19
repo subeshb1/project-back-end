@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 require 'rubygems'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 Bundler.require
 
 # Prevent database truncation if the environment is production
@@ -11,6 +12,7 @@ require 'rspec/rails'
 require 'rack/test'
 require 'database_cleaner'
 require 'factory_bot_rails'
+Dir[Rails.root.join('spec', 'support', '**', '*.rb').to_s].each { |f| require(f) }
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -65,12 +67,12 @@ RSpec.configure do |config|
     DatabaseCleaner[:active_record].strategy = :truncation
   end
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner[:active_record].strategy = :transaction
     DatabaseCleaner.start
   end
 
-  config.after(:each) do
+  config.after do
     DatabaseCleaner.clean
   end
 

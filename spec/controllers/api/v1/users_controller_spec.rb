@@ -10,7 +10,7 @@ describe Api::V1::UsersController, type: :api do
 
   describe '#create' do
     subject { post 'api/v1/users', params.to_json }
-    let(:params) do 
+    let(:base_params) do 
       {
         email: 'example@gmail.com',
         password: '12345678',
@@ -19,15 +19,15 @@ describe Api::V1::UsersController, type: :api do
       }
     end
     context 'when required params are not provided' do
-      let(:params) { base_params.except(:review_status) }
+      let(:params) { {} }
 
       include_examples 'Validation Failure' do
         let(:errors) do
           [
+            { field: 'type', message: 'is missing' },
             { field: 'email', message: 'is missing' },
             { field: 'password', message: 'is missing' },
             { field: 'confirm_password', message: 'is missing' },
-            { field: 'job_seeker', message: 'is missing' },
           ]
         end
       end

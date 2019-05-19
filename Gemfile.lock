@@ -55,11 +55,13 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     backports (3.15.0)
+    bcrypt (3.1.12)
     bcrypt (3.1.12-x64-mingw32)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
     brakeman (4.5.1)
     builder (3.2.3)
+    byebug (11.0.1)
     cancancan (3.0.1)
     case_transform (0.2)
       activesupport
@@ -98,6 +100,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
+    ffi (1.11.0)
     ffi (1.11.0-x64-mingw32)
     flay (2.7.0)
       erubis (~> 2.7.0)
@@ -149,6 +152,7 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
+    msgpack (1.2.10)
     msgpack (1.2.10-x64-mingw32)
     multi_json (1.13.1)
     multi_xml (0.6.0)
@@ -156,12 +160,15 @@ GEM
     net-http-persistent (2.9.4)
     net-http-pipeline (1.0.1)
     nio4r (2.3.1)
+    nokogiri (1.10.3)
+      mini_portile2 (~> 2.4.0)
     nokogiri (1.10.3-x64-mingw32)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
+    pg (1.1.4)
     pg (1.1.4-x64-mingw32)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -311,6 +318,7 @@ GEM
     websocket-extensions (0.1.3)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
@@ -334,6 +342,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.11)
   rack-cors
+  rack-test
   rails (~> 5.2.2)
   rake
   rspec-rails
