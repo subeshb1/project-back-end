@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["job_seeker","job_provider"],
+      "invalidMessage": "'type' must be either job_seeker or job_provider"
+    },
+    "email": {
+      "type": "string",
+      "minLength": 1,
+      "invalidMessage": "'email' must be a non blank string"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "invalidMessage": "'password' must be at least 8 characters long"
+    }
+  },
+  "required": [
+    "type",
+    "email",
+    "password",
+    "confirm_password"
+  ]
+}

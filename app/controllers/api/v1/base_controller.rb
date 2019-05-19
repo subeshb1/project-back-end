@@ -46,6 +46,32 @@ module Api
         api_error(422, JSON.parse(error.message)) unless valid
       end
 
+      def set_pagination_header(name, _options = {})
+        scope = instance_variable_get("@#{name}")
+        prepare_link_header(scope)
+        headers['X-Total'] = scope.total_count.to_s
+        headers['X-Per-Page'] = scope.size.to_s
+        headers['X-Page'] = scope.current_page.to_s
+      end
+
+      def prepare_link_header(scope)
+        last_page = scope.total_pages
+        current_page = scope.current_page
+        return if last_page <= 1
+
+        query = request.query_parameters
+        headers['link'] = FindHeaderLinks.new(query, request.env, current_page, last_page).call
+      end
+
+      # Pagination
+      def extract_page_details(params)
+        per_page = params['per_page'].to_i
+        per_page = per_page.positive? && per_page <= 1000 ? per_page : 100
+        page = params['page'].to_i
+        page = page.positive? ? page : 1
+        [page, per_page]
+      end
+
       # Validates the token and user and sets the @current_user scope
       def authenticate_request!
         if !payload || !JsonWebToken.valid_payload(payload.first)
@@ -58,7 +84,7 @@ module Api
 
       # Returns 401 response. To handle malformed / invalid requests.
       def invalid_authentication
-        render json: { error: 'Invalid Request' }, status: :unauthorized
+        render json: { error: 'Unauthorized' }, status: :unauthorized
       end
 
       private

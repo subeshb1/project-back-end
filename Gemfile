@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 gem 'devise'
+gem 'cancancan'
 gem 'rake'
 
 # Manage databases by mapping the tables to Ruby classes
