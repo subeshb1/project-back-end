@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Api::V1::UsersController, type: :api do
@@ -10,7 +11,7 @@ describe Api::V1::UsersController, type: :api do
 
   describe '#create' do
     subject { post 'api/v1/users', params.to_json }
-    let(:base_params) do 
+    let(:base_params) do
       {
         email: 'example@gmail.com',
         password: '12345678',
@@ -24,10 +25,10 @@ describe Api::V1::UsersController, type: :api do
       include_examples 'Validation Failure' do
         let(:errors) do
           [
-            { field: 'type', message: 'is missing' },
-            { field: 'email', message: 'is missing' },
-            { field: 'password', message: 'is missing' },
-            { field: 'confirm_password', message: 'is missing' },
+            { field: '', message: "did not contain a required property of 'type'" },
+            { field: '', message: "did not contain a required property of 'email'" },
+            { field: '', message: "did not contain a required property of 'password'" },
+            { field: '', message: "did not contain a required property of 'confirm_password'" }
           ]
         end
       end

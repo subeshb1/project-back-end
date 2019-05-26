@@ -39,7 +39,7 @@ describe SchemaValidatorForm do
         { message: 'Validation Failed',
           errors: [{
             field: 'field_name',
-            message: 'must be a non-blank string'
+            message: 'of type array did not match the following type: string'
           }] }.to_json
       end
 
