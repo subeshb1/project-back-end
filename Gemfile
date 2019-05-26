@@ -17,7 +17,7 @@ gem 'figaro'
 gem 'active_model_serializers'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
-
+gem 'json-schema'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record
@@ -90,7 +90,6 @@ group :test do
   gem 'factory_bot_rails'
   # easily generate fake data
   gem 'rack-test', require: 'rack/test'
-  gem 'rspec-rails'
 
   gem 'faker'
   # Select from many strategies for cleaning your database in Ruby,
