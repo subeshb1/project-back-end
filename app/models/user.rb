@@ -2,10 +2,15 @@
 
 class User < ApplicationRecord
   include RandomAlphaNumeric
+  include ProfileBuilder
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   before_create :assign_unique_id
   after_create :build_profile
+  after_destroy_commit :delete_profile
+
+  validates :role, presence: true
 
   JOB_SEEKER = 0
   JOB_PROVIDER = 1
@@ -16,18 +21,7 @@ class User < ApplicationRecord
     2 => 'admin'
   }.freeze
 
-  def profile
-    JobSeeker.where(user_id: id).last
-  end
-
-  def build_profile
-    case role
-    when JOB_SEEKER
-      JobSeeker.create!(user_id: id)
-    when JOB_PROVIDER
-      JobProvider.create!(user_id: id)
-    else
-      Admin.create!(user_id: id)
-    end
+  def nice_role
+    ROLE[role]
   end
 end

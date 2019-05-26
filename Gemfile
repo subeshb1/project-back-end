@@ -46,7 +46,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
-group :development, :test do
+group :development, :test, :production do
     # Call `byebug` in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   # Call `binding.pry` in the code to access runtime developer console for debugging
@@ -61,7 +61,8 @@ group :development, :test do
   gem 'brakeman', require: false
 end
 
-group :development do
+group :development,:production do
+  gem 'annotate'
    # Get notified about the file modifications made
   gem 'listen'
   # Speed up development by keeping your application
