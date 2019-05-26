@@ -15,7 +15,6 @@ gem 'httparty'
 
 gem 'figaro'
 gem 'active_model_serializers'
-gem 'json-schema'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
