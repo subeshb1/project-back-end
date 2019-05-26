@@ -24,7 +24,7 @@ module Api
         end
 
         def check_job_seeker
-          User.where(uid: profile_params[:id], profile_params[:])
+          User.where(uid: profile_params[:id])
         end
       end
     end
