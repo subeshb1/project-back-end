@@ -13,6 +13,7 @@ gem 'activerecord'
 # Query web services through api and examine the resulting output
 gem 'httparty'
 
+gem 'figaro'
 gem 'active_model_serializers'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
