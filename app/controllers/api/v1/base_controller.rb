@@ -5,7 +5,7 @@ module Api
     # Base controller for all V1 APIs
     class BaseController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
-
+      attr_accessor :current_user
       before_action :authenticate
 
       def status
@@ -100,7 +100,7 @@ module Api
 
       # Sets the @current_user with the user_id from payload
       def load_current_user!
-        @current_user = User.find_by(id: payload[0]['user_id'])
+        @current_user = User.find_by(uid: payload[0]['user_id'])
       end
     end
   end
