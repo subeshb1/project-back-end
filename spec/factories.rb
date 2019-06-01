@@ -8,6 +8,6 @@ FactoryBot.define do
 
   factory :user do
     email { 'example@gmail.com' }
-    role { User::ROLE.key('job_seeker') }
+    role { User::ROLES.key('job_seeker') }
   end
 end

@@ -5,12 +5,12 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      namespace 'job_seeker' do
-        resources :profiles
+      resources :profiles, only: [:index] do
+        put :update, on: :collection
       end
-      resources :test
+      resources :test, only: [:index]
       get 'status', to: 'base#status'
-      resources :users do
+      resources :users, only: [:create] do
         get :role, on: :collection
       end
     end

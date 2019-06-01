@@ -4,7 +4,7 @@ module Api
   module V1
     class UsersController < BaseController
       before_action :validate_schema, only: [:create]
-      before_action :authenticate_request!
+      before_action :authenticate_request!, only: [:role]
       def create
         valid, error = CreateUserForm.new(user_params).validate
         api_error(422, error) unless valid
@@ -14,8 +14,7 @@ module Api
       end
 
       def role
-        authenticate_request!
-        role = current_user.nil? ? nil : User::ROLE[current_user.role]
+        role = current_user.nil? ? nil : User::ROLES[current_user.role]
         render json: { role: role }, status: :ok, serializer: nil
       end
 
