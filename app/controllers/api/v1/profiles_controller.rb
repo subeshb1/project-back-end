@@ -5,13 +5,12 @@ module Api
     class ProfilesController < BaseController
       # before_action :check_user
       before_action :authenticate_request!, only: [:update]
-
+      before_action :validate_schema
       def update
         valid, error = UpdateProfileForm.new(profile_params).validate
         abort(422, error) unless valid
-
-        # user = CreateUser.new(user_params).call
-        # render json: user, status: :create
+        profile = UpdateProfile.new(profile_params, current_user).call
+        render json: profile, status: 200
       end
 
       private

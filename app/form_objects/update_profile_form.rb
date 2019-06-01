@@ -9,13 +9,8 @@ class UpdateProfileForm < FormObjects::Base
   end
 
   def validate
-    validate_email
-    validate_password
-    validate_no_user
     validate_result
   end
 
   private
-
-  
 end
