@@ -15,13 +15,13 @@ class User < ApplicationRecord
   JOB_SEEKER = 0
   JOB_PROVIDER = 1
   ADMIN = 2
-  ROLE = {
+  ROLES = {
     0 => 'job_seeker',
     1 => 'job_provider',
     2 => 'admin'
   }.freeze
 
   def nice_role
-    ROLE[role]
+    ROLES[role]
   end
 end

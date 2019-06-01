@@ -10,7 +10,7 @@ class CreateUser
   def call
     user = User.new(email: params[:email], password: params[:password],
                     password_confirmation: params[:confirm_password],
-                    role: User::ROLE.key(params[:type]))
+                    role: User::ROLES.key(params[:type]))
     user.save!
     user.reload
   end

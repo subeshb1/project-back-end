@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # All authorization module for user with core role
-module CoreAbility
+module JobProviderAbility
   def job_provider(user)
     can :manage, :all
     cannot :create_core_user, User

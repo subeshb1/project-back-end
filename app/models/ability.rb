@@ -14,7 +14,7 @@ class Ability
         ability = "#{role}_ability"
         extend ability.camelize.constantize
       end
-      send(user.system_role, user)
+      send(user.nice_role, user)
     end
   end
 end
