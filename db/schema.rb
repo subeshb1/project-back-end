@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_11_184817) do
+ActiveRecord::Schema.define(version: 2019_06_04_165324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(version: 2019_05_11_184817) do
     t.string "token", null: false
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_jobs", id: false, force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.bigint "job_id", null: false
+  end
+
   create_table "job_providers", force: :cascade do |t|
     t.string "company_name"
     t.jsonb "address", default: {}
@@ -74,6 +85,19 @@ ActiveRecord::Schema.define(version: 2019_05_11_184817) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_job_seekers_on_user_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string "uid"
+    t.text "description"
+    t.string "title"
+    t.float "min_salary"
+    t.float "max_salary"
+    t.jsonb "features", default: {}
+    t.bigint "job_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_provider_id"], name: "index_jobs_on_job_provider_id"
   end
 
   create_table "users", force: :cascade do |t|
