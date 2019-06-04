@@ -10,7 +10,8 @@ module Api
         api_error(422, error) unless valid
 
         user = CreateUser.new(user_params).call
-        render json: user, status: :ok
+        auth_token = JsonWebToken.encode(user_id: user.uid)
+        render json: { auth_token: auth_token, email: user.email, uid: user.uid, role: User::ROLES[user.role] }, status: :ok
       end
 
       def role

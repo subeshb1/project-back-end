@@ -8,8 +8,9 @@ module Api
       before_action :validate_schema, only: %i[update]
 
       def update
-        valid, error = UpdateProfileForm.new(profile_params).validate
-        abort(422, error) unless valid
+        valid, error = UpdateProfileForm.new(profile_params, current_user)
+                                        .validate
+        api_error(422, error) unless valid
         profile = UpdateProfile.new(profile_params, current_user).call
         render json: profile, status: 200
       end

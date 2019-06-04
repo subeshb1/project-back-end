@@ -6,7 +6,7 @@ class JobProviderSerializer < ActiveModel::Serializer
 
   def uid
     object.user.uid
- end
+  end
 
   def email
     object.user.email
