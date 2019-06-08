@@ -53,13 +53,14 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
 
   create_table "basic_informations", force: :cascade do |t|
     t.string "name"
-    t.date "birth_date"
+    t.datetime "birth_date"
     t.jsonb "phone_numbers", default: {}
     t.jsonb "social_accounts", default: {}
-    t.integer "type", limit: 2
+    t.integer "role", limit: 2
     t.text "description"
     t.string "website"
     t.bigint "user_id"
+    t.jsonb "address", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_basic_informations_on_user_id"
@@ -102,8 +103,8 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
   create_table "educations", force: :cascade do |t|
     t.string "degree"
     t.string "program"
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -141,8 +142,8 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
     t.string "job_title"
     t.string "title"
     t.string "level"
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.text "description"
     t.bigint "user_id"
     t.datetime "created_at", null: false

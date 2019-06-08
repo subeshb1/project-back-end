@@ -2,7 +2,7 @@
 
 class JobProviderSerializer < ActiveModel::Serializer
   attributes :company_name, :uid, :address,
-             :phone_numbers, :social_profiles, :avatar, :email
+             :phone_numbers, :social_accounts, :avatar, :email
 
   def uid
     object.user.uid

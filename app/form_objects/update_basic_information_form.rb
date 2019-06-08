@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
-class UpdateProfileForm < FormObjects::Base
-  attr_reader :params, :user
+class UpdateBasicInformationForm < FormObjects::Base
+  attr_accessor :params, :user, :attributes
 
   def initialize(params = {}, user)
-    @params = params
+    @params = params.to_h
+    @attributes = %i[avatar
+                     address phone_numbers
+                     social_accounts name description website]
     @user = user
     super()
   end
@@ -24,13 +27,11 @@ class UpdateProfileForm < FormObjects::Base
   def fetch_attributes
     case user.role
     when User::ROLES.key('job_seeker')
-      params.slice(:first_name, :last_name, :middle_name, :avatar,
-                   :address, :phone_numbers, :education, :social_profiles)
+      params[:role] = params.delete :gender
     when User::ROLES.key('job_provider')
-      params.slice(:company_name,
-                   :address, :phone_numbers, :social_profiles, :avatar)
-    else
-      params.slice(:first_name, :last_name, :middle_name, :avatar)
+      params[:role] = params.delete :organization_type
+      params[:birth_date] = params.delete :established_date
     end
+    params.slice(*attributes)
   end
 end

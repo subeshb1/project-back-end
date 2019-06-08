@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      resources :profiles, only: [:index] do
-        put :update, on: :collection
+      resources :profile, only: [:index] do
+        put :basic_info, on: :collection
       end
       resources :test, only: [:index]
       get 'status', to: 'base#status'

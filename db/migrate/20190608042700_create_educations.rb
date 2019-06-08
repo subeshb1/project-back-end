@@ -3,8 +3,8 @@ class CreateEducations < ActiveRecord::Migration[5.2]
     create_table :educations do |t|
       t.string :degree
       t.string :program
-      t.date :start_date
-      t.date :end_date
+      t.datetime :start_date
+      t.datetime :end_date
       t.belongs_to :user, foreign_key: true
       t.timestamps
     end

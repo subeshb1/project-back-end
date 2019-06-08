@@ -2,13 +2,14 @@ class CreateBasicInformations < ActiveRecord::Migration[5.2]
   def change
     create_table :basic_informations do |t|
       t.string :name
-      t.date :birth_date
+      t.datetime :birth_date
       t.jsonb :phone_numbers, default: {}
       t.jsonb :social_accounts, default: {}
-      t.integer :type, limit: 1
+      t.integer :role, limit: 1
       t.text :description
       t.string :website
       t.belongs_to :user, foreign_key: true
+      t.jsonb :address, default: {}
       t.timestamps
     end
     create_table :categories_basic_informations, id: false do |t|

@@ -5,8 +5,8 @@ class CreateWorkExperiences < ActiveRecord::Migration[5.2]
       t.string :job_title
       t.string :title
       t.string :level
-      t.date :start_date
-      t.date :end_date
+      t.datetime :start_date
+      t.datetime :end_date
       t.text :description
       t.belongs_to :user
       t.timestamps
