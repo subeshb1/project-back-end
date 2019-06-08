@@ -58,8 +58,10 @@ ActiveRecord::Schema.define(version: 2019_06_04_165324) do
   end
 
   create_table "categories_jobs", id: false, force: :cascade do |t|
-    t.bigint "category_id", null: false
-    t.bigint "job_id", null: false
+    t.bigint "categories_id"
+    t.bigint "jobs_id"
+    t.index ["categories_id"], name: "index_categories_jobs_on_categories_id"
+    t.index ["jobs_id"], name: "index_categories_jobs_on_jobs_id"
   end
 
   create_table "job_providers", force: :cascade do |t|
@@ -121,4 +123,10 @@ ActiveRecord::Schema.define(version: 2019_06_04_165324) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admins", "users"
+  add_foreign_key "categories_jobs", "categories", column: "categories_id"
+  add_foreign_key "categories_jobs", "jobs", column: "jobs_id"
+  add_foreign_key "job_providers", "users"
+  add_foreign_key "job_seekers", "users"
+  add_foreign_key "jobs", "job_providers"
 end
