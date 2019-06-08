@@ -8,7 +8,9 @@ class CreateJobs < ActiveRecord::Migration[5.2]
       t.float :max_salary
       t.jsonb :features, default: {}
       t.integer :open_seats, default: 1
-      t.belongs_to :job_provider, index: true, foreign_key: true
+      t.integer :level, limit: 1
+      t.integer :type, limit: 1
+      t.belongs_to :user, index: true, foreign_key: true
       t.timestamps
     end
   end

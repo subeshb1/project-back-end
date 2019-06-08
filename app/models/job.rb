@@ -16,6 +16,10 @@
 #
 
 class Job < ApplicationRecord
+  include RandomAlphaNumeric
+  
+  before_create :assign_unique_id
+
   has_and_belongs_to_many :categories
   belongs_to :job_provider
   has_many_attached :images

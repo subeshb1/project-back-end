@@ -2,6 +2,6 @@
 
 class AddRoleToUser < ActiveRecord::Migration[5.2]
   def change
-    add_column :users, :role, :integer, :default => User::JOB_SEEKER
+    add_column :users, :role, :integer,limit: 1, :default => User::JOB_SEEKER
   end
 end

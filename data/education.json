@@ -1,0 +1,1454 @@
+[
+    {
+        "bachelors": [
+            {
+                "agriculture": [
+                    {
+                        "course": "B.Sc.",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Tech.Ed.",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Veterinary Science and Animal Husbandry",
+                        "time": "5years"
+                    },
+                    {
+                        "course": "B.Sc. Fisheries",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "ayurved": [
+                    {
+                        "course": "BAMS",
+                        "time": "5years 6months"
+                    }
+                ]
+            },
+            {
+                "computer and IT": [
+                    {
+                        "course": "BCA",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "education": [
+                    {
+                        "course": "B.Ed",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Ed ICT",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Educational Sciences in Education, Planning and Management",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Educational Sciences in English",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Educational Sciences in Health and Physical Education",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Educational Sciences in Mathematics",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Educational Sciences in Nepali",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Ed",
+                        "time": "3years"
+                    },
+                    {
+                        "course": "Bachelor in English Education",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "engineering": [
+                    {
+                        "course": "Bachelor of Civil Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Aerospace Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Automobile Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Civil Engineering (Diploma holders)",
+                        "time": "4years 6months"
+                    },
+                    {
+                        "course": "Bachelor of Industrial Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Agriculture Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Architecture (B. Arch)",
+                        "time": "5years"
+                    },
+                    {
+                        "course": "Bachelor of Computer Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Civil and Rural Engineering",
+                        "time": "4years 6months"
+                    },
+                    {
+                        "course": "Bachelor of Electrical and Electronics Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Electrical Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Electronics and Communication Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Electronics, Communication and Information Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Biomedical Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Engineering in Information Technology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Geometric Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Hydropower Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Mechanical Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Software Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor's Degree in Geomatics Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Chemical Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Geomatic and Land Resources Management Engineering",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B. Tech. Environmental Engineering",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "forestry": [
+                    {
+                        "course": "B.Sc Forestry",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "law": [
+                    {
+                        "course": "Bachelor of Arts Bachelor of Laws (BALLB)",
+                        "time": "5years"
+                    },
+                    {
+                        "course": "Bachelor of Business Management and Bachelor of Law (BBM LLB)",
+                        "time": "5years"
+                    },
+                    {
+                        "course": "Bachelor of Arts Bachelor of Laws (BALLB)",
+                        "time": "5years"
+                    },
+                    {
+                        "course": "Bachelor of Law (LLB)",
+                        "time": "3years"
+                    }
+                ]
+            },
+            {
+                "management": [
+                    {
+                        "course": "Bachelor of Business Administration (BBA)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Business Management (BBM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Business Studies (BBS)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Development Finance",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Development Studies",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Hospitality and Tourism Management (BHTM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Travel and Tourism Management (BTTM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "​Bachelor of Business Administration (BBA)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Business Administration in Banking and Insurance (BBA-BI)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Business Administration in Finance (BBA-Finance)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Business Administration - Travel and Tourism (BBA-TT)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Business Information System (BBIS)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Commerce Studies",
+                        "time": "3years"
+                    },
+                    {
+                        "course": "Bachelor of Health Care Management (BHCM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Hospitality and Catering Management (BHCM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Hotel Management (BHM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Information Management (BIM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Mountaineering Studies (BMS)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Mountain Tourism Management (BMTM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Public Administration (BPA)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Travel and Tourism Management (BTTM)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Travel and Tourism Studies (BTTS)",
+                        "time": "3years"
+                    },
+                    {
+                        "course": "BBA (Hons)/BBA (Emphasis)",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "medicine and health care": [
+                    {
+                        "course": "Bachelor in Audiology and Speech Language Pathology (BASLP)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Medical Laboratory Technology (B.Sc MLT)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Optometry",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Optometry and Vision Science",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Dental Surgery (BDS)",
+                        "time": "4years 6months"
+                    },
+                    {
+                        "course": "Bachelor of Homeopathic Medicine and Surgery (BHMS)",
+                        "time": "5years 6months"
+                    },
+                    {
+                        "course": "Bachelor of Medicine, Bachelor of Surgery (MBBS)",
+                        "time": "5years 6months"
+                    },
+                    {
+                        "course": "​Bachelor of Nursing Science (BNS) in Oncology",
+                        "time": "3years"
+                    },
+                    {
+                        "course": "​Bachelor of Optometry",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "​Bachelor of Physiotherapy",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "​Bachelor of Science (B.Sc) in Medical Biochemistry",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "​Bachelor of Science (B.Sc) in Medical Microbiology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "​Bachelor of Science in Medical Imaging Technology (B.Sc MIT)",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "nursing": [
+                    {
+                        "course": "Bachelor in Midwifery",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Midwifery Sciences",
+                        "time": "3years"
+                    },
+                    {
+                        "course": "Bachelor in Nursing Science (BNS)",
+                        "time": "3years 6months"
+                    },
+                    {
+                        "course": "Bachelor of Nursing (BN)",
+                        "time": "3years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Nursing",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Post Basic Bachelor in Nursing (PBBN)",
+                        "time": "2years"
+                    }
+                ]
+            },
+            {
+                "pharmacy": [
+                    {
+                        "course": "Bachelor of Pharmacy",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "public health": [
+                    {
+                        "course": "Bachelor in Public Health (BPH)",
+                        "time": "4years"
+                    }
+                ]
+            },
+            {
+                "science and technology": [
+                    {
+                        "course": "Bachelor in Food/Dairy Technology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor in Mathematical Sciences (B.Match.Sc)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Computer Application (BCA)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Computer Information Systems (BCIS)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Information Technology (BIT)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) General",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Biochemistry",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Biotechnology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Botany",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Chemistry",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Environmental Science",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc.) in Geology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Horticulture and Floriculture Management",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Mathematics",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Meteorology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Microbiology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Physics",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Statistics",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Bachelor of Science (B.Sc) in Zoology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Sc Applied Physics",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Sc. Computer Science and Information Technology (B.SC. CSIT)",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Sc Human Biology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "BSc in Computational Mathematics",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Sc in Computer Science",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Sc in Environmental Science",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Sc in Tea Technology and Management",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B.Sc. Nutrition and Dietetics",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B. Tech Biotechnology",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "B. Tech Food Technology",
+                        "time": "4years"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "masters": [
+            {
+                "agriculture": [
+                    {
+                        "course": "Master in Agriculture Business Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Science in Agriculture (M.Sc Ag)",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Science in Animal Science (M.Sc.An.Sc.)",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Veterinary Science (M.V.Sc.)",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Aquaculture",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Meat Technology",
+                        "time": "2years"
+                    }
+                ]
+            },
+            {
+                "ayurved": [
+                    {
+                        "course": "MD Ayurved",
+                        "time": "3years"
+                    }
+                ]
+            },
+            {
+                "computer and IT": [
+                    {
+                        "course": "Master of Computer Application",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Computer Information Systems (MCIS)",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Science (M.Sc) in Computer Science",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Masters of Science in Computer Science and Information Technology (M.Sc.CSIT)",
+                        "time": "2years"
+                    }
+                ]
+            },
+            {
+                "education": [
+                    {
+                        "course": "Master in Mathematics Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master in Technical and Vocational Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Masterof Educational Sciences in Curriculum and Evaluation",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Masterof Educational Sciences in Education, Planning and Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Masterof Educational Sciences in English",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Educational Sciences in Health and Physical Education",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Master of Educational Sciences in Nepali",
+                        "time": "4years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) General",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in Economics Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in Geography Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in Health Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in History Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in Physical Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in Political Science Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in Population Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Education (M.Ed) in Science Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Masters of Education (M.Ed) in Mathematics Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Ed Education Planning and Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Ed English Language Education",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Ed in English Language Teaching",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Ed. in Information and Communication Technology Education (ICTEd)",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Ed in Leadership and Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Ed Nepali Language Education",
+                        "time": "2years"
+                    }
+                ]
+            },
+            {
+                "engineering": [
+                    {
+                        "course": "Master in Land Administration",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master in Planning and Operation of Energy Systems",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Computer Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Engineering in Earthquake",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Science in Public Health and Disaster Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master of Science in Structural Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Climate change and Development",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Computer System and Knowledge Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Construction Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Disaster Risk Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Energy System Planning and Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Environmental Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Information & Communication Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Material Science",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Power System Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Renewable Energy Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Structural Engineering ",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Technology and Innovation Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Transportation Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Urban Planning",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "(M.Sc) in Water Resources Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "Master Program in Energy Efficient Building Design (EEBD)",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "ME in Communication Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "ME in Computer Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "ME in Electrical and Power Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "ME in Mechanical Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "ME in Structural Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc Earthquake Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Communications and Knowledge Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Disaster Risk Engineering and Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Distributed Generation Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc. in Electrical Engineering in Power System",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Engineering Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Hydropower Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Information System Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Infrastructure Engineering and Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc In Interdisciplinary Water Resources Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Sc in Transportation Engineering and Management",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "​M.Sc Mechanical Engineering in Design and Manufacturing",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Tech. Environmental Engineering",
+                        "time": "2years"
+                    },
+                    {
+                        "course": "M.Tech in Information Technology",
+                        "time": "2years"
+                    }
+                ]
+            },
+            {
+                "forestry": [
+                    {
+                        "course":"Master of Science (M.Sc) in Forestry",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc.) in Natural Resource Management and Rural Development",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc.) in Watershed Management",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Masters in Environmental Administration and Management",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc in Wildlife Protected Area Management and Biodiversity Conservation",
+                        "time":"2years"
+                    }
+                ]
+            },
+
+            {
+                "law":[
+                    {
+                        "course":"3 Year LLM",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master Degree in Human Rights",
+                        "time":"1year"
+                    },
+
+                    {
+                        "course":"Master in Conflict and International Humanitarian Law",
+                        "time":"1year"
+                    },
+
+                    {
+                        "course":"Master of Laws",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Masters by Research in Energy and Infrastructure Law",
+                        "time":"2years"
+                    }
+                ]
+            },
+
+            {
+                "management":[
+                    {
+                        "course":"Executive MBA",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"​Master of Business Administration-Banking and Finance (MBA-BF)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Business Administration-Evening (MBAe) ",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"​Master of Business Administration in Entrepreneurship (MBA-E)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Business Administration in Information Technology (MBA IT)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Business Administration (MBA)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Business Management (MBM)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Business Studies (MBS)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Finance and Control (MFC)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Healthcare Management (MHCM)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Hospitality Management (MHM)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Public Administration-MPA",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Tourism Studies",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Travel and Tourism Management (MTTM) ",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MBA (Global Business)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MBA in Global Leadership and Management",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MS in Development Management and Governance (MSDMG)",
+                        "time":"2years"
+                    }
+                ]
+            },
+
+            {
+                "medicine and health care":[
+                    {
+                        "course":"Master of Dental Surgery (MDS)",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Optometry (M.Optom)",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Science in Medical Biochemistry (M.Sc MB)",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Science in Medical Microbiology (M.Sc MM)",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Anatomy",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Human Anatomy",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Human Physiology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Medical Biochemistry",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Medical Microbiology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Pharmacology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Physiology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MD Anaesthesiology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Biochemistry",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Clinical Pharmacology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Clinical Physiology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Community Medicine",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Dermatology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Dermatology & Venereology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Forensic Medicine",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD General Practice",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in General Practice and Emergency Medicine (MDGP)",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Hospital Administration",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Internal Medicine",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Obstetrics and Gynaecology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Ophthalmology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Paediatric",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Pathology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Psychiatry",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in radiation oncology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Radiodiagnosis",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD in Radiology and Imaging",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Internal Medicine",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Microbiology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Pharmacology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Physiology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MD Radiotherapy",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Community Dentistry",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Conservative Dentistry and Endodontics",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Oral and Maxillofacial Surgery",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Oral Pathology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Orthodontics",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Periodontics",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Periodontology and Oral Implantology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MDS Prosthodontics",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MS Anatomy",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"M.Sc. Clinical Biochemistry",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"M.Sc. Clinical Microbiology",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"M.Sc in Microbiology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc in Nutrition and Dietetics",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc Medical Imaging Technology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MS General Surgery",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MS in Clinical Otorhinolaryngology and Head and Neck Surgery",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MS in Orthopaedic and Trauma Surgery",
+                        "time":"4years"
+                    },
+
+                    {
+                        "course":"MS in Orthopedics",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MS in Otorhinolaryngology (ENT)",
+                        "time":"3years"
+                    },
+
+                    {
+                        "course":"MS Ophthalmology",
+                        "time":"3years"
+                    }
+                ]
+            },
+
+            {
+                "nursing":[
+                    {
+                        "course":"Master in Nursing (MN)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science in Midwifery",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MN Adult Nursing",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MN in Paediatric Nursing",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"MN in Women Health and Development",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc. Nursing Program",
+                        "time":"2years"
+                    }
+                ]
+            },
+
+            {
+                "pharmacy":[
+                    {
+                        "course":"Master in Pharmacy",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Pharmaceutical Sciences",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M. Pharm in Clinical Pharmacy",
+                        "time":"2years"
+                    }
+
+                ]
+            },
+
+            {
+                "public health":[
+                    {
+                        "course":"Master in Public Health (MPH)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master in Public Health Nutrition (MPHN)",
+                        "time":"2years"
+                    }
+                ]
+            },
+
+            {
+                "science and technology":[
+                    {
+                        "course":"Master in e-Governance",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Information Technology (MIT)",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) Chemistr",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Botany",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Geology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Mathematics",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Meteorology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Physics",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Statistics",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Urban Design in Conservation",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"Master of Science (M.Sc) in Zoology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc. Biotechnology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc Dairy Technology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc Environment and Natural Resources",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M. Sc. in Biodiversity and Environmental Management",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc in Construction Management",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc in Engineering Geology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc in Environmental Management",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Sc in Environmental Science",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Tech Biotechnology",
+                        "time":"2years"
+                    },
+
+                    {
+                        "course":"M.Tech Food Technology",
+                        "time":"2years"
+                    }
+                ]
+            }
+
+        ]
+    }
+]
