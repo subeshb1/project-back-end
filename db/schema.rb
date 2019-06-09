@@ -140,9 +140,8 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
   create_table "work_experiences", force: :cascade do |t|
     t.string "organization_name"
     t.string "job_title"
-    t.string "title"
     t.string "level"
-    t.string "salary"
+    t.float "salary"
     t.datetime "start_date"
     t.datetime "end_date"
     t.text "description"

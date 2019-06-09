@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "work_experiences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organization_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "job_title": {
+            "type": "string",
+            "minLength": 2
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "salary": {
+            "type": "float"
+          },
+          "level": {
+            "type": "string",
+            "enum": ["entry_level", "mid_level", "senior_level", "top_level"]
+          },
+          "description": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "organization_name",
+          "job_title",
+          "level",
+          "categories",
+          "salary",
+          "start_date",
+          "end_date"
+        ]
+      }
+    }
+  },
+  "required": ["work_experiences"]
+}
