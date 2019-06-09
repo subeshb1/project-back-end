@@ -4,7 +4,7 @@ module Api
   module V1
     class ProfileController < BaseController
       # before_action :check_user
-      before_action :authenticate_request!, only: %i[basic_info index]
+      before_action :authenticate_request!, only: %i[basic_info show_basic_info]
       before_action :validate_schema, only: %i[basic_info]
 
       def basic_info
@@ -15,8 +15,8 @@ module Api
         render json: profile, status: 200
       end
 
-      def index
-        render json: current_user.profile, status: 200
+      def show_basic_info
+        render json: current_user.basic_information, status: 200
       end
 
       private

@@ -5,6 +5,7 @@ class CreateWorkExperiences < ActiveRecord::Migration[5.2]
       t.string :job_title
       t.string :title
       t.string :level
+      t.string :salary
       t.datetime :start_date
       t.datetime :end_date
       t.text :description

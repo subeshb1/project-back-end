@@ -10,3 +10,7 @@ def create_a_user(params = {})
   }
   User.create!(user_params.merge!(params))
 end
+
+def get_auth(user)
+  JsonWebToken.encode(user_id: user.uid)
+end

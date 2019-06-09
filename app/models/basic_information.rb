@@ -18,7 +18,7 @@
 #
 
 class BasicInformation < ApplicationRecord
-  has_one_attached :image
+  has_one_attached :avatar
   belongs_to :user
   has_and_belongs_to_many :categories
 
@@ -35,7 +35,7 @@ class BasicInformation < ApplicationRecord
   }.freeze
 
   def established_date
-    birth_date
+    birth_date if user.role == User::ROLES.key('job_provider')
   end
 
   def age
@@ -48,18 +48,18 @@ class BasicInformation < ApplicationRecord
   end
 
   def nice_gender
-    GENDER[role]
+    GENDER[gender]
   end
 
   def gender
-    role
+    role unless user.role == User::ROLES.key('job_provider')
   end
 
   def nice_organization_type
-    GENDER[role]
+    ORGANIZATION_TYPE[organization_type]
   end
 
   def organization_type
-    role
+    role if user.role == User::ROLES.key('job_provider')
   end
 end

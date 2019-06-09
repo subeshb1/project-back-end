@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
     t.string "job_title"
     t.string "title"
     t.string "level"
+    t.string "salary"
     t.datetime "start_date"
     t.datetime "end_date"
     t.text "description"
