@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UpdateEducation
-  attr_reader :params, :basic_information, :user, :attributes
+  attr_reader :params, :user
 
   def initialize(current_user, params = {})
     @params = params

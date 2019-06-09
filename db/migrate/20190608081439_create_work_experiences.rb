@@ -3,9 +3,8 @@ class CreateWorkExperiences < ActiveRecord::Migration[5.2]
     create_table :work_experiences do |t|
       t.string :organization_name
       t.string :job_title
-      t.string :title
       t.string :level
-      t.string :salary
+      t.float  :salary
       t.datetime :start_date
       t.datetime :end_date
       t.text :description
