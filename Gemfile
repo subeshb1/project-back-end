@@ -61,6 +61,7 @@ group :development, :test, :production do
   gem 'rubycritic', require: false
   # Detect security vulnerabilities in Ruby on Rails applications via static analysis
   gem 'brakeman', require: false
+  gem 'faker'
 end
 
 group :development, :production do
@@ -93,7 +94,6 @@ group :test do
   # easily generate fake data
   gem 'rack-test', require: 'rack/test'
 
-  gem 'faker'
   # Select from many strategies for cleaning your database in Ruby,
   # especially to ensure a clean state during tests
   # For more understandable, maintainable Rails-specific tests

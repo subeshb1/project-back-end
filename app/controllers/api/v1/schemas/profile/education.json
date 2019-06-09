@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "educations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "degree": {
+            "type": "string",
+            "enum": [
+              "Master",
+              "Bachelor",
+              "Intermediate",
+              "SLC/SEE",
+              "Other",
+              "Ph. D."
+            ]
+          },
+          "program": {
+            "type": "string",
+            "minLength": 2
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "degree",
+          "start_date",
+          "end_date",
+          "categories",
+          "program"
+        ]
+      }
+    }
+  },
+  "required": ["educations"]
+}
