@@ -1,11 +1,24 @@
 # frozen_string_literal: true
 
-class JobProviderSerializer < ActiveModel::Serializer
-  attributes :company_name, :uid, :address,
+class BasicInformationSerializer < ActiveModel::Serializer
+  attributes :name, :uid, :address, :birth_date, :established_date,
+             :gender, :organization_type,
              :phone_numbers, :social_accounts, :avatar, :email
 
   def uid
     object.user.uid
+  end
+
+  def gender
+    object.nice_gender
+  end
+
+  def birth_date
+    object.birth_date unless object.user.role == User::ROLES.key('job_provider')
+  end
+
+  def organization_type
+    object.nice_organization_type
   end
 
   def email

@@ -1,14 +1,16 @@
 # == Schema Information
 #
-# Table name: categories
+# Table name: applicants
 #
 #  id         :bigint           not null, primary key
-#  name       :string
+#  status     :integer
+#  user_id    :bigint
+#  job_id     :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Category < ApplicationRecord
-  has_and_belongs_to_many :jobs
-  has_one_attached :image
+class Applicant < ApplicationRecord
+  belongs_to :user
+  belongs_to :job
 end

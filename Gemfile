@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'devise'
 gem 'cancancan'
+gem 'devise'
 gem 'rake'
 
 # Manage databases by mapping the tables to Ruby classes
@@ -13,8 +15,8 @@ gem 'activerecord'
 # Query web services through api and examine the resulting output
 gem 'httparty'
 
-gem 'figaro'
 gem 'active_model_serializers'
+gem 'figaro'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 gem 'json-schema'
@@ -23,8 +25,8 @@ gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
 gem 'jwt'
+gem 'puma', '~> 3.11'
 gem 'travis'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -47,7 +49,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors'
 
 group :development, :test, :production do
-    # Call `byebug` in the code to stop execution and get a debugger console
+  # Call `byebug` in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   # Call `binding.pry` in the code to access runtime developer console for debugging
   gem 'pry'
@@ -61,9 +63,9 @@ group :development, :test, :production do
   gem 'brakeman', require: false
 end
 
-group :development,:production do
+group :development, :production do
   gem 'annotate'
-   # Get notified about the file modifications made
+  # Get notified about the file modifications made
   gem 'listen'
   # Speed up development by keeping your application
   # running in the background. Read more: https://github.com/rails/spring
@@ -73,17 +75,17 @@ group :development,:production do
   # Check code style to enforce the community-driven Ruby Style Guide
   gem 'rubocop', require: false
   # Extend rubocop to check rspec files as well
-  gem 'rubocop-rspec'
   gem 'rubocop-performance'
+  gem 'rubocop-rspec'
   # For easy renaming of your project
   # gem 'rename'
 end
 
 group :test do
   # Code coverage analysis tool for Ruby
-  gem 'simplecov', require: false
-  gem 'rspec-rails'
   gem 'database_cleaner'
+  gem 'rspec-rails'
+  gem 'simplecov', require: false
   # Add :retry option for intermittently failing rspec examples
   # gem 'rspec-retry'
   # set ruby objects as test data with support for multiple factories for the same class
@@ -103,4 +105,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

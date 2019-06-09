@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 2
+    },
+    "address": {
+      "type": "object"
+    },
+    "phone_numbers": {
+      "type": "object"
+    },
+    "social_accounts": {
+      "type": "object"
+    },
+    "birth_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "established_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "website": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["male", "female", "other"]
+    },
+    "organization_type": {
+      "type": "string",
+      "enum": ["small", "medium", "large"]
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,321 @@
+[
+    {
+        "agriculture":[
+            {
+                "agricultural communications":[
+                    "Market news reporter", 
+                    "Farm news reporter",
+                    "Public relations representative",
+                    "Advertising specialist",
+                    "Marketing communications manager",
+                    "Regional sales manager",
+                    "Account manager"
+                ]
+            },
+
+            {
+                "agricultural economics":[
+                    "Grain broker",
+                    "Farm and land appraiser",
+                    "Resource economist consultant",
+                    "Agricultural policy analyst",
+                    "Insurance agent",
+                    "Food distribution manager",
+                    "Agricultural lender"                  
+                ]
+            },
+
+            {
+                "agricultural education":[
+                    "Education specialist",
+                    "Education supervisor",
+                    "Farm management",
+                    "Soil conservationist",
+                    "Extension advisor"
+                ]
+            },
+
+            {
+                "agricultural engineering":[
+                    "Structural engineer",
+                    "Irrigation engineer",
+                    "Sanitary/waste handling",
+                    "Food engineer",
+                    "Bioprocessing engineer",
+                    "Machine design engineer"
+                ]
+            },
+
+            {
+                "agronomy":[
+                    "Crop specialist",
+                    "Soil scientist",
+                    "Fertilizer sales representative",
+                    "Plant breeder",
+                    "Plant geneticist",
+                    "Soil conservationist",
+                    "Soil surveyor",
+                    "Farm supply representative"
+                ]
+            },
+
+            {
+                "animal sciences":[
+                    "Livestock production manager",
+                    "Feed sales/management",
+                    "Livestock procurement",
+                    "Livestock insurance representative",
+                    "Veterinarian",
+                    "Farm management",
+                    "Stable management",
+                    "Livestock feedlot operator",
+                    "Ranch/farm hand",
+                    "Animal scientist",
+                    "Animal geneticist"
+                ]
+            },
+
+            {
+                "food sciences":[
+                    "Food product research and development",
+                    "Quality assurance",
+                    "Food chemist",
+                    "Food microbiologist",
+                    "Food manufacturing",
+                    "Food researcher"
+                ]
+            }
+        ]
+    },
+
+    {
+        "ayurved":[
+            "Ayurvedic Consultant",
+            "Ayurvedic Consultant Assistant",
+            "Ayurvedic Doctor",
+            "Ayurvedic Physician",
+            "Ayurvedic Pharmacist",
+            "Ayurvedic Practitioner",
+            "Ayurvedic Research Associate",
+            "Ayurvedic Research Associate Assistant",
+            "Ayurvedic Technicians",
+            "Ayurvedic Therapist",
+            "Medical Officer"
+        ]
+    },
+
+    {
+        "computer and IT":[
+            "Computer and Information Science Manager",
+            "Computer Programmer",
+            "Computer Security Specialist",
+            "Computer Software Engineer",
+            "Computer Support Specialist",
+            "Computer Systems Analyst",
+            "Database Administrator",
+            "Graphics Designer",
+            "Network Administrator",
+            "Website Developer",
+            "Technical Writer"
+        ]
+    },
+
+    {
+        "education":[
+            "Education Administrator",
+            "Elementary School Teacher",
+            "Fitness Trainer",
+            "Post-Secondary Teacher",
+            "School Counselor",
+            "Secondary School Teacher",
+            "Teacher Assistant",
+            "Training Specialist or Manager"
+        ]
+    },
+
+    {
+        "engineering":[
+            "Aerospace Engineer",
+            "Architect",
+            "Chemical Engineer",
+            "Civil Engineer",
+            "Industrial Engineer",
+            "Marine Engineer",
+            "Materials Engineer",
+            "Mechanical Engineer",
+            "Nuclear Engineer"
+        ]
+    },
+
+    {
+        "law, public safety and security":[
+            "Air Crew Officer",
+            "Animal Control Worker",
+            "Court Clerk",
+            "Court Reporter",
+            "Detective",
+            "Fire Inspector",
+            "Firefighter",
+            "Immigration and Customs Inspector",
+            "Judge",
+            "Lawyer",
+            "Paralegal",
+            "Police Officer",
+            "Private Detective",
+            "Security Guard"
+        ]
+    },
+
+    {
+        "management":[
+            {
+                "Business Management and Administration":[
+                    "Accountant or Auditor",
+                    "Administrative Assistant or Secretary",
+                    "Budget Analyst",
+                    "Customer Service Representative",
+                    "Employment and Placement Specialist",
+                    "File Clerk",
+                    "Human Resources Manager or Assistant",
+                    "Legal Secretary",
+                    "Management Analyst",
+                    "Manager",
+                    "Medical Secretary",
+                    "Operations Research Analyst",
+                    "Proofreader",
+                    "Receptionist",
+                    "Statistician",
+                    "Title Examiner"
+                ]
+            },
+
+            {
+                "Finance":[
+                    "Actuary",
+                    "Bill and Account Collector",
+                    "Bookkeeper",
+                    "Brokerage Clerk",
+                    "Claims Adjusters and Examiners",
+                    "Chief Financial Officer",
+                    "Credit Analyst",
+                    "Economist",
+                    "Financial Advisor",
+                    "Financial Analysts and Examiners",
+                    "Financial Manager",
+                    "Financial Services Sales Agent",
+                    "Financial Specialist",
+                    "Insurance Appraiser",
+                    "Insurance Claims Clerk",
+                    "Insurance Underwriter",
+                    "Loan Officer",
+                    "Market Research Analyst",
+                    "Payroll Clerk",
+                    "Procurement Clerk",
+                    "Tax Examiners and Collectors",
+                    "Teller"
+                ]
+            },
+
+            {
+                "Hospitality and Tourism":[
+                    "Amusement and Recreation Attendant",
+                    "Bellhop",
+                    "Bartender",
+                    "Chef",
+                    "Coaches and Scouts",
+                    "Cook",
+                    "Dishwasher ",
+                    "Food Preparation Worker",
+                    "Food Service Manager",
+                    "Gaming and Sports Book Writer",
+                    "Gaming Cage Worker",
+                    "Gaming Dealer",
+                    "Gaming Manager",
+                    "Hotel Desk Clerk",
+                    "Maids and Housekeepers",
+                    "Recreation Worker",
+                    "Tour Guide",
+                    "Travel Agent",
+                    "Umpires and Referees",
+                    "Waiters and Waitresses"
+                ]
+            }
+        ]
+    },
+
+    {
+        "medicine and health care":[
+            "Anesthesiologist",
+            "Athletic Trainer",
+            "Chiropractor",
+            "Dental Assistants and Hygienists",
+            "Dentist",
+            "Dietitians and Nutritionists",
+            "Doctor",
+            "Emergency Medical Technician",
+            "Massage Therapist ",
+            "Medical and Health Services Manager",
+            "Medical Assistant",
+            "Medical Records Technician",
+            "Occupational Therapist",
+            "Optometrist",
+            "Orthodontist",
+            "Physical Therapist",
+            "Physician Assistant ",
+            "Podiatrist",
+            "Psychiatrist ",
+            "Radiology Technician",
+            "Recreational Therapist",
+            "Respiratory Therapist",
+            "Surgeon",
+            "Speech-Language Pathologist ",
+            "Veterinarian",
+            "Veterinary Assistant"
+        ]
+    },
+    {
+        "nursing":[
+            "Ambulatory Care Nurses",
+            "Critical Care Nurses",
+            "Emergency Room or Trauma Nurses",
+            "Holistic Nurses",
+            "Home Health Care Nurses",
+            "Hospice Nurses",
+            "Infusion Nurses",
+            "Long-term Care Nurses",
+            "Medical-surgical Nurses",
+           " Occupational Health Nurses",
+           " Perianesthesia Nurses",
+            "Perioperative Nurses",
+           " Psychiatric Nurses",
+           " Radiologic Nurses",
+           " Rehabilitation Nurses",
+           " Transplant Nurses"
+        ]
+    },
+
+    {
+        "pharmacy":[
+            "Pharmacist",
+            "Pharmacy Technician"
+        ]
+    },
+    
+    {
+        "science and technology":[
+            "Archeologist",
+            "Astronomer",
+            "Atmospheric Scientist",
+            "Biologist",
+            "Cartographer",
+            "Chemist",
+            "Engineering Manager",
+            "Environmental Scientist",
+            "Forensic Technician",
+            "Geographer",
+            "Oceanographer",
+            "Physicist"
+        ]
+    }
+
+]
