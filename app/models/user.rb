@@ -13,7 +13,6 @@
 #  uid                :string           not null
 #
 
-
 class User < ApplicationRecord
   include RandomAlphaNumeric
 
@@ -34,7 +33,6 @@ class User < ApplicationRecord
   has_many :jobs
   has_many :applicants
 
-
   JOB_SEEKER = 0
   JOB_PROVIDER = 1
   ADMIN = 2
@@ -46,5 +44,17 @@ class User < ApplicationRecord
 
   def nice_role
     ROLES[role]
+  end
+
+  def job_seeker?
+    role == JOB_SEEKER
+  end
+
+  def job_provider?
+    role == JOB_PROVIDER
+  end
+
+  def admin?
+    role == ADMIN
   end
 end

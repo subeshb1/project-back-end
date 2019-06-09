@@ -43,8 +43,14 @@ class BasicInformation < ApplicationRecord
     year = this_year - birth_date.year
     year -= 1 if
       (birth_date.month > this_year.month) ||
-      ((birth_date.month >= this_year.month) && (birth_date.day > this_year.day))
+      ((birth_date.month >= this_year.month) &&
+      (birth_date.day > this_year.day))
     year
+  end
+
+  def complete?
+    !(name.nil? || birth_date.nil? || phone_numbers.nil? ||
+      social_accounts.nil? || role.nil? || description.nil?)
   end
 
   def nice_gender

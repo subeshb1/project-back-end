@@ -9,10 +9,11 @@ module Api
 
       # Baisc Info
       def basic_info
-        valid, error = UpdateBasicInformationForm.new(basic_info_params, current_user)
-                                                 .validate
+        valid, error = UpdateBasicInformationForm.new(basic_info_params,
+                                                      current_user).validate
         api_error(422, error) unless valid
-        basic_info = UpdateBasicInformation.new(basic_info_params, current_user).call
+        basic_info = UpdateBasicInformation.new(basic_info_params,
+                                                current_user).call
         render json: basic_info, status: 200
       end
 
@@ -34,12 +35,22 @@ module Api
       # Work Experience
       def work_experience
         authorize! :update_work_experience, current_user
-        work_experiences = UpdateWorkExperience.new(current_user, work_experience_params).call
+        work_experiences = UpdateWorkExperience.new(current_user,
+                                                    work_experience_params).call
         render json: work_experiences, status: 200
       end
 
       def show_work_experience
         render json: current_user.work_experiences, status: 200
+      end
+
+      # Profile
+      def index
+        render json: GetProfile.new(current_user).call, status: 200, serializer: ProfileSerializer
+      end
+
+      def status
+        render json: GetProfileStatus.new(current_user).call, status: 200
       end
 
       private
