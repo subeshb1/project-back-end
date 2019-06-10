@@ -5,10 +5,10 @@
 #  id                :bigint           not null, primary key
 #  organization_name :string
 #  job_title         :string
-#  title             :string
 #  level             :string
-#  start_date        :date
-#  end_date          :date
+#  salary            :float
+#  start_date        :datetime
+#  end_date          :datetime
 #  description       :text
 #  user_id           :bigint
 #  created_at        :datetime         not null

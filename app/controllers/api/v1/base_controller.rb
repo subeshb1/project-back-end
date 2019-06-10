@@ -16,7 +16,17 @@ module Api
       rescue_from StandardError, with: :handle_exception
       rescue_from APIError, with: :handle_api_error
 
+      rescue_from CanCan::AccessDenied do |_exception|
+        respond_to do |format|
+          format.json { render json: {message: 'Forbidden'}, status: :forbidden }
+        end
+      end
+
       protected
+
+      def handle_can_can_error(exception)
+        raise APIError.new(403, 'Forbidden', exception)
+      end
 
       def api_error(code, msg = '', request = nil)
         raise APIError.new(code, msg, request)

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
+      resources :jobs, only: [:create] do
+      end
       resources :profile, only: [:index] do
         put :basic_info, on: :collection
         put :education, on: :collection

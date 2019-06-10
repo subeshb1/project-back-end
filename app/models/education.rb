@@ -5,8 +5,8 @@
 #  id         :bigint           not null, primary key
 #  degree     :string
 #  program    :string
-#  start_date :date
-#  end_date   :date
+#  start_date :datetime
+#  end_date   :datetime
 #  user_id    :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
