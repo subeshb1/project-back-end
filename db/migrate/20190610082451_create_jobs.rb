@@ -2,6 +2,7 @@ class CreateJobs < ActiveRecord::Migration[5.2]
   def change
     create_table :jobs do |t|
       t.string :uid, unique: true
+      t.integer :status, limit: 1, default: 0
       t.string :job_title
       t.integer :open_seats, default: 1
       t.string :level

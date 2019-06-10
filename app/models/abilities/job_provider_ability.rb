@@ -4,5 +4,6 @@
 module JobProviderAbility
   def job_provider(user)
     can :create_job, User
+    can :view_job, User
   end
 end

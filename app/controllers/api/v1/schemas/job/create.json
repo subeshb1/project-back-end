@@ -1,0 +1,103 @@
+{
+  "definitions": {
+    "specification_1": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "require": { "type": "boolean" }
+      },
+      "required": ["require", "value"]
+    },
+    "specification_2": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "require": { "type": "boolean" }
+      },
+      "required": ["require", "max", "min"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "job_title": {
+      "type": "string",
+      "minLength": 2
+    },
+    "open_seats": {
+      "type": "number"
+    },
+    "level": {
+      "type": "string",
+      "enum": ["entry_level", "mid_level", "senior_level", "top_level"]
+    },
+    "min_salary": {
+      "type": "number"
+    },
+    "max_salary": {
+      "type": "number"
+    },
+    "job_type": {
+      "type": "string",
+      "enum": ["full_time", "part_time", "internship", "contract"]
+    },
+    "application_deadline": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "type": "string"
+    },
+    "job_specifications": {
+      "type": "object",
+      "properties": {
+        "degree": { "$ref": "#/definitions/specification_1" },
+        "program": { "$ref": "#/definitions/specification_1" },
+        "experience": { "$ref": "#/definitions/specification_1" },
+        "skills": { "$ref": "#/definitions/specification_1" },
+        "gender": { "$ref": "#/definitions/specification_1" },
+        "age": { "$ref": "#/definitions/specification_2" }
+      },
+      "required": ["degree", "program", "experience", "gender", "age"]
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "question_type": {
+            "type": "string",
+            "enum": ["multiple_choice", "answer", "file"]
+          },
+          "options": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "categories",
+    "job_title",
+    "open_seats",
+    "level",
+    "min_salary",
+    "max_salary",
+    "job_type",
+    "application_deadline",
+    "job_specifications"
+  ]
+}

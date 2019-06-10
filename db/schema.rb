@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_094216) do
+ActiveRecord::Schema.define(version: 2019_06_10_082451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
   create_table "api_keys", id: :serial, force: :cascade do |t|
     t.jsonb "app_info", default: {}, null: false
     t.string "token", null: false
-  end
-
-  create_table "applicants", force: :cascade do |t|
-    t.integer "status", limit: 2
-    t.bigint "user_id"
-    t.bigint "job_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_applicants_on_job_id"
-    t.index ["user_id"], name: "index_applicants_on_user_id"
   end
 
   create_table "basic_informations", force: :cascade do |t|
@@ -113,14 +103,17 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
 
   create_table "jobs", force: :cascade do |t|
     t.string "uid"
-    t.text "description"
-    t.string "title"
+    t.string "job_title"
+    t.integer "open_seats", default: 1
+    t.string "level"
     t.float "min_salary"
     t.float "max_salary"
-    t.jsonb "features", default: {}
-    t.integer "open_seats", default: 1
-    t.integer "level", limit: 2
-    t.integer "type", limit: 2
+    t.string "job_type"
+    t.datetime "application_deadline"
+    t.text "description"
+    t.jsonb "job_specifications"
+    t.jsonb "questions"
+    t.datetime "completed_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -152,8 +145,6 @@ ActiveRecord::Schema.define(version: 2019_06_08_094216) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "applicants", "jobs"
-  add_foreign_key "applicants", "users"
   add_foreign_key "basic_informations", "users"
   add_foreign_key "categories_basic_informations", "basic_informations"
   add_foreign_key "categories_basic_informations", "categories"

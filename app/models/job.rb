@@ -19,7 +19,15 @@
 
 class Job < ApplicationRecord
   include RandomAlphaNumeric
-  
+  ACTIVE = 0
+  PROCESSING = 1
+  COMPLETED = 2
+  STATUS = {
+    0 => 'active',
+    1 => 'processing',
+    2 => 'completed'
+  }
+
   before_create :assign_unique_id
 
   has_and_belongs_to_many :categories
