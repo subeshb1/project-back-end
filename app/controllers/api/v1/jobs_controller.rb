@@ -7,7 +7,7 @@ module Api
       # before_action :validate_schema, only: [:create]
 
       def create
-        authorize! :modify_job, current_user
+        authorize! :create_job, current_user
         valid, error = CreateJobForm.new(create_params).validate
         api_error(422, error) unless valid
 
