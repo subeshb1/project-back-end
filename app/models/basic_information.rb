@@ -6,13 +6,14 @@
 #
 #  id              :bigint           not null, primary key
 #  name            :string
-#  birth_date      :date
+#  birth_date      :datetime
 #  phone_numbers   :jsonb
 #  social_accounts :jsonb
-#  type            :integer
+#  role            :integer
 #  description     :text
 #  website         :string
 #  user_id         :bigint
+#  address         :jsonb
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

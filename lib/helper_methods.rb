@@ -14,3 +14,15 @@ end
 def get_auth(user)
   JsonWebToken.encode(user_id: user.uid)
 end
+
+# def create_job_seeker_profile(user)
+#   user = create_a_user  unless user
+  
+
+# end
+
+# def create_work_experience(user)
+#   user.work_experiences << WorkExperience.create(
+    
+#   )
+# end
