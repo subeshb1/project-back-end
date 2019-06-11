@@ -20,7 +20,7 @@ module Api
 
         def index
           page, per_page = extract_page_details(params)
-
+          jobs = GetList
         end
 
         def show

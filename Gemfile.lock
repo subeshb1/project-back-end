@@ -341,6 +341,7 @@ DEPENDENCIES
   figaro
   httparty
   jbuilder
+  json
   json-schema
   jwt
   listen
