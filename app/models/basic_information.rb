@@ -21,7 +21,7 @@
 class BasicInformation < ApplicationRecord
   has_one_attached :avatar
   belongs_to :user
-  has_and_belongs_to_many :categories
+  has_and_belongs_to_many :categories, join_table: "categories_basic_informations"
 
   GENDER = {
     0 => 'male',
@@ -51,7 +51,7 @@ class BasicInformation < ApplicationRecord
 
   def complete?
     !(name.nil? || birth_date.nil? || phone_numbers.nil? ||
-      social_accounts.nil? || role.nil? || description.nil?)
+      social_accounts.nil? || role.nil? || description.nil? || categories.count.zero?)
   end
 
   def nice_gender

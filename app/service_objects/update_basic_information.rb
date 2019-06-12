@@ -5,17 +5,21 @@ class UpdateBasicInformation
 
   def initialize(params = {}, current_user)
     @basic_information = BasicInformation.find_or_create_by(user_id: current_user.id)
-    @params = params.to_h
+    @params = params.to_h.with_indifferent_access
     @attributes = %i[avatar birth_date
                      address phone_numbers education role
-                     social_accounts name description website]
+                     social_accounts name description website categories]
     @user = current_user
   end
 
   def call
     params = fetch_attributes
-    basic_information.update_attributes(params.except(:avatar))
+    basic_information.update_attributes(params.except(:avatar, :categories))
     basic_information.avatar.attach(params[:avatar]) unless params[:avatar].nil?
+    if params[:categories]
+      basic_information.categories.destroy_all
+      basic_information.categories << Category.where('lower(name) = ?', params[:categories].map(&:downcase))
+    end
     basic_information.reload
   end
 
@@ -29,7 +33,6 @@ class UpdateBasicInformation
       params[:role] = BasicInformation::ORGANIZATION_TYPE.key params.delete :organization_type if params.key? :organization_type
       params[:birth_date] = params.delete :established_date if params.key? :established_date
     end
-
     params.slice(*attributes)
   end
 end

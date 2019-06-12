@@ -89,7 +89,10 @@ end
 
 
 def create_fake_job_provider
-
+  company_info = []
+  Category.all.map(&:name).each do
+    
+  end
 end
 
 
@@ -100,7 +103,9 @@ def extract_jobs
   job_hash.each do |key, values|
     jobs[key] = []
     values.each do
-      
+      jobs[key] << {
+        job_title: job_hash[category_name].sample,
+      }
     end
   end
 end
