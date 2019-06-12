@@ -87,3 +87,20 @@ def create_fake_job_seeker
   end
 end
 
+
+def create_fake_job_provider
+
+end
+
+
+def extract_jobs
+  file = File.read('data/jobs.json')
+  job_hash = JSON.parse(file)
+  jobs = {}
+  job_hash.each do |key, values|
+    jobs[key] = []
+    values.each do
+      
+    end
+  end
+end
