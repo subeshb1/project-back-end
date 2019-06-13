@@ -37,6 +37,7 @@ def create_job_seeker_profile(user, educations, work_experiences)
                              }, user).call
   UpdateEducation.new(user,  educations).call
   UpdateWorkExperience.new(user, work_experiences).call
+  user
 end
 
 def extract_education_work_experience
@@ -78,16 +79,28 @@ def extract_education_work_experience
   education_work_experience
 end
 
-def create_fake_job_seeker
+def create_fake_job_seekers
   extract_education_work_experience.each do |value|
     create_job_seeker_profile(nil, { educations: value[:educations] }, work_experiences: value[:work_experiences])
   end
 end
 
+def create_job_provider_jobs(user, basic_information, jobs)
+  user ||= create_a_user role: 1
+  UpdateBasicInformation.new(basic_information, user).call
+  jobs.each do |job|
+    user.jobs << CreateJob.new(user,job).call
+  end
+  user
+end
 
+def create_fake_job_providers
+  extract_company_jobs.each do |value|
+    create_job_provider_jobs(nil, value[:basic_information] , value[:jobs])
+  end
+end
 
-
-def create_fake_job_provider
+def extract_company_jobs
   company_info = []
   file = File.read('data/jobs.json')
   job_hash = JSON.parse(file)
@@ -137,7 +150,7 @@ def create_fake_job_provider
           min_salary: min_salary,
           max_salary: min_salary + rand(0..3) * 10_000,
           job_type: job_type[level].sample,
-          application_deadline: Date.today + rand(1..150).days,
+          application_deadline: (Date.today + rand(1..150).days).to_datetime.to_time.iso8601,
           description: Faker::Lorem.paragraph_by_chars(256, false),
           job_specifications: {
             degree: {

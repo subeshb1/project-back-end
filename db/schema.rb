@@ -62,21 +62,21 @@ ActiveRecord::Schema.define(version: 2019_06_10_082451) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_basic_informations", id: false, force: :cascade do |t|
+  create_table "categories_basic_informations", force: :cascade do |t|
     t.bigint "category_id"
     t.bigint "basic_information_id"
     t.index ["basic_information_id"], name: "index_categories_basic_informations_on_basic_information_id"
     t.index ["category_id"], name: "index_categories_basic_informations_on_category_id"
   end
 
-  create_table "categories_educations", id: false, force: :cascade do |t|
+  create_table "categories_educations", force: :cascade do |t|
     t.bigint "category_id"
     t.bigint "education_id"
     t.index ["category_id"], name: "index_categories_educations_on_category_id"
     t.index ["education_id"], name: "index_categories_educations_on_education_id"
   end
 
-  create_table "categories_jobs", id: false, force: :cascade do |t|
+  create_table "categories_jobs", force: :cascade do |t|
     t.bigint "category_id"
     t.bigint "job_id"
     t.index ["category_id"], name: "index_categories_jobs_on_category_id"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_082451) do
 
   create_table "jobs", force: :cascade do |t|
     t.string "uid"
+    t.integer "status", limit: 2, default: 0
     t.string "job_title"
     t.integer "open_seats", default: 1
     t.string "level"

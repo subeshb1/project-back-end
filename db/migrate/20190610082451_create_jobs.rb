@@ -18,7 +18,7 @@ class CreateJobs < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :categories_jobs, id: false do |t|
+    create_table :categories_jobs do |t|
       t.belongs_to :category, index: true, foreign_key: true
       t.belongs_to :job, index: true, foreign_key: true
     end

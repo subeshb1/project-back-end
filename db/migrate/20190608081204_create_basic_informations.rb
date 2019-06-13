@@ -12,7 +12,7 @@ class CreateBasicInformations < ActiveRecord::Migration[5.2]
       t.jsonb :address, default: {}
       t.timestamps
     end
-    create_table :categories_basic_informations, id: false do |t|
+    create_table :categories_basic_informations do |t|
       t.belongs_to :category, index: true, foreign_key: true
       t.belongs_to :basic_information, index: true, foreign_key: true
     end

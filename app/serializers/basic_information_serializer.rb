@@ -2,7 +2,7 @@
 
 class BasicInformationSerializer < ActiveModel::Serializer
   attributes :name, :uid, :address, :birth_date, :established_date,
-             :gender, :organization_type,
+             :gender, :organization_type, :website, :description,
              :phone_numbers, :social_accounts, :avatar, :email, :categories
 
   def uid
