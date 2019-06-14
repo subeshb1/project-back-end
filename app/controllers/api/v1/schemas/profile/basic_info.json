@@ -35,6 +35,13 @@
     },
     "description": {
       "type": "string"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   }
 }

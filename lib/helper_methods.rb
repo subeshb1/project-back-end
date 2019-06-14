@@ -36,10 +36,9 @@ def create_job_seeker_profile(user, educations, work_experiences)
 
                              }, user).call
   UpdateEducation.new(user,  educations).call
-  UpdateWorkExperience.new(user,  work_experiences).call
+  UpdateWorkExperience.new(user, work_experiences).call
+  user
 end
-
-
 
 def extract_education_work_experience
   file = File.read('data/education.json')
@@ -80,27 +79,112 @@ def extract_education_work_experience
   education_work_experience
 end
 
-
-def create_fake_job_seeker
+def create_fake_job_seekers
   extract_education_work_experience.each do |value|
-    create_job_seeker_profile(nil, {educations: value[:educations]},{work_experiences: value[:work_experiences]})
+    create_job_seeker_profile(nil, { educations: value[:educations] }, work_experiences: value[:work_experiences])
   end
 end
 
-
-def create_fake_job_provider
-
+def create_job_provider_jobs(user, basic_information, jobs)
+  user ||= create_a_user role: 1
+  UpdateBasicInformation.new(basic_information, user).call
+  jobs.each do |job|
+    user.jobs << CreateJob.new(user,job).call
+  end
+  user
 end
 
+def create_fake_job_providers
+  extract_company_jobs.each do |value|
+    create_job_provider_jobs(nil, value[:basic_information] , value[:jobs])
+  end
+end
 
-def extract_jobs
+def extract_company_jobs
+  company_info = []
   file = File.read('data/jobs.json')
   job_hash = JSON.parse(file)
-  jobs = {}
-  job_hash.each do |key, values|
-    jobs[key] = []
-    values.each do
-      
+  Category.all.map(&:name).each do |category_name|
+    rand(10..15).times.each do
+      basic_information = {
+        name: Faker::Company.name,
+        address: { main_branch: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize },
+        description: Faker::Lorem.paragraph_by_chars(256, false),
+        established_date: Faker::Date.birthday(18, 65).to_datetime.to_time.iso8601,
+        organization_type: BasicInformation::ORGANIZATION_TYPE.values.sample,
+        website: Faker::Internet.url,
+        phone_numbers: {
+          office: Faker::PhoneNumber.phone_number_with_country_code
+        },
+        categories: [category_name]
+      }
+
+      jobs = []
+
+      rand(1..20).times.each do
+        level =  %w[entry_level mid_level senior_level top_level].sample
+        salary = {
+          "entry_level": 10_000,
+          "mid_level": 30_000,
+          "senior_level": 50_000,
+          "top_level": 70_000
+        }.with_indifferent_access
+        min_salary = salary[level]
+        degree = {
+          "entry_level": ['Bachelor', 'Intermediate', 'SLC/SEE', 'Other'],
+          "mid_level": ['Master', 'Bachelor', 'Intermediate', 'SLC/SEE', 'Other'],
+          "senior_level": ['Master', 'Bachelor', 'Other', 'Ph. D.'],
+          "top_level": ['Master', 'Bachelor', 'Other', 'Ph. D.']
+        }.with_indifferent_access
+        job_type = {
+          "entry_level": %w[internship part_time full_time],
+          "mid_level": %w[part_time full_time contract],
+          "senior_level": %w[full_time contract],
+          "top_level": %w[full_time contract]
+        }.with_indifferent_access
+        jobs << {
+          job_title: job_hash[category_name].sample,
+          categories: [category_name],
+          open_seats: rand(1..5),
+          level: level,
+          min_salary: min_salary,
+          max_salary: min_salary + rand(0..3) * 10_000,
+          job_type: job_type[level].sample,
+          application_deadline: (Date.today + rand(1..150).days).to_datetime.to_time.iso8601,
+          description: Faker::Lorem.paragraph_by_chars(256, false),
+          job_specifications: {
+            degree: {
+              value: [degree[level].sample],
+              require: false
+            },
+            program: {
+              value: [],
+              require: false
+            },
+            experience: {
+              value: [rand(1..5).to_s],
+              require: false
+            },
+            gender: {
+              value: [BasicInformation::GENDER.values.sample],
+              require: false
+            },
+            age: {
+              value: {
+                min: 16,
+                max: 69
+              },
+              require: false
+            }
+          }
+
+        }
+      end
+      company_info << {
+        basic_information: basic_information,
+        jobs: jobs
+      }
     end
   end
+  company_info
 end

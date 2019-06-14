@@ -7,7 +7,7 @@ class UpdateBasicInformationForm < FormObjects::Base
     @params = params.to_h
     @attributes = %i[avatar
                      address phone_numbers
-                     social_accounts name description website]
+                     social_accounts name description website categories]
     @user = user
     super()
   end

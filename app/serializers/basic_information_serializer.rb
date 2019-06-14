@@ -2,8 +2,8 @@
 
 class BasicInformationSerializer < ActiveModel::Serializer
   attributes :name, :uid, :address, :birth_date, :established_date,
-             :gender, :organization_type,
-             :phone_numbers, :social_accounts, :avatar, :email
+             :gender, :organization_type, :website, :description,
+             :phone_numbers, :social_accounts, :avatar, :email, :categories
 
   def uid
     object.user.uid
@@ -30,5 +30,9 @@ class BasicInformationSerializer < ActiveModel::Serializer
 
     ENV['URL'] + Rails.application.routes.url_helpers.rails_blob_path(object.avatar,
                                                                       only_path: true)
+  end
+
+  def categories
+    ActiveModel::SerializableResource.new(object.categories, each_serializer: CategorySerializer)
   end
 end

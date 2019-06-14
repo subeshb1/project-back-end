@@ -71,7 +71,8 @@ module Api
       def basic_info_params
         params.dup.permit(:name, :avatar, :gender, :organization_type,
                           :website, :description,
-                          :birth_date, :established_date, address: {},
+                          :birth_date, :established_date, categories: [],
+                                                          address: {},
                                                           phone_numbers: {},
                                                           social_accounts: {})
       end
