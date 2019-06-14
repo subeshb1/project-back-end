@@ -5,6 +5,6 @@ class WorkExperienceSerializer < ActiveModel::Serializer
              :end_date, :salary, :level, :description
 
   def categories
-    ActiveModel::SerializableResource.new(object.categories, each_serializer: CategorySerializer)
+    object.categories&.map(&:name)
   end
 end

@@ -18,7 +18,7 @@ class UpdateBasicInformation
     basic_information.avatar.attach(params[:avatar]) unless params[:avatar].nil?
     if params[:categories]
       basic_information.categories.destroy_all
-      basic_information.categories << Category.where('lower(name) = ?', params[:categories].map(&:downcase))
+      basic_information.categories << Category.where(name: params[:categories])
     end
     basic_information.reload
   end
