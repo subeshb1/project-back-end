@@ -21,8 +21,7 @@ class UpdateEducation
 
   def create_education(param)
     education = Education.create(param.except(:categories))
-    education.categories << Category.where('lower(name) = ?', param[:categories]
-                                    .map(&:downcase))
+    education.categories << Category.where(name: param[:categories])
     education
   end
 end

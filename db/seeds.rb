@@ -10,18 +10,18 @@
 ApiKey.new(token: 'development').save!
 
 categories = [
-  'science and technology',
-  'pharmacy',
-  'nursing',
-  'management',
-  'medicine and health care',
-  'law, public safety and security',
-  'engineering',
-  'computer and IT',
-  'education',
-  'ayurved',
-  'agriculture'
-]
+  'Science and Technology',
+  'Pharmacy',
+  'Nursing',
+  'Management',
+  'Medicine and Health Care',
+  'Law, public safety and security',
+  'Engineering',
+  'Computer and IT',
+  'Education',
+  'Ayurved',
+  'Agriculture'
+].sort
 
 categories.each do |category|
   Category.create!(name: category)

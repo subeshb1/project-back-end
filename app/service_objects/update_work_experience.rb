@@ -21,8 +21,7 @@ class UpdateWorkExperience
 
   def create_work_experience(param)
     work_experience = WorkExperience.create(param.except(:categories))
-    work_experience.categories << Category.where('lower(name) = ?', param[:categories]
-                                    .map(&:downcase))
+    work_experience.categories << Category.where(name: param[:categories])
     work_experience
   end
 end
