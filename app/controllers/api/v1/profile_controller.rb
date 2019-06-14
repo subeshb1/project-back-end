@@ -9,7 +9,6 @@ module Api
 
       # Baisc Info
       def basic_info
-        binding.pry
         valid, error = UpdateBasicInformationForm.new(basic_info_params,
                                                       current_user).validate
         api_error(422, error) unless valid

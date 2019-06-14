@@ -33,6 +33,6 @@ class BasicInformationSerializer < ActiveModel::Serializer
   end
 
   def categories
-    ActiveModel::SerializableResource.new(object.categories, each_serializer: CategorySerializer)
+    object.categories&.map(&:name)
   end
 end

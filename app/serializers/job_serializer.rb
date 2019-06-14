@@ -9,6 +9,6 @@ class JobSerializer < ActiveModel::Serializer
              :job_specifications, :uid
 
   def categories
-    ActiveModel::SerializableResource.new(object.categories, each_serializer: CategorySerializer)
+    object.categories&.map(&:name)
   end
 end
