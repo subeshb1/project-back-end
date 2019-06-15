@@ -5,7 +5,8 @@ module Api
     module Jobprovider
       class JobController < BaseController
         before_action :authenticate_request!
-        before_action :validate_schema, only: [:create]
+        before_action :validate_schema, only: %i[create index]
+        after_action -> { set_pagination_header(:jobs) }, only: %i[index]
 
         def create
           authorize! :create_job, current_user
@@ -13,14 +14,16 @@ module Api
           api_error(422, error) unless valid
 
           job = CreateJob.new(current_user, create_params).call
-          render json: job, status: :ok
+          render json: job, status: 201
         end
 
         def update; end
 
         def index
+          authorize! :view_job, current_user
           page, per_page = extract_page_details(params)
-          # jobs = GetList
+          @jobs = GetJobList.new(job_list_params.merge!(job_provider_id: [current_user.uid])).call.page(page).per(per_page)
+          render json: @jobs, status: :ok, each_serializer: LessJobSerializer
         end
 
         def show
@@ -29,6 +32,15 @@ module Api
         end
 
         private
+
+        def job_list_params
+          params.permit(
+            :time_min, :time_max,
+            :min_salary,
+            :max_salary, :job_title, level: [], job_type: [],
+                         categories: [], open_seats: {}
+          )
+        end
 
         def show_params
           params.permit(:id)

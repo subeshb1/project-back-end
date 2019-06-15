@@ -34,6 +34,11 @@ class User < ApplicationRecord
   has_many :jobs
   has_many :applicants
 
+  scope :job_seeker, -> { where(role: JOB_SEEKER) }
+  scope :job_provider, -> { where(role: JOB_PROVIDER) }
+  scope :admin, -> { where(role: ADMIN) }
+
+
   JOB_SEEKER = 0
   JOB_PROVIDER = 1
   ADMIN = 2
