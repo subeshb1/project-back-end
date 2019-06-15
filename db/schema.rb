@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_082451) do
+ActiveRecord::Schema.define(version: 2019_06_15_132438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,19 @@ ActiveRecord::Schema.define(version: 2019_06_10_082451) do
   create_table "api_keys", id: :serial, force: :cascade do |t|
     t.jsonb "app_info", default: {}, null: false
     t.string "token", null: false
+  end
+
+  create_table "applicants", force: :cascade do |t|
+    t.integer "status", limit: 2
+    t.bigint "user_id"
+    t.bigint "job_id"
+    t.datetime "applied_date"
+    t.jsonb "answers", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id", "user_id"], name: "index_applicants_on_job_id_and_user_id", unique: true
+    t.index ["job_id"], name: "index_applicants_on_job_id"
+    t.index ["user_id"], name: "index_applicants_on_user_id"
   end
 
   create_table "basic_informations", force: :cascade do |t|
@@ -101,6 +114,16 @@ ActiveRecord::Schema.define(version: 2019_06_10_082451) do
     t.index ["user_id"], name: "index_educations_on_user_id"
   end
 
+  create_table "job_views", force: :cascade do |t|
+    t.bigint "job_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id", "user_id"], name: "index_job_views_on_job_id_and_user_id", unique: true
+    t.index ["job_id"], name: "index_job_views_on_job_id"
+    t.index ["user_id"], name: "index_job_views_on_user_id"
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.string "uid"
     t.integer "status", limit: 2, default: 0
@@ -146,6 +169,8 @@ ActiveRecord::Schema.define(version: 2019_06_10_082451) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "applicants", "jobs"
+  add_foreign_key "applicants", "users"
   add_foreign_key "basic_informations", "users"
   add_foreign_key "categories_basic_informations", "basic_informations"
   add_foreign_key "categories_basic_informations", "categories"
@@ -156,5 +181,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_082451) do
   add_foreign_key "categories_work_experiences", "categories"
   add_foreign_key "categories_work_experiences", "work_experiences"
   add_foreign_key "educations", "users"
+  add_foreign_key "job_views", "jobs"
+  add_foreign_key "job_views", "users"
   add_foreign_key "jobs", "users"
 end

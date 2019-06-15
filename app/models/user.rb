@@ -30,14 +30,19 @@ class User < ApplicationRecord
   has_many :skills
   has_many :work_experiences
 
-  has_one :company_information
+  has_many :job_views
+  # has_many :applied_jobs
+  has_many :applicants
+  has_many :applications, class_name: "Applicant"
+  has_many :applied_jobs, class_name: "Job", source: :job, through: :applications
+  has_many :viewed_jobs, through: :job_views, source: :job
+
   has_many :jobs
   has_many :applicants
 
   scope :job_seeker, -> { where(role: JOB_SEEKER) }
   scope :job_provider, -> { where(role: JOB_PROVIDER) }
   scope :admin, -> { where(role: ADMIN) }
-
 
   JOB_SEEKER = 0
   JOB_PROVIDER = 1
