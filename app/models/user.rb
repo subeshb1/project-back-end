@@ -19,6 +19,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   before_create :assign_unique_id
+  after_create :create_basic_information
 
   validates :role, presence: true
 
