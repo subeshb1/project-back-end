@@ -46,10 +46,7 @@ module Recommendation
     sorted_recommended = recommended.sort_by { |_key, value| value }.reverse
   end
 end
-# user1_data = user1.viewed_jobs.select('applicants.id, job_views.job_id')
-#                       .joins('RIGHT JOIN "applicants" ON "job_views"."user_id" = "applicants"."user_id" AND "job_views"."job_id" = "applicants"."job_id" ')
-#                       .map { |x| { applicant_id: x.id, job_id: x.job_id } }
-
+user1_data = user1.viewed_jobs.select('applicants.id, jobs_views.job_id') .joins('RIGHT JOIN "applicants" ON "jobs_views"."user_id" = "applicants"."user_id" AND "jobs_views"."job_id" = "applicants"."job_id" ') .map { |x| { applicant_id: x.id, job_id: x.job_id } }
 jobs = Job.last(9)
 
 user1 = User.last
