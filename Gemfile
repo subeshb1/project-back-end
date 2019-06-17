@@ -8,6 +8,8 @@ ruby '2.6.3'
 gem 'cancancan'
 gem 'devise'
 gem 'rake'
+gem 'kaminari'
+
 
 # Manage databases by mapping the tables to Ruby classes
 gem 'activerecord'

@@ -33,6 +33,10 @@ class Job < ApplicationRecord
   has_and_belongs_to_many :categories
   belongs_to :job_provider
   has_many_attached :images
+
+  has_many :job_views
+  has_many :applicants
+  has_many :viewers, class_name: "User", through: :job_views
 end
 
 # class CreateApplicants < ActiveRecord::Migration[5.2]

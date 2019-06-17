@@ -1,0 +1,62 @@
+{
+  "definitions": {
+    "min_max": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" }
+      },
+      "required": ["max", "min"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "job_title": {
+      "type": "string"
+    },
+    "open_seats": {
+      "type": { "$ref": "#/definitions/min_max" }
+    },
+    "level": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["entry_level", "mid_level", "senior_level", "top_level"]
+      }
+    },
+    "min_salary": {
+      "type": "number"
+    },
+    "max_salary": {
+      "type": "number"
+    },
+    "job_type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["full_time", "part_time", "internship", "contract"]
+      }
+    },
+    "time_min": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "time_max": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "job_provider_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}
