@@ -1,6 +1,6 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
-# module Recommendation
+module Recommendation
 #   def pearson_correlation_score(user1, user2)
 #     common_views = (user1.viewed_jobs & user2.viewed_jobs).map(&:id)
 
@@ -80,4 +80,4 @@
 # ].each_with_index do |val, index|
 #   user2.viewed_jobs << jobs[index]
 #   user2.applied_jobs << jobs[index] if val == '1'
-# end
+end
