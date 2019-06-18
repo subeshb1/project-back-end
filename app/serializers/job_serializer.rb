@@ -6,8 +6,11 @@ class JobSerializer < ActiveModel::Serializer
              :description, :job_type, :application_deadline,
              :categories,
              :questions,
-             :job_specifications, :uid
+             :job_specifications, :uid, :status
 
+  def status
+    object.nice_status
+  end
   def categories
     object.categories&.map(&:name)
   end

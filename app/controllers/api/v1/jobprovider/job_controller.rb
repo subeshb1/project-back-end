@@ -6,7 +6,6 @@ module Api
       class JobController < BaseController
         before_action :authenticate_request!
         before_action :validate_schema, only: %i[create index]
-        after_action -> { set_pagination_header(:jobs) }, only: %i[index]
 
         def create
           authorize! :create_job, current_user
@@ -22,8 +21,15 @@ module Api
         def index
           authorize! :view_job, current_user
           page, per_page = extract_page_details(params)
-          @jobs = GetJobList.new(job_list_params.merge!(job_provider_id: [current_user.uid])).call.page(page).per(per_page)
-          render json: @jobs, status: :ok, each_serializer: LessJobSerializer
+          jobs = GetJobList.new(job_list_params.merge!(job_provider_id: [current_user.uid])).call.page(page).per(per_page)
+          render json: {
+
+            data: ActiveModel::SerializableResource.new(
+              jobs,
+              each_serializer: LessJobSerializer
+            ),
+            meta: fetch_meta(jobs)
+          }, status: :ok
         end
 
         def show
@@ -38,7 +44,7 @@ module Api
             :time_min, :time_max,
             :min_salary,
             :max_salary, :job_title, level: [], job_type: [],
-                         categories: [], open_seats: {}
+                                     categories: [], open_seats: {}
           )
         end
 

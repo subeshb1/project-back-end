@@ -37,6 +37,10 @@ class Job < ApplicationRecord
   has_many :job_views
   has_many :applicants
   has_many :viewers, class_name: "User", through: :job_views
+
+  def nice_status
+    STATUS[status]
+  end
 end
 
 # class CreateApplicants < ActiveRecord::Migration[5.2]
