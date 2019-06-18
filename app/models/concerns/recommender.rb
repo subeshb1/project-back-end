@@ -46,38 +46,38 @@ module Recommendation
     sorted_recommended = recommended.sort_by { |_key, value| value }.reverse
   end
 end
-user1_data = user1.viewed_jobs.select('applicants.id, jobs_views.job_id') .joins('RIGHT JOIN "applicants" ON "jobs_views"."user_id" = "applicants"."user_id" AND "jobs_views"."job_id" = "applicants"."job_id" ') .map { |x| { applicant_id: x.id, job_id: x.job_id } }
-jobs = Job.last(9)
+# user1_data = user1.viewed_jobs.select('applicants.id, jobs_views.job_id') .joins('RIGHT JOIN "applicants" ON "jobs_views"."user_id" = "applicants"."user_id" AND "jobs_views"."job_id" = "applicants"."job_id" ') .map { |x| { applicant_id: x.id, job_id: x.job_id } }
+# jobs = Job.last(9)
 
-user1 = User.last
-user2 = User.first
+# user1 = User.last
+# user2 = User.first
 
-%w[
-  1
-  0
-  0
-  0
-  1
-  1
-  0
-  0
-  0
-].each_with_index do |val, index|
-  user1.viewed_jobs << jobs[index]
-  user1.applied_jobs << jobs[index] if val == '1'
-end
+# %w[
+#   1
+#   0
+#   0
+#   0
+#   1
+#   1
+#   0
+#   0
+#   0
+# ].each_with_index do |val, index|
+#   user1.viewed_jobs << jobs[index]
+#   user1.applied_jobs << jobs[index] if val == '1'
+# end
 
-%w[
-  1
-  0
-  0
-  0
-  1
-  1
-  0
-  0
-  1
-].each_with_index do |val, index|
-  user2.viewed_jobs << jobs[index]
-  user2.applied_jobs << jobs[index] if val == '1'
+# %w[
+#   1
+#   0
+#   0
+#   0
+#   1
+#   1
+#   0
+#   0
+#   1
+# ].each_with_index do |val, index|
+#   user2.viewed_jobs << jobs[index]
+#   user2.applied_jobs << jobs[index] if val == '1'
 end
