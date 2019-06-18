@@ -80,4 +80,4 @@ end
 # ].each_with_index do |val, index|
 #   user2.viewed_jobs << jobs[index]
 #   user2.applied_jobs << jobs[index] if val == '1'
-end
+# end
