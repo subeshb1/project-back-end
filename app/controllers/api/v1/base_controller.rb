@@ -56,12 +56,13 @@ module Api
         api_error(422, JSON.parse(error.message)) unless valid
       end
 
-      def set_pagination_header(name, _options = {})
-        scope = instance_variable_get("@#{name}")
-        prepare_link_header(scope)
-        headers['X-Total'] = scope.total_count.to_s
-        headers['X-Per-Page'] = scope.size.to_s
-        headers['X-Page'] = scope.current_page.to_s
+      def fetch_meta(name, _options = {})
+        prepare_link_header(name)
+        {
+          total: name.total_count,
+          per_page: name.size,
+          page: name.current_page
+        }
       end
 
       def prepare_link_header(scope)

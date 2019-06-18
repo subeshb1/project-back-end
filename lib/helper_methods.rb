@@ -27,15 +27,16 @@ def create_job_seeker_profile(user, educations, work_experiences)
                                gender: %w[male female other].sample,
                                website: Faker::Internet.url,
                                phone_numbers: {
-                                 home: Faker::PhoneNumber.phone_number_with_country_code
-
+                                 home: Faker::PhoneNumber.phone_number_with_country_code,
+                                 personal: Faker::PhoneNumber.phone_number_with_country_code
                                },
                                address: {
-                                 permantent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize
-                               }
+                                 permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize
+                               },
+                               categories: educations[0].categories
 
                              }, user).call
-  UpdateEducation.new(user,  educations).call
+  UpdateEducation.new(user,  educations).callpermanent
   UpdateWorkExperience.new(user, work_experiences).call
   user
 end
@@ -89,14 +90,14 @@ def create_job_provider_jobs(user, basic_information, jobs)
   user ||= create_a_user role: 1
   UpdateBasicInformation.new(basic_information, user).call
   jobs.each do |job|
-    user.jobs << CreateJob.new(user,job).call
+    user.jobs << CreateJob.new(user, job).call
   end
   user
 end
 
 def create_fake_job_providers
   extract_company_jobs.each do |value|
-    create_job_provider_jobs(nil, value[:basic_information] , value[:jobs])
+    create_job_provider_jobs(nil, value[:basic_information], value[:jobs])
   end
 end
 
@@ -108,13 +109,14 @@ def extract_company_jobs
     rand(10..15).times.each do
       basic_information = {
         name: Faker::Company.name,
-        address: { main_branch: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize },
+        address: { permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize },
         description: Faker::Lorem.paragraph_by_chars(256, false),
         established_date: Faker::Date.birthday(18, 65).to_datetime.to_time.iso8601,
         organization_type: BasicInformation::ORGANIZATION_TYPE.values.sample,
         website: Faker::Internet.url,
         phone_numbers: {
-          office: Faker::PhoneNumber.phone_number_with_country_code
+          home: Faker::PhoneNumber.phone_number_with_country_code,
+          personal: Faker::PhoneNumber.phone_number_with_country_code
         },
         categories: [category_name]
       }
