@@ -6,5 +6,6 @@ module JobSeekerAbility
     can :manage_profile, User, id: user.id
     can :update_education, User, id: user.id
     can :update_work_experience, User, id: user.id
+    can :apply_jobs, User, id: user.id
   end
 end

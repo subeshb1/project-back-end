@@ -14,4 +14,5 @@ class Category < ApplicationRecord
   has_and_belongs_to_many :educations
   has_and_belongs_to_many :work_experiences
   has_one_attached :image
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 end

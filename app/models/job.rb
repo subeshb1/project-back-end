@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: jobs
@@ -26,7 +28,7 @@ class Job < ApplicationRecord
     0 => 'active',
     1 => 'processing',
     2 => 'completed'
-  }
+  }.freeze
 
   before_create :assign_unique_id
 
@@ -36,7 +38,11 @@ class Job < ApplicationRecord
 
   has_many :job_views
   has_many :applicants
-  has_many :viewers, class_name: "User", through: :job_views
+
+  has_many :appliers, class_name: 'User', through: :applicants, source: :user
+  has_many :viewers, class_name: 'User', through: :job_views
+
+  belongs_to :user
 
   def nice_status
     STATUS[status]

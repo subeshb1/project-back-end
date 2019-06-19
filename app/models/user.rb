@@ -31,7 +31,6 @@ class User < ApplicationRecord
   has_many :work_experiences
 
   has_many :job_views
-  # has_many :applied_jobs
   has_many :applicants
   has_many :applications, class_name: "Applicant"
   has_many :applied_jobs, class_name: "Job", source: :job, through: :applications

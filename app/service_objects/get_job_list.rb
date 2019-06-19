@@ -15,6 +15,7 @@ class GetJobList
        .where(job_title_query)
        .where(salary_query)
        .where(type_level_query)
+       .order(created_at: :desc)
   end
 
   private

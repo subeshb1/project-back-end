@@ -22,6 +22,12 @@ Rails.application.routes.draw do
       resources :users, only: [:create] do
         get :role, on: :collection
       end
+      resources :applicant, only: [:create,:show] do
+        post :apply, on: :member
+        post :approve, on: :member
+        post :reject, on: :member
+
+      end
     end
   end
   resources :auth, only: %i[login] do

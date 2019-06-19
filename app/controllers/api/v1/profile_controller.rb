@@ -53,6 +53,10 @@ module Api
         render json: GetProfileStatus.new(current_user).call, status: 200
       end
 
+      def show
+        # render json: GetProfileStatus.new(current_user).call, status: 200
+      end
+      
       private
 
       def work_experience_params
