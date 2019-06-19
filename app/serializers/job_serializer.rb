@@ -9,7 +9,8 @@ class JobSerializer < ActiveModel::Serializer
              :job_specifications, :uid, :status,
              :created_at,
              :company_name,
-             :company_avatar
+             :company_avatar,
+             :company_uid
   def status
     object.nice_status
   end
@@ -27,5 +28,9 @@ class JobSerializer < ActiveModel::Serializer
 
     ENV['URL'] + Rails.application.routes.url_helpers.rails_blob_path(object.user.basic_information.avatar,
                                                                       only_path: true)
+  end
+
+  def company_uid
+    object.user.uid
   end
 end
