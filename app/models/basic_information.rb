@@ -40,6 +40,7 @@ class BasicInformation < ApplicationRecord
   end
 
   def age
+    # birth_date ||= Date.today.year
     this_year = Date.today.year
     year = this_year - birth_date.year
     year -= 1 if

@@ -6,6 +6,7 @@ module Api
       class JobController < BaseController
         before_action :authenticate_request!
         before_action :validate_schema, only: %i[create index]
+        before_action :check_job, only: %i[update]
 
         def create
           authorize! :create_job, current_user
@@ -16,7 +17,10 @@ module Api
           render json: job, status: 201
         end
 
-        def update; end
+        def update
+          authorize! :create_job, current_user
+          render json: UpdateJob.new(@job, create_params).call, status: :ok
+        end
 
         def index
           authorize! :view_job, current_user
@@ -34,7 +38,7 @@ module Api
 
         def show
           authorize! :view_job, current_user
-          render json: Job.where(uid: show_params[:id], user_id: current_user.id), status: :ok
+          render json: Job.where(uid: show_params[:id], user_id: current_user.id).last, status: :ok
         end
 
         private
@@ -59,6 +63,14 @@ module Api
                         categories: [],
                         questions: %i[question_type question options],
                         job_specifications: {})
+        end
+
+        def check_job
+          @job = Job.where(uid: params[:id]).last
+          return if @job
+
+          error_message = { message: 'Job not found!' }
+          api_error(403, error_message)
         end
       end
     end

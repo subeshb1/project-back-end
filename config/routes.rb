@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       namespace 'jobprovider' do
         resources :job
       end
-      resources :profile, only: [:index] do
+      resources :profile, only: %i[index show] do
         put :basic_info, on: :collection
         put :education, on: :collection
         put :work_experience, on: :collection
@@ -22,6 +22,13 @@ Rails.application.routes.draw do
       resources :users, only: [:create] do
         get :role, on: :collection
       end
+      resources :applicant, only: %i[create show] do
+        post :apply, on: :member
+        post :approve, on: :member
+        post :reject, on: :member
+      end
+
+      resources :jobs, only: %i[show index]
     end
   end
   resources :auth, only: %i[login] do

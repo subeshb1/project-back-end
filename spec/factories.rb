@@ -7,7 +7,19 @@ FactoryBot.define do
   end
 
   factory :user do
-    email { 'example@gmail.com' }
+    email { Faker::Internet.email }
     role { User::ROLES.key('job_seeker') }
+    password {'12345678'}
+  end
+
+  factory :job_provider, class: User do
+    email { Faker::Internet.email }
+    role { User::ROLES.key('job_provider') }
+    password {'12345678'}
+  end
+
+  factory :job do
+    job_title { Faker::Job.title }
+    association :user, factory: :job_provider
   end
 end
