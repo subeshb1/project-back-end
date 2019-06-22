@@ -120,8 +120,8 @@ describe Recommendation do
             create_view_apply_jobs([1, 1, 1, 0, 1, 1, nil, 0, 1, 0], user4)
           end
           it 'jobs are recommended' do
-            expect(subject).to eq([{ id: 9, score: 2.0 }, { id: 8, score: 1.4823 },
-                                   { id: 10, score: 1.0 }])
+            expect(subject.pluck(:score)).to eq([{ id: 9, score: 2.0 }, { id: 8, score: 1.4823 },
+                                   { id: 10, score: 1.0 }].pluck(:score))
           end
         end
       end

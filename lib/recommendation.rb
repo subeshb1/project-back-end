@@ -54,10 +54,10 @@ class Recommendation
         score: score
       }
     end
-    users.sort_by { |x| x[:score] }.reverse[0...20]
+    users.sort_by { |x| x[:score] }.reverse.first 20
   end
 
-  def self.user_based_recommendation(user, _count = 10)
+  def self.user_based_recommendation(user, count = 10)
     other_users = get_most_similar_users(user)
     total = {}
     similarity_score = {}
@@ -82,6 +82,6 @@ class Recommendation
         score: (total.to_f / similarity_score[id]).round(4)
       }
     end
-    result.sort_by { |x| x[:score] }.reverse
+    result.sort_by { |x| x[:score] }.reverse.first count
   end
 end
