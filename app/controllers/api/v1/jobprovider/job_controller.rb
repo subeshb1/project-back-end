@@ -38,7 +38,7 @@ module Api
 
         def show
           authorize! :view_job, current_user
-          render json: Job.where(uid: show_params[:id], user_id: current_user.id), status: :ok
+          render json: Job.where(uid: show_params[:id], user_id: current_user.id).last, status: :ok
         end
 
         private
