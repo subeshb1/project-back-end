@@ -54,9 +54,9 @@ module Api
       end
 
       def show
-        # render json: GetProfileStatus.new(current_user).call, status: 200
+        render json: GetProfile.new(User.where(uid: params[:id]).last).call, status: 200, serializer: ProfileSerializer
       end
-      
+
       private
 
       def work_experience_params
