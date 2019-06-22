@@ -33,10 +33,9 @@ def create_job_seeker_profile(user, educations, work_experiences)
                                address: {
                                  permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize
                                },
-                               categories: educations[0].categories
 
                              }, user).call
-  UpdateEducation.new(user,  educations).callpermanent
+  UpdateEducation.new(user,  educations).call
   UpdateWorkExperience.new(user, work_experiences).call
   user
 end
