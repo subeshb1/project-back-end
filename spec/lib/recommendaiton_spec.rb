@@ -48,7 +48,7 @@ describe Recommendation do
       end
     end
 
-    context 'when user and other users have common views and one or more some has applied job' do
+    context 'when user and other user have common views and one or more some has applied job' do
       before do
         create_view_apply_jobs([1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, nil], user)
         create_view_apply_jobs([1, 0, 0, 0, 1, 1, 0, 0, 1, 0, nil, 0, 1, 0, nil, 0], other_user)
@@ -81,15 +81,7 @@ describe Recommendation do
       end
     end
 
-    context 'when user has no activity but the group does' do
-      before { create_view_apply_jobs([1, 0, 0, 0, 1, 1, 0, 0, 1, 0], user2) }
-
-      it 'no jobs are recommended' do
-        expect(subject).to eq([])
-      end
-    end
-
-    context 'when user and group has some activity' do
+    context 'when user and group have some activity' do
       context 'but there are no similar users' do
         before do
           create_view_apply_jobs([nil, nil, nil, nil, nil, nil, 0, 0, 1, 0], user)
