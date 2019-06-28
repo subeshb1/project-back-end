@@ -27,6 +27,12 @@ module Api
         render json: @job, status: :ok
       end
 
+      def recommend
+        authorize! :get_recommendations, current_user
+        recommendations = GetRecommendations.new(current_user).call
+        render json: recommendations, status: :ok, serializer: RecommendSerializer
+      end
+
       private
 
       def job_list_params

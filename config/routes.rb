@@ -28,7 +28,9 @@ Rails.application.routes.draw do
         post :reject, on: :member
       end
 
-      resources :jobs, only: %i[show index]
+      resources :jobs, only: %i[show index] do
+        get :recommend, on: :collection
+      end
     end
   end
   resources :auth, only: %i[login] do
