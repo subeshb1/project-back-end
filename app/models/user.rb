@@ -25,16 +25,16 @@ class User < ApplicationRecord
 
   has_many :social_accounts
 
-  has_one :basic_information
-  has_many :educations
+  has_one :basic_information,dependent: :destroy
+  has_many :educations,dependent: :destroy
   has_many :skills
-  has_many :work_experiences
+  has_many :work_experiences,dependent: :destroy
 
-  has_many :job_views
-  has_many :applicants
-  has_many :applications, class_name: "Applicant"
-  has_many :applied_jobs, class_name: "Job", source: :job, through: :applications
-  has_many :viewed_jobs, through: :job_views, source: :job
+  has_many :job_views,dependent: :destroy
+  has_many :applicants,dependent: :destroy
+  has_many :applications, class_name: "Applicant",dependent: :destroy
+  has_many :applied_jobs, class_name: "Job", source: :job, through: :applications,dependent: :destroy
+  has_many :viewed_jobs, through: :job_views, source: :job,dependent: :destroy
 
   has_many :jobs
   has_many :applicants

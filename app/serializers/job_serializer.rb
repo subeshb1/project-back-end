@@ -10,7 +10,8 @@ class JobSerializer < ActiveModel::Serializer
              :created_at,
              :company_name,
              :company_avatar,
-             :company_uid
+             :company_uid,
+             :views
   def status
     object.nice_status
   end
