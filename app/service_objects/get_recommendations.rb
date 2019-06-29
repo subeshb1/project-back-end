@@ -17,7 +17,12 @@ class GetRecommendations
   end
 
   def fetch_recommendations
-    Recommendation.user_based_recommendation(user).map { |x| Job.find(x[:id]) }
+    jobs = []
+    recommendations = Recommendation.user_based_recommendation(user)
+    recommendations.group_by { |x| x[:score] }.each_value do |value|
+      jobs += Job.where(id: value.pluck(:id)).order(views: :desc)
+    end
+    jobs.first 15
   end
 
   def fetch_history
@@ -25,17 +30,24 @@ class GetRecommendations
   end
 
   def fetch_categories
-    Job.select('jobs.*').joins(:categories)
+    Job.select('distinct(jobs.*)')
+       .joins(:categories)
+       .where.not(id: user.applications.pluck(:job_id))
        .where('categories.name': user.basic_information.categories.pluck(:name))
+       .group(:id)
        .order(views: :desc)
        .limit(9)
   end
 
   def fetch_top_jobs
-    Job.order(views: :desc).limit(9)
+    Job.where.not(id: user.applications.pluck(:job_id))
+       .order(views: :desc).limit(9)
   end
 
   def fetch_latest_jobs
-    Job.where('created_at > ?', Date.today - 14.days).order(views: :desc).limit(9)
+    Job.where('created_at > ?', Date.today - 14.days)
+       .where.not(id: user.applications.pluck(:job_id))
+       .order(created_at: :desc)
+       .limit(9)
   end
 end

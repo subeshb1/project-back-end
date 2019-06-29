@@ -9,7 +9,7 @@ module Api
 
       def index
         page, per_page = extract_page_details(params)
-        jobs = GetJobList.new(job_list_params).call.page(page).per(per_page)
+        jobs = GetJobList.new(job_list_params).call.order(views: :desc).page(page).per(per_page)
         render json: {
           data: ActiveModel::SerializableResource.new(
             jobs,
@@ -39,7 +39,7 @@ module Api
         params.permit(
           :time_min, :time_max,
           :min_salary,
-          :max_salary, :job_title,job_provider_id:[], level: [], job_type: [],
+          :max_salary, :job_title, job_provider_id: [], level: [], job_type: [],
                                    categories: [], open_seats: {}
         )
       end

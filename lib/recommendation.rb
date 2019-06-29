@@ -17,7 +17,6 @@ class Recommendation
                           AND
                           "job_views"."job_id" = "applicants"."job_id" ))
                          .map { |x| { applied: x.id ? 1 : 0, id: x.job_id } }
-
     return 0 if common_views.empty?
 
     user1_applied_sum = user1_applied.pluck(:applied).sum
@@ -54,20 +53,19 @@ class Recommendation
         score: score
       }
     end
-    users.sort_by { |x| x[:score] }.reverse.first 20
+    users.sort_by { |x| x[:score] }.reverse
   end
 
-  def self.user_based_recommendation(user, count = 10)
+  def self.user_based_recommendation(user, _count = 10)
     other_users = get_most_similar_users(user)
     total = {}
     similarity_score = {}
     other_users.each do |object|
       other_user = object[:user]
       score = object[:score]
-
       next unless score.positive?
 
-      other_jobs = other_user.viewed_jobs - user.viewed_jobs
+      other_jobs = other_user.viewed_jobs - user.applied_jobs
       other_jobs.each do |job|
         total[job.id] ||= 0
         total[job.id] += get_job_point(other_user, job.id).to_f * score
@@ -82,6 +80,25 @@ class Recommendation
         score: (total.to_f / similarity_score[id]).round(4)
       }
     end
-    result.sort_by { |x| x[:score] }.reverse.first count
+    result.sort_by { |x| x[:score] }.reverse
+  end
+
+  def self.item_based_recommendation(user, job)
+    applied_users = User.where(id: Applicants.where(job_id: job.id).pluck(:user_id)).where.not(id:user.id)
+    jobs = {}
+    applied_users.each do |other_user|
+      other_jobs = other_user.applied_jobs - user.applied_jobs
+      other_jobs.each do |job|
+        jobs[job.id] ||= 0
+        jobs[job.id]  += 0
+      end
+    end
+    result = jobs.each_with_object([]) do |(id, total), result|
+      result << {
+        id: id,
+        score: total
+      }
+    end
+    result.sort_by { |x| x[:score] }.reverse
   end
 end

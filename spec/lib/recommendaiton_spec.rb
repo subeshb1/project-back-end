@@ -100,8 +100,8 @@ describe Recommendation do
             create_view_apply_jobs([1, 0, 0, 0, 1, 1, 0], user2)
             create_view_apply_jobs([1, 1, 0, 0, 1, 1, nil], user3)
           end
-          it 'no jobs are recommended' do
-            expect(subject).to eq([])
+          it 'jobs are recommended for common views' do
+            expect(subject.pluck(:score)).to eq([2.0, 1.0, 1.0, 1.0])
           end
         end
         context 'and there are other ativities of similar users' do
@@ -112,8 +112,7 @@ describe Recommendation do
             create_view_apply_jobs([1, 1, 1, 0, 1, 1, nil, 0, 1, 0], user4)
           end
           it 'jobs are recommended' do
-            expect(subject.pluck(:score)).to eq([{ id: 9, score: 2.0 }, { id: 8, score: 1.4823 },
-                                   { id: 10, score: 1.0 }].pluck(:score))
+            expect(subject.pluck(:score)).to eq([2.0, 2.0, 1.5177, 1.4823, 1.0, 1.0, 1.0])
           end
         end
       end
@@ -123,7 +122,7 @@ end
 
 def create_view_apply_jobs(job_array, user)
   job_array.each_with_index do |val, index|
-    user.viewed_jobs << Job.all[index] if val
-    user.applied_jobs << Job.all[index] if val == 1
+    user.viewed_jobs << Job.all.order(:id)[index] if val
+    user.applied_jobs << Job.all.order(:id)[index] if val == 1
   end
 end

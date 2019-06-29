@@ -19,10 +19,9 @@ def view_or_apply(user)
   return if user.basic_information.categories.pluck(:name).empty?
   
   jobs = GetJobList.new(categories: user.basic_information.categories.pluck(:name)).call
-  jobs.each do |job|
-    view_job = rand(0..1) == 1
-    user.viewed_jobs << job if view_job
-    user.applied_jobs << job if view_job && rand(0..2) == 1
+  jobs.sample(rand(4..20)).each do |job|
+    user.viewed_jobs << job
+    user.applied_jobs << job if rand(0..2) == 1
   end
 end
 
@@ -44,18 +43,9 @@ def extract_education_work_experience
   education_hash.each do |degree, values|
     values.each do |category|
       category.each do |category_name, values|
-        next if ["Agriculture",
-          "Ayurved",
-          "Computer and IT",
-          "Education",
-          "Engineering",
-          "Law, public safety and security",
-          "Management"
-        ].include?(category_name)
         values.each do |value|
           start_date = rand(3..7).years.ago
           work_year = start_date + rand(-2..2).year
-          rand(1..2).times do
             education_work_experience << {
               basic_information: {
                 name: Faker::Name.unique.name,
@@ -91,7 +81,6 @@ def extract_education_work_experience
                 }
               ] : []
             }
-          end
         end
       end
     end

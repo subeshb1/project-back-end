@@ -9,5 +9,6 @@ module JobSeekerAbility
     can :apply_jobs, User, id: user.id
     can :view_job, User, id: user.id
     can :get_recommendations, User, id: user.id
+    can :view_applied, User, id: user.id
   end
 end
