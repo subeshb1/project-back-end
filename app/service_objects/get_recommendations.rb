@@ -17,7 +17,7 @@ class GetRecommendations
   end
 
   def fetch_recommendations
-    Recommendation.user_based_recommendation(user).map { |x| Job.find(x.id) }
+    Recommendation.user_based_recommendation(user).map { |x| Job.find(x[:id]) }
   end
 
   def fetch_history
