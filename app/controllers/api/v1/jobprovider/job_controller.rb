@@ -12,7 +12,6 @@ module Api
           authorize! :create_job, current_user
           valid, error = CreateJobForm.new(current_user, create_params).validate
           api_error(422, error) unless valid
-
           job = CreateJob.new(current_user, create_params).call
           render json: job, status: 201
         end
