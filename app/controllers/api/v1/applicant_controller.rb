@@ -41,6 +41,19 @@ module Api
         render json: { message: 'Successfully Rejected!' }, status: :ok
       end
 
+      def view_applied
+        authorize! :view_applied, current_user
+        page, per_page = extract_page_details(params)
+        applied_jobs = current_user.applications.order(created_at: :desc).page(page).per(per_page)
+        render json: {
+          data: ActiveModel::SerializableResource.new(
+            applied_jobs,
+            each_serializer: ApplicantSerializer
+          ),
+          meta: fetch_meta(applied_jobs)
+        }, status: :ok
+      end
+
       private
 
       def show_params

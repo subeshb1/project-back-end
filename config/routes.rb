@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         post :apply, on: :member
         post :approve, on: :member
         post :reject, on: :member
+        get :view_applied, on: :collection
       end
 
       resources :jobs, only: %i[show index] do
