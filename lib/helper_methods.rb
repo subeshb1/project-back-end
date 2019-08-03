@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-file = File.read('data/education.json')
-education_hash = JSON.parse(file)
-
 def create_a_user(params = {})
   require 'faker'
   user_params = {
-    email: Faker::Internet.email,
+    email: Faker::Internet.unique.email,
     password: '12345678',
     password_confirmation: '12345678',
     role: 0
@@ -18,25 +15,22 @@ def get_auth(user)
   JsonWebToken.encode(user_id: user.uid)
 end
 
-def create_job_seeker_profile(user, educations, work_experiences)
-  user ||= create_a_user
-  UpdateBasicInformation.new({
-                               name: Faker::Name.name,
-                               description: Faker::Lorem.paragraph_by_chars(256, false),
-                               birth_date: Faker::Date.birthday(18, 65).to_datetime.to_time.iso8601,
-                               gender: %w[male female other].sample,
-                               website: Faker::Internet.url,
-                               phone_numbers: {
-                                 home: Faker::PhoneNumber.phone_number_with_country_code,
-                                 personal: Faker::PhoneNumber.phone_number_with_country_code
-                               },
-                               address: {
-                                 permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize
-                               },
+def view_or_apply(user)
+  return if user.basic_information.categories.pluck(:name).empty?
+  
+  jobs = GetJobList.new(categories: user.basic_information.categories.pluck(:name)).call
+  jobs.sample(rand(4..20)).each do |job|
+    user.viewed_jobs << job
+    user.applied_jobs << job if rand(0..2) == 1
+  end
+end
 
-                             }, user).call
+def create_job_seeker_profile(user, basic_information, educations, work_experiences)
+  user ||= create_a_user
+  UpdateBasicInformation.new(basic_information, user).call
   UpdateEducation.new(user,  educations).call
   UpdateWorkExperience.new(user, work_experiences).call
+  view_or_apply(user)
   user
 end
 
@@ -52,26 +46,41 @@ def extract_education_work_experience
         values.each do |value|
           start_date = rand(3..7).years.ago
           work_year = start_date + rand(-2..2).year
-          education_work_experience << {
-            educations: [{ degree: degree,
-                           categories: [category_name],
-                           program: value['course'],
-                           start_date: start_date.to_time.iso8601,
-                           end_date: (start_date + value['time'].year).to_time.iso8601 }],
-            work_experiences: rand(1..2) == 1 && !job_hash[category_name].nil? ? [
-              {
-                job_title: job_hash[category_name].sample,
-                organization_name: Faker::Company.name,
-                level: %w[entry_level mid_level senior_level top_level].sample,
-                start_date: work_year.to_time.iso8601,
-                end_date: (work_year + rand(1..6).year).to_time.iso8601,
-                categories: [category_name],
-                salary: rand(1..10) * 10_000,
-                description: Faker::Lorem.paragraph_by_chars(256, false)
+            education_work_experience << {
+              basic_information: {
+                name: Faker::Name.unique.name,
+                description: Faker::Lorem.paragraph_by_chars(256, false),
+                birth_date: Faker::Date.birthday(18, 65).to_datetime.to_time.iso8601,
+                gender: %w[male female other].sample,
+                website: Faker::Internet.unique.url,
+                phone_numbers: {
+                  home: Faker::PhoneNumber.phone_number_with_country_code,
+                  personal: Faker::PhoneNumber.phone_number_with_country_code
+                },
+                address: {
+                  permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize
+                },
+                categories: [category_name]
+              },
+              educations: [{ degree: degree,
+                             categories: [category_name],
+                             program: value['course'],
+                             start_date: start_date.to_time.iso8601,
+                             end_date: (start_date + value['time'].year).to_time.iso8601 }],
+              work_experiences: rand(1..2) == 1 && !job_hash[category_name].nil? ? [
+                {
+                  job_title: job_hash[category_name].sample,
+                  organization_name: Faker::Company.name,
+                  level: %w[entry_level mid_level senior_level top_level].sample,
+                  start_date: work_year.to_time.iso8601,
+                  end_date: (work_year + rand(1..6).year).to_time.iso8601,
+                  categories: [category_name],
+                  salary: rand(1..10) * 10_000,
+                  description: Faker::Lorem.paragraph_by_chars(256, false)
 
-              }
-            ] : []
-          }
+                }
+              ] : []
+            }
         end
       end
     end
@@ -81,7 +90,7 @@ end
 
 def create_fake_job_seekers
   extract_education_work_experience.each do |value|
-    create_job_seeker_profile(nil, { educations: value[:educations] }, work_experiences: value[:work_experiences])
+    create_job_seeker_profile(nil, value[:basic_information] , { educations: value[:educations] }, work_experiences: value[:work_experiences])
   end
 end
 
@@ -106,13 +115,14 @@ def extract_company_jobs
   job_hash = JSON.parse(file)
   Category.all.map(&:name).each do |category_name|
     rand(10..15).times.each do
+      name = Faker::Company.unique.name
       basic_information = {
-        name: Faker::Company.name,
+        name: name,
         address: { permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize },
         description: Faker::Lorem.paragraph_by_chars(256, false),
         established_date: Faker::Date.birthday(18, 65).to_datetime.to_time.iso8601,
         organization_type: BasicInformation::ORGANIZATION_TYPE.values.sample,
-        website: Faker::Internet.url,
+        website: Faker::Internet.unique.url,
         phone_numbers: {
           home: Faker::PhoneNumber.phone_number_with_country_code,
           personal: Faker::PhoneNumber.phone_number_with_country_code
@@ -122,7 +132,7 @@ def extract_company_jobs
 
       jobs = []
 
-      rand(1..20).times.each do
+      job_hash[category_name].sample(rand(4..30)).each do |job_title|
         level =  %w[entry_level mid_level senior_level top_level].sample
         salary = {
           "entry_level": 10_000,
@@ -144,7 +154,7 @@ def extract_company_jobs
           "top_level": %w[full_time contract]
         }.with_indifferent_access
         jobs << {
-          job_title: job_hash[category_name].sample,
+          job_title: job_title,
           categories: [category_name],
           open_seats: rand(1..5),
           level: level,
@@ -171,10 +181,8 @@ def extract_company_jobs
               require: false
             },
             age: {
-              value: {
-                min: 16,
-                max: 69
-              },
+              min: 16,
+              max: 69,
               require: false
             }
           }

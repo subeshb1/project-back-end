@@ -173,14 +173,6 @@
       ]
     },
     {
-      "Forestry": [
-        {
-          "course": "B.Sc Forestry",
-          "time": 4
-        }
-      ]
-    },
-    {
       "Law, public safety and security": [
         {
           "course": "Bachelor of Arts Bachelor of Laws (BALLB)",
@@ -389,14 +381,6 @@
       ]
     },
     {
-      "Public Health": [
-        {
-          "course": "Bachelor in Public Health (BPH)",
-          "time": 4
-        }
-      ]
-    },
-    {
       "Science and Technology": [
         {
           "course": "Bachelor in Food/Dairy Technology",
@@ -548,7 +532,7 @@
       ]
     },
     {
-      "ayurved": [
+      "Ayurved": [
         {
           "course": "MD Ayurved",
           "time": 3
@@ -835,30 +819,6 @@
         },
         {
           "course": "M.Tech in Information Technology",
-          "time": 2
-        }
-      ]
-    },
-    {
-      "Forestry": [
-        {
-          "course": "Master of Science (M.Sc) in Forestry",
-          "time": 2
-        },
-        {
-          "course": "Master of Science (M.Sc.) in Natural Resource Management and Rural Development",
-          "time": 2
-        },
-        {
-          "course": "Master of Science (M.Sc.) in Watershed Management",
-          "time": 2
-        },
-        {
-          "course": "Masters in Environmental Administration and Management",
-          "time": 2
-        },
-        {
-          "course": "M.Sc in Wildlife Protected Area Management and Biodiversity Conservation",
           "time": 2
         }
       ]
@@ -1227,18 +1187,6 @@
         },
         {
           "course": "M. Pharm in Clinical Pharmacy",
-          "time": 2
-        }
-      ]
-    },
-    {
-      "Public Health": [
-        {
-          "course": "Master in Public Health (MPH)",
-          "time": 2
-        },
-        {
-          "course": "Master in Public Health Nutrition (MPHN)",
           "time": 2
         }
       ]

@@ -25,5 +25,5 @@ test:
 
 production:
   <<: *default
-  database: job_hire
+  database: job_hire_development
   

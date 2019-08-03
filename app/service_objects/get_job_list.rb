@@ -15,13 +15,12 @@ class GetJobList
        .where(job_title_query)
        .where(salary_query)
        .where(type_level_query)
-       .order(created_at: :desc)
   end
 
   private
 
   def job_title_query
-    ['lower(job_title) like ?', "%#{params.delete(:job_title)}%"]
+    ['lower(job_title) like ?', "%#{params.delete(:job_title).downcase}%"]
   end
 
   def application_deadline_query

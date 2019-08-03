@@ -41,6 +41,7 @@ class BasicInformation < ApplicationRecord
 
   def age
     # birth_date ||= Date.today.year
+    return nil unless birth_date
     this_year = Date.today.year
     year = this_year - birth_date.year
     year -= 1 if
