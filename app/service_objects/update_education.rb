@@ -14,6 +14,7 @@ class UpdateEducation
     user.educations << params[:educations].each_with_object([]) do |param, educations|
       educations << create_education(param)
     end
+    CreateNotification.new(user, 'hamro_job@gmail.com', user.email, "<h1>Education Updated!</h1><p>Click <a href='/jobseeker/profile/education'>here</a> to see the new Changes!</p><p>Thank you!</p>").call
     user.educations.reload
   end
 

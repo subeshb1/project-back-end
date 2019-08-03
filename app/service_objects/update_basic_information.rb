@@ -20,6 +20,7 @@ class UpdateBasicInformation
       basic_information.categories.destroy_all
       basic_information.categories << Category.where(name: params[:categories])
     end
+    CreateNotification.new(user, 'hamro_job@gmail.com', user.email, "<h1>Basic Information Updated!</h1><p>Click <a href='/#{User::ROLES[user.role].gsub('_', '')}/profile/basic_info'>here</a> to see the new Changes!</p><p>Thank you!</p>").call
     basic_information.reload
   end
 
