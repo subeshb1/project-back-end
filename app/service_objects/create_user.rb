@@ -3,6 +3,11 @@
 class CreateUser
   attr_reader :params
 
+  MESSAGE = [
+    '<h1>Welcome to Hamro Job</h1><p>Start filling your profile and Search for Jobs!</p>',
+    '<h1>Welcome to Hamro Job</h1><p>Start filling your profile and Create Job Vacancies!</p>'
+  ].freeze
+
   def initialize(params = {})
     @params = params
   end
@@ -12,6 +17,7 @@ class CreateUser
                     password_confirmation: params[:confirm_password],
                     role: User::ROLES.key(params[:type]))
     user.save!
+    CreateNotification.new(user, 'hamro_job@gmail.com', user.email, MESSAGE[user.role]).call
     user.reload
   end
 end

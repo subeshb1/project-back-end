@@ -24,6 +24,7 @@ class User < ApplicationRecord
   validates :role, presence: true
 
   has_many :social_accounts
+  has_many :notifications
 
   has_one :basic_information
   has_many :educations

@@ -29,6 +29,11 @@ Rails.application.routes.draw do
       end
 
       resources :jobs, only: %i[show index]
+
+      resources :notification, only: [:index] do
+        get :unread_count, on: :collection
+        get :show, on: :member
+      end
     end
   end
   resources :auth, only: %i[login] do

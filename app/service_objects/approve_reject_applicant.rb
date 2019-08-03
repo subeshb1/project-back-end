@@ -5,7 +5,7 @@ class ApproveRejectApplicant
 
   def initialize(job, param, approve = false)
     @job = job
-    @param=param
+    @param = param
     @approve = approve
   end
 
