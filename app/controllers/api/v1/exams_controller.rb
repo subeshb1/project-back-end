@@ -4,27 +4,29 @@ module Api
   module V1
     class ExamsController < BaseController
       before_action :authenticate_request!
-      before_action :validate_schema, only: %i[index]
-      before_action :check_job, only: %i[show]
 
       def index
-        page, per_page = extract_page_details(params)
-        jobs = GetJobList.new(job_list_params).call.page(page).per(per_page)
-        render json: {
-          data: ActiveModel::SerializableResource.new(
-            jobs,
-            each_serializer: LessJobSerializer
-          ),
-          meta: fetch_meta(jobs)
-        }, status: :ok
+        render json: Exam.all, status: :ok
       end
 
       def show
-        authorize! :view_job, current_user
-        unless current_user.viewed_jobs.include?(@job) && current_user.job_seeker?
-          current_user.viewed_jobs << @job
+        exam = Exam.find_by(id: params[:id])
+        render json: {
+          questions: exam.questions.map { |x| x.except('answer') },
+          name: exam.name
+        }, status: :ok
+      end
+
+      def result
+        if current_user.examinees.where(exam_id: params[:id]).blank?
+          render json: GetResult.new(current_user, params[:id], params[:answers]).call, status: :ok
+        else
+          render json: { message: 'Forbidden' }, status: 403
         end
-        render json: @job, status: :ok
+      end
+
+      def skills
+        render json: current_user.examinees, status: :ok
       end
 
       private
@@ -33,7 +35,7 @@ module Api
         params.permit(
           :time_min, :time_max,
           :min_salary,
-          :max_salary, :job_title,job_provider_id:[], level: [], job_type: [],
+          :max_salary, :job_title, job_provider_id: [], level: [], job_type: [],
                                    categories: [], open_seats: {}
         )
       end

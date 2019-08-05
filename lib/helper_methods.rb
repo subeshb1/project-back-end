@@ -251,7 +251,7 @@ def create_exams
   ]
   exams.each do |value|
     file = File.read(value[:file])
-    questions = JSON.parse(file)
-    Exam.create(skill_name: value[:name], name: value[:name], questions: questions, uid: value[:file])
+    test = JSON.parse(file)
+    Exam.create(skill_name: value[:name].titleize, name:value[:name].titleize, questions: test["questions"], uid: value[:file])
   end
 end

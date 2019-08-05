@@ -18,6 +18,7 @@ class CheckEligibilityForm < FormObjects::Base
     validate_program
     validate_degree
     validate_previous_apply
+    validate_skills
     validate_result
   end
 
@@ -84,5 +85,16 @@ class CheckEligibilityForm < FormObjects::Base
 
     @errors << error('gender',
                      'Only specified genders can apply!')
+  end
+
+  def validate_skills
+    return unless job_specifications[:skills][:require]
+
+    skills = user_stats[:skill]
+    job_skill = job_specifications[:skill][:value]
+    return unless (skills & job_skill).empty?
+
+    @errors << error('skills',
+                     'You can only apply if you have the listed skills!')
   end
 end

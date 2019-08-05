@@ -37,6 +37,11 @@ Rails.application.routes.draw do
       resources :jobs, only: %i[show index] do
         get :recommend, on: :collection
       end
+
+      resources :exams, only: %i[show index] do
+        get :result, on: :member
+        get :skills, on: :collection
+      end
     end
   end
   resources :auth, only: %i[login] do
