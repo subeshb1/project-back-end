@@ -88,7 +88,7 @@ class CheckEligibilityForm < FormObjects::Base
   end
 
   def validate_skills
-    return unless job_specifications[:skills][:require]
+    return unless job_specifications[:skills] && job_specifications[:skills][:require]
 
     skills = user_stats[:skills]
     job_skill = job_specifications[:skills][:value]
