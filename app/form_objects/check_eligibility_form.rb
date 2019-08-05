@@ -90,8 +90,8 @@ class CheckEligibilityForm < FormObjects::Base
   def validate_skills
     return unless job_specifications[:skills][:require]
 
-    skills = user_stats[:skill]
-    job_skill = job_specifications[:skill][:value]
+    skills = user_stats[:skills]
+    job_skill = job_specifications[:skills][:value]
     return unless (skills & job_skill).empty?
 
     @errors << error('skills',
