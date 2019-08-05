@@ -1,0 +1,204 @@
+{
+    "questions":[
+        {
+            "question":"what is the opposite of alkali?",
+            "options":[
+                "Acid",
+                "Fluid",
+                "Carbon",
+                "Oxide"
+            ],
+            "answer":1
+        },
+        {
+            "question":"What is the unit of luminous efficiency?",
+            "options":[
+                "Lumen/watt",   
+                "Lumen/volt",   
+                "Lumen/ampere",   
+                "Lumen/coulomb"  
+            ],
+            "answer":1
+        },
+        {
+            "question":"What is the value of the universal gas constant in kJ/mol •K?",
+            "options":[
+                "10.73",
+                "1.986",
+                "8.314",
+                "1545"
+            ],
+            "answer":3
+        },
+        {
+            "question":"32. When all atom molecule are the same, the substance is called?",
+            "options":[
+                "mixture",   
+                "compound",   
+                "substance",   
+                "halogens"  
+            ],
+            "answer":2
+        },
+        {
+            "question":"What is the chief ore of titanium?  ",
+            "options":[
+                "Glamite",
+                "Llamite",
+                "Tiate",
+                "Sphalite"
+            ],
+            "answer":2
+        },
+        {
+            "question":"What temperature scale is identical to Kelvin scale?",
+            "options":[
+                "Ideal gas temperature scale",   
+                "Ideal temperature scale",   
+                "Absolute gas temperature scale",   
+                "Triple point temperature scale"  
+            ],
+            "answer":1
+        },
+        {
+            "question":"What acid id used in glass itching?  ",
+            "options":[
+                "Acetylsalicylic acid",
+                "Hydrofluoric acid",
+                "Phosphoric acid",
+                "Hydrochloric acid"
+            ],
+            "answer":2
+        },
+        {
+            "question":"What is measure of rigidity?",
+            "options":[
+                "Ultimate strength",
+                "Allowable strength",
+                "Modulus of elasticity",
+                "Yield strength"
+            ],
+            "answer":3
+        },
+        {
+            "question":"All station must promote the FIlipino music by playing ___ OPM every hour.",
+            "options":[
+                "2",
+                "4",
+                "1",
+                "3"
+            ],
+            "answer":2
+        },
+        {
+            "question":"what carboxylic acid is found in coconut oil?",
+            "options":[
+                "Lactic acid",   
+                "Critic acid",   
+                "Tartaric acid",   
+                "Lauric acid"  
+            ],
+            "answer":4
+        },
+        {
+            "question":"What is another term for \"Alkanes\"?  ",
+            "options":[
+                "Olefins",
+                "Acetylene",
+                "Paraffins",
+                "Methyl"
+            ],
+            "answer":3
+        },
+        {
+            "question":"A steel cannot qualify for stainless prefix until it has at least how many percent of Chromium?",
+            "options":[
+                "10%",   
+                "3%",   
+                "12%",   
+                "15%"  
+            ],
+            "answer":1
+        },
+        {
+            "question":"What is ASTM test for compression is designated for plastics?",
+            "options":[
+                "D795",
+                "E456",
+                "D695",
+                "F980"
+            ],
+            "answer":3
+        },
+        {
+            "question":"A method of applying mechanics that assumes all objects are continuous. ",
+            "options":[
+                "Mechanics",   
+                "Continuum",   
+                "Directional mechanics",   
+                "Continuum mechanics"  
+            ],
+            "answer":4
+        },
+        {
+            "question":"What is of fluids at rest?",
+            "options":[
+                "Electro pneumatics",
+                "Hydraulics",
+                "Pneumatics",
+                "Hydrostatics"
+            ],
+            "answer":4
+        },
+        {
+            "question":"A piano string with a length of 1.17m and a mass of 21.0g in under tension of 6.4 x 103 N, what is the fundamental frequency?",
+            "options":[
+                "225 Hz",   
+                "187 Hz",   
+                "255 Hz",   
+                "290 Hz"  
+            ],
+            "answer":3
+        },
+        {
+            "question":"Which statement of the second law of thermodynamics states that no heat engine can have a thermal efficiency of 100 percent?",
+            "options":[
+                "Kelvin-Planck statement",
+                "Clausis statement",
+                "Kelvin statement",
+                "Rankine statement"
+            ],
+            "answer":1
+        },
+        {
+            "question":"What is a substance that attracts piece of iron?",
+            "options":[
+                "Core",   
+                "Magnet",   
+                "Iron",   
+                "Cladding"  
+            ],
+            "answer":2
+        },
+        {
+            "question":"What represents the share of participation in business organizations?",
+            "options":[
+                "Franchise",
+                "Partnership",
+                "Stock",
+                "Corporation"
+            ],
+            "answer":3
+        },
+        {
+            "question":"The use of acids to remove oxides and scale on hot-worked steels is known as ",
+            "options":[
+                "Pulling",   
+                "Pushing",   
+                "Picking",   
+                "Adding"  
+            ],
+            "answer":3
+        }
+    ]
+}

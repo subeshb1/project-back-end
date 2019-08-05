@@ -1,0 +1,205 @@
+{
+    "name": "JavaScript",
+    "questions": [
+        {
+            "question": "What is the HTML tag under which one can write the JavaScript code?",
+            "options": [
+                "<javascript>",
+                "<scripted>",
+                "<script>",
+                "<js>"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Choose the correct JavaScript syntax to change the content of the following HTML code. <p id=\"geek\"> GeeksforGeeks </p>",
+            "options": [
+                "document.getElement(“geek”).innerHTML=”I am a Geek”;",
+                "document.getElementById(“geek”).innerHTML=”I am a Geek”;",
+                "document.getId(“geek”)=”I am a Geek”;",
+                "document.getElementById(“geek”).innerHTML=I am a Geek;"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Which of the following is the correct syntax to display “GeeksforGeeks” in an alert box using JavaScript?",
+            "options": [
+                "alertbox(“GeeksforGeeks”);",
+                "msg(“GeeksforGeeks”);",
+                "msgbox(“GeeksforGeeks”);",
+                "alert(“GeeksforGeeks”);"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "What is the correct syntax for referring to an external script called “geek.js”?",
+            "options": [
+                "<script src=”geek.js”>",
+                "<script href=”geek.js”>",
+                "<script ref=”geek.js”>",
+                "<script name=”geek.js”>"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "The external JavaScript file must contain <script> tag. True or False?",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Predict the output of the following JavaScript code. <script type=\"text/javascript\"> a = 8 + \"8\";  document.write(a); </script> ",
+            "options": [
+                "16",
+                "Compilation Error",
+                "88",
+                "Run Time Error"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Predict the output of the following JavaScript code. <script type=\"text/javascript\"> var a=\"GeeksforGeeks\"; var x=a.lastIndexOf(\"G\");    document.write(x);  </script> ",
+            "options": [
+                "8",
+                "0",
+                "9",
+                "Error"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Which of the following is not a reserved word in JavaScript?",
+            "options": [
+                "interface",
+                "throws",
+                "program",
+                "short"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Predict the output of the following JavaScript code. <script type=\"text/javascript\" language=\"javascript\"> var a = \"GeeksforGeeks\"; var result = a.substring(4, 5); document.write(result);  </script> ",
+            "options": [
+                "sf",
+                "ks",
+                "s",
+                "k"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Predict the output of the following JavaScript code. <script type=\"text/javascript\" language=\"javascript\"> var x=5; var y=6; var res=eval(\"x*y\"); document.write(res); </script> ",
+            "options": [
+                "“30”",
+                "30",
+                "5*6",
+                "“5*6”"
+            ],
+            "answer":2
+        },
+        {
+            "question": "In JavaScript, we do not have datatypes like integer and float. What is the function that can be used to check if the number is an integer or not?",
+            "options": [
+                "Integer(value)",
+                "ifInteger(value)",
+                "isInteger(value)",
+                "ifinteger(value)"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Which of the following is an advantage of using JavaScript?",
+            "options": [
+                "Increased interactivity.",
+                "Less server interaction.",
+                "Immediate feedback from the users.",
+                "All of the above."
+            ],
+            "answer":4
+        },
+        {
+            "question": "Which function of an Array object calls a function for each element in the array?",
+            "options": [
+                "forEach()",
+                "every()",
+                "forEvery()",
+                "each()"
+            ],
+            "answer":1
+        },
+        {
+            "question": "JavaScript is a ________ Side Scripting Language.",
+            "options": [
+                "Server",
+                "ISP",
+                "Browser",
+                "None of the above"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Predict the output on the console for the following JavaScript code.<script> function geek() { if(true) { var a = 5; } document.write(a); } geek(); </script> ",
+            "options": [
+                "Compilation Error",
+                "Nothing will be printed as output",
+                "5",
+                "Runtime Error"
+            ],
+            "answer":3
+        },
+        {
+            "question": "JavaScript is ________ language.",
+            "options": [
+                "a compiled",
+                "an interpreted",
+                "",
+                ""
+            ],
+            "answer":2
+        },
+        {
+            "question": "Which was the first browser to support JavaScript?",
+            "options": [
+                "Mozilla Firefox",
+                "Netscape",
+                "Google Chrome",
+                "IE"
+            ],
+            "answer":2
+        },
+        {
+            "question": "<script type=\"text/javascript\"> <!-- document.write(\"Hello\"); //--> </script> ",
+            "options": [
+                "Nothing",
+                "Compilation Error",
+                "Hello",
+                "<!–document.write(“Hello”);//–>"
+            ],
+            "answer":3 
+        },
+        {
+            "question": "Predict the output on the console for the following JavaScript code. <script> let myName = \"Geek\"; let myCity = \"Geekistan\"; console.log(`My name is ${myName}. My favorite city is ${myCity}.`) </script> ",
+            "options": [
+                "Compilation Error",
+                "My name is Geek. My favorite city is Geekistan.",
+                "My name is ${myName}.My favorite city is ${myCity}.",
+                "0"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Predict the output on the console for the following JavaScript code. <script> let geek = 'GeeksforGeeks'; console.log(typeof geek); geek=1; console.log(typeof geek); </script> ",
+            "options": [
+                "string number",
+                "string string",
+                "null null",
+                "string integer"
+            ],
+            "answer":1
+        }
+    ]
+}

@@ -1,0 +1,215 @@
+{
+    "name": "Ayurved Test",
+    "questions": [
+        {
+            "question": "Asian ginseng is native to what countries?",
+            "options":[
+                "Thailand And Japan",
+                "Japan And Hong Kong",
+                "China And Taiwan",
+                "Korea And China"
+            ],
+            "answer":4
+        },
+        {
+            "question": "The fruit and leaves of what plant are used to treat a variety of ailments?",
+            "options":[
+                "Garlic",
+                "Flaxseed",
+                "Bilberry",
+                "Honeydew"
+            ],
+            "answer":3
+        },
+        {
+            "question": "What plant is used as an herbal remedy in Europe as a treatment for cancer?",
+            "options":[
+                "St. John's Wort",
+                "European Mistletoe",
+                "Peppermint",
+                "Asian Ginseng"
+            ],
+            "answer":2
+        },
+        {
+            "question": "What plant is used to treat migraines and rheumatoid arthritis",
+            "options":[
+                "Feverfew",
+                "Lemon",
+                "Artichoke",
+                "Chamomile"
+            ],
+            "answer":1
+        },
+        {
+            "question": "What is a common nickname for the herb red clover?",
+            "options":[
+                "Cow Clover",
+                "Ginger",
+                "Kava",
+                "St. John's Wort"
+            ],
+            "answer":1
+        },
+        {
+            "question": "Where is saw palmetto a native plant?",
+            "options":[
+                "Australia",
+                "North America",
+                "North Pole",
+                "Greenland"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Which of the body's organs is the plant milk thistle thought to help?",
+            "options":[
+                "Brain",
+                "Liver",
+                "Hair",
+                "Skin"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Which herbal remedy form has the shortest lifespan?",
+            "options":[
+                "Poultice",
+                "Tincture",
+                "Solid",
+                "Fluid"
+            ],
+            "answer":1
+        },
+        {
+            "question": "Which of these is another term for someone who practices herbal medicine?",
+            "options":[
+                "Witch Doctor",
+                "Plant Doctor",
+                "Weed Doctor",
+                "Herbalist"
+            ],
+            "answer":4
+        },
+        {
+            "question": "In what year was the American Board of Holistic Medicine incorporated?",
+            "options":[
+                "2006",
+                "1976",
+                "1996",
+                "1986"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Which of these is considered the primary goal of holistic medical practice?",
+            "options":[
+                "Prevention And Treatment",
+                "Optimal Health",
+                "Artificial Supplementation",
+                "Healing Power Of Love"
+            ],
+            "answer":2
+        },
+        {
+            "question": "The American Board of Holistic Medicine has based holistic medicine's core belief on which of these?",
+            "options":[
+                "Daily Exercise",
+                "Unconditional Love",
+                "A Better State Of Mind",
+                "Healthy Foods"
+            ],
+            "answer":2
+        },
+        {
+            "question": "How many principles of holistic medicine are there?",
+            "options":[
+                "10 Principles",
+                "9 Principles",
+                "11 Principles",
+                "8 Principles"
+            ],
+            "answer":1
+        },
+        {
+            "question": "Which holistic medicine principle speaks of \"the person who has an illness\" not the opposite?",
+            "options":[
+                "Whole Person",
+                "Individuality",
+                "Integration Of Healing Systems",
+                "Optimal Health"
+            ],
+            "answer":2
+        },
+        {
+            "question": "How often does the American Board of Holistic Medicine require recertification?",
+            "options":[
+                "Every Year",
+                "Every 7 Years",
+                "Every 5 Years",
+                "Every 10 Years"
+            ],
+            "answer":2
+        },
+        {
+            "question": "A common cold remedy consists of eucalyptus leaf, mint leaf and which of the following?",
+            "options":[
+                "Chamomile",
+                "Peppermint",
+                "Juniper Berry",
+                "Garlic"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Which herbal medicine is used to treat high blood pressure?",
+            "options":[
+                "Nigella Sativa",
+                "Valerian Root",
+                "Echinacea",
+                "Rauwolfia Serpentina"
+            ],
+            "answer":4
+        },
+        {
+            "question": "\"Eugenia Aromatica\" is the Latin name for which herbal medicine?",
+            "options":[
+                "Echinacea",
+                "Clove",
+                "Lemonbalm",
+                "Garlic"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Devil's claw is used for treating which condition?",
+            "options":[
+                "Bad Breath",
+                "Gout",
+                "Migraines",
+                "Obesity"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Which of these terms is another name for herbal medicine?",
+            "options":[
+                "Phytotherapy",
+                "Physiotherapy",
+                "Chinese Therapy",
+                "Herbology"
+            ],
+            "answer":1
+        },
+        {
+            "question": "Which of these plants was used in traditional Native American medicine?",
+            "options":[
+                "Dandelion",
+                "Ginseng",
+                "Banana",
+                "Cactus"
+            ],
+            "answer":1
+        }
+    ]
+}

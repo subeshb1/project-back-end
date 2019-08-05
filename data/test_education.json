@@ -1,0 +1,195 @@
+{
+    "name": "Education test",
+    "questions": [
+        {
+            "question": "Which of these documents shows a person has passed a series of tests?",
+            "options": [
+                "Certificate",
+                "Curriculum Vitae",
+                "Letter of Attestation",
+                "Test Page"
+            ],
+            "answer":1
+        },
+        {
+            "question": "When are postgraduate certificates taken?",
+            "options": [
+                "After the Master's Degree",
+                "After the Certificate of Higher Education",
+                "After the Bachelor's Degree",
+                "After an Undergraduate Program"
+            ],
+            "answer":3
+        },
+        {
+            "question": "A certificate can be...",
+            "options": [
+                "Only academic",
+                "Both academic and vocational",
+                "Only vocational",
+                "None of the above"
+            ],
+            "answer":2   
+        },
+        {
+            "question": "An academic certificate may be issued by a higher institution of education.",
+            "options": [
+                "Yes",
+                "No, only secondary schools",
+                "No",
+                "Yes, if they want to"
+            ],
+            "answer":1
+        },
+        {
+            "question": "Graduate certificate are beyond...",
+            "options": [
+                "Master's degree",
+                "Bachelor's degree",
+                "PhD",
+                "None of the above"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Which of the following qualifications is higher than a graduate certificate?",
+            "options": [
+                "Bachelor's degree",
+                "GCE",
+                "Master's certificate",
+                "High school certificate"
+            ],
+            "answer":3
+        },
+        {
+            "question": "What is the purpose of an academic certificate?",
+            "options": [
+                "It gives the holder a chance",
+                "It makes good impression on employers",
+                "It shows that the holders have acquired the stated skills",
+                "Its useful for making a CV beautiful"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Which of the following is not included in a certificate?",
+            "options": [
+                "Levels and qualifications",
+                "Name of institution",
+                "Name of holder",
+                "Health insurance of holder"
+            ],
+            "answer":4
+        },
+        {
+            "question": "What invalidates an academic certificate?",
+            "options": [
+                "A photocopy",
+                "An erasure",
+                "A good grade",
+                "A signature"
+            ],
+            "answer":2
+        },
+        {
+            "question": "All academic certificates must be _____ before they are considered valid.",
+            "options": [
+                "Re-signed",
+                "Scribbled",
+                "Signed",
+                "Decorated"
+            ],
+            "answer":3
+        },
+        {
+            "question": "What are the three parts of a paragraph?",
+            "options": [
+                "Thesis statment, Introductory statement, Body",
+                "Body, Thesis, Conclusion",
+                "Topic sentence, Body, Closing sentence",
+                "Introduction, Body, Thesis"
+            ],
+            "answer":3
+        },
+        {
+            "question": "What is the purpose of the closing sentence?",
+            "options": [
+                "It reminds the reader of the topic, and keeps them thinking.",
+                "It re-states the introduction.",
+                "It gives us details about the topic.",
+                "It lets us know what the paragraph is going to be about."
+            ],
+            "answer":1
+        },
+        {
+            "question": "A good topic sentence should always be...",
+            "options": [
+                "Boring",
+                "Detailed",
+                "Interesting",
+                "Long"
+            ],
+            "answer":3
+        },
+        {
+            "question": "What is the primary function of the Center for Academic Excellence?",
+            "options": [
+                "To help failing or unmotivated students to succeed.",
+                "To assist students who are struggling with their assignments.",
+                "To help students become competent, self-motivated learners.",
+                "Remediation"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Which of the following is NOT the role of a tutor?",
+            "options": [
+                "To supplement what the student is learning in the classroom.",
+                "To clarify information which the student did not fully grasp in class.",
+                "To help students comprehend material which they missed when they were absent from class.",
+                "To provide valuable one-on-one time."
+            ],
+            "answer":3
+        },
+        {
+            "question": "Which of the following will tutors NOT do?",
+            "options": [
+                "Proofread an entire paper.",
+                "Help with homework.",
+                "Help with a take-home test.",
+                "All of the above."
+            ],
+            "answer":4
+        },
+        {
+            "question": "What happens if a student arrives unprepared for a tutoring session?",
+            "options": [
+                "The tutor will gladly produce a substitute lesson plan and teach an appropriate mini-lesson.",
+                "The tutor will record a no-show. A second no-show will result in the student's being barred from tutoring for the remainder of the semester.",
+                "The tutor will record a cancellation. Four cancellations will result in a student's being ineligible for tutoring for the remainder of the semester.",
+                "Nothing will happen. The tutor will simply surf the Internet for an hour while drawing a paycheck."
+            ],
+            "answer":2
+        },
+        {
+            "question": "How often is a student eligible to consult with a tutor?",
+            "options": [
+                "In general, that will depend on the tutor's caseload and her perceptions of the student's needs. In most cases, this means twice a week up to a maximum of two courses.",
+                "There is no limit to how often a student may consult with a tutor.",
+                "Students may only receive one tutoring session per week during the semester, and twice a week during the summer intercession.",
+                "Tutors are too busy surfing the Internet to consult with students."
+            ],
+            "answer":1
+        },
+        {
+            "question": "If a student is failing a course (or expects to fail a course), will the student be able to receive tutoring.",
+            "options": [
+                "All currently enrolled students are eligible for tutoring.",
+                "Students who are failing--or who expect to fail--are not eligible for tutoring.",
+                "The Center gladly accepts students who are failing their classes.",
+                "Students who are failing are more properly referred to the Success Center, where they may meet with an Academic Coach."
+            ],
+            "answer":2
+        }
+    ]
+}

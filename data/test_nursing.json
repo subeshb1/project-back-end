@@ -1,0 +1,205 @@
+{
+    "name": "Nursing test",
+    "questions": [
+        {
+            "question": "An ION is",
+            "options": [
+                "A charged atom or particle",
+                "A positively charged ion",
+                "A negatively charged ion",
+                "A substance that disassociates into ions when in water thereby giving a solution that is capable of conducting electricity."
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Osmotic pressure is",
+            "options": [
+                "Lower pressure than plasma",
+                "Higher pressure than plasma",
+                "Same pressure than plasma",
+                "The pressure required to prevent osmosis from occurring"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "Intracellur fluid makes up how much of an animals bodyweight?",
+            "options": [
+                "25%",
+                "75%",
+                "60%",
+                "20%"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "The main ANION in interstitial fluid is",
+            "options": [
+                "Sodium",
+                "Calcium",
+                "Pottasium",
+                "Bicarbonate"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "What triggers the production of ADH?",
+            "options": [
+                "Thirst",
+                "Over administration of fluid",
+                "Postior pituitary",
+                "Anterior pituitary"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "What stimulates the release of aldosternoe",
+            "options": [
+                "Angiotensin",
+                "Corticosteroid",
+                "Corticotrophic hormone",
+                "ADH"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "A sudden redness of the skin is known as:",
+            "options": [
+                "Flush",
+                "Cyanosis",
+                "Jaundice",
+                "Pallor"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "The term gavage indicates:",
+            "options": [
+                "Administration of a liquid feeding into the stomach",
+                "Visual examination of the stomach",
+                "Irrigation of the stomach with a solution",
+                "A surgical opening through the abdomen to the stomach"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "A patient states that he has difficulty sleeping in the hospital because of noise. Which of the following would be an appropriate nursing action?",
+            "options": [
+                "Administer a sedative at bedtime, as ordered by the physician",
+                "Ambulate the patient for 5 minutes before he retires",
+                "Give the patient a glass of warm milk before bedtime",
+                "Close the patient's door from 9pm to 7am"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Which of the following nursing theorists is credited with developing a conceptual model specific to nursing, with man as the central focus?",
+            "options": [
+                "Martha Rogers",
+                "Dorothea Orem",
+                "Florence Nightingale",
+                "Sister Callista Roy"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "If a patient is injured because a nurse acted in a wrongful manner, which party could be held liable along with the nurse?",
+            "options": [
+                "The private attending physician",
+                "The nursing supervisor",
+                "The hospital",
+                "All of the above"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Which of the following nursing theorists developed a conceptual model based on the belief that all persons strive to achieve self-care? ",
+            "options": [
+                "Martha Rogers",
+                "Dorothea Orem",
+                "Florence Nightingale",
+                "Cister Callista Roy"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Jake is complaining of shortness of breath. The nurse assesses his respiratory rate to be 30 breaths per minute and documents that Jake is tachypneic. The nurse understands that tachypnea means:",
+            "options": [
+                "Pulse rate greater than 100 beats per minute",
+                "Blood pressure of 140/90",
+                "Respiratory rate greater than 20 breaths per minute",
+                "Frequent bowel sounds"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "The nurse listens to Mrs. Sullen’s lungs and notes a hissing sound or musical sound. The nurse documents this as:",
+            "options": [
+                "Wheezes",
+                "Rhonchi",
+                "Gurgles",
+                "Vesicular"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "The nurse in charge measures a patient’s temperature at 101 degrees F. What is the equivalent centigrade temperature?",
+            "options": [
+                "36.3 degrees C",
+                "37.95 degrees C",
+                "40.03 degrees C",
+                "38.01 degrees C"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Which approach to problem-solving tests any number of solutions until one is found that works for that particular problem?",
+            "options": [
+                "Intuition",
+                "Routine",
+                "Scientific method",
+                "Trial and error"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "What is the order of the nursing process?",
+            "options": [
+                "Assessing, diagnosing, implementing, evaluating, and planning",
+                "Diagnosing, assessing, planning, implementing, and evaluating",
+                "Assessing, diagnosing, planning, implementing, and evaluating",
+                "Planning, evaluating, diagnosing, assessing, and implementing"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "During the planning phase of the nursing process, which of the following is the outcome?",
+            "options": [
+                "Nursing history",
+                "Nursing notes",
+                "Nursing care plan",
+                "Nursing diagnosis"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "What is an example of a subjective data?",
+            "options": [
+                "Heart rate of 68 beats per minute",
+                "Yellowish sputum",
+                "Client verbalized, “I feel pain when urinating.”",
+                "Noisy breathing"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Which expected outcome is correctly written?",
+            "options": [
+                "“The patient will feel less nauseated in 24 hours.”",
+                "“The patient will eat the right amount of food daily.”",
+                "“The patient will identify all the high-salt food from a prepared list by discharge.”",
+                "“The patient will have enough sleep.”"
+            ],
+            "answer": 3
+        }
+    ]
+}

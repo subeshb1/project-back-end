@@ -1,0 +1,205 @@
+{
+    "name": "Science and technology test",
+    "questions":[
+        {
+            "question":"In what country must you turn over any meteor finds?",
+            "options":[
+                "Scotland",
+                "Egypt",
+                "South Africa",
+                "Russia"
+            ],
+            "answer":3
+        },
+        {
+            "question":"The Law of Octaves was given by...?",
+            "options":[
+                "Mendeleev",
+                "John Newlands",
+                "Bohr",
+                "Dobereiner"
+            ],
+            "answer":2
+        },
+        {
+            "question":"Much of our body heat escapes through the head. What percent is this?",
+            "options":[
+                "50%",
+                "60%",
+                "70%",
+                "80%"
+            ],
+            "answer":4
+        },
+        {
+            "question":"After the first photons of light are produced, which process is responsible for amplification of the light ?",
+            "options":[
+                "Blackbody radiation",
+                "Stimulated emission",
+                "Einstein oscillation",
+                "Planck's radiation"
+            ],
+            "answer":2
+        },
+        {
+            "question":"What was the first element to be produced artificially ?",
+            "options":[
+                "Plutonium",
+                "Neptunium",
+                "Francium",
+                "Technetium"
+            ],
+            "answer":4
+        },
+        {
+            "question":"What is the process responsible for producing photons in a diode laser?",
+            "options":[
+                "Fermi level shift",
+                "Majority carrier injection",
+                "Carrier freeze out",
+                "Electron-hole recombination"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Where was the first oil well struck in the world?",
+            "options":[
+                "Kuwait",
+                "Australia",
+                "Saudi Arabia",
+                "USA"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Lux is the unit of...?",
+            "options":[
+                "Luminuous intensity",
+                "Illumination",
+                "Focus",
+                "Luminuous Flux"
+            ],
+            "answer":2
+        },
+        {
+            "question":"What is dry ice?",
+            "options":[
+                "Liquid nitrogen",
+                "Water ice",
+                "Solid carbon dioxide",
+                "Frozen ethanol"
+            ],
+            "answer":3
+        },
+        {
+            "question":"Which of these has the highest calorific value?",
+            "options":[
+                "Rubber",
+                "Hydrogen",
+                "Coal",
+                "Plastic"
+            ],
+            "answer":2
+        },
+        {
+            "question":"Pure water freezes at what temperature?",
+            "options":[
+                "19F",
+                "0F",
+                "32F",
+                "47F"
+            ],
+            "answer":3
+        },
+        {
+            "question":"Exhaled air has what % of its oxygen left?",
+            "options":[
+                "77%",
+                "24%",
+                "62%",
+                "48%"
+            ],
+            "answer":1
+        },
+        {
+            "question":"What was the coldest temperature ever recorded on Earth (at Vostok, Antarctica)?",
+            "options":[
+                "-197F",
+                "-136F",
+                "-103F",
+                "-129F"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Breaking of a larger hydrocarbon molecule into a smaller one by heating in the presence of a catalyst is called ___.",
+            "options":[
+                "Cracking",
+                "Orthofugation",
+                "Centrifugation",
+                "Thermogenation"
+            ],
+            "answer":1
+        },
+        {
+            "question":"What was the active medium used in the first working laser ever constructed?",
+            "options":[
+                "A diamond block",
+                "Helium-neon gas",
+                "A ruby rod",
+                "Carbon dioxide gas"
+            ],
+            "answer":3
+        },
+        {
+            "question":"Touchscreens rely on ________ to function.",
+            "options":[
+                "The oils on your fingertips",
+                "The electrical impulses in your body",
+                "The warmth of your hands",
+                "Tiny men and women living inside your mobile devices"
+            ],
+            "answer":2
+        },
+        {
+            "question":"What do we call the touchscreen used in an iPhone?",
+            "options":[
+                "Electron sensitive",
+                "Kinetic",
+                "Capacitive",
+                "ITouch"
+            ],
+            "answer":3
+        },
+        {
+            "question":"Human cells transfer electricity across ________.",
+            "options":[
+                "Synapses only",
+                "Special conducting tendrils in the bloodstream",
+                "Red blood cells",
+                "The cell membrane"
+            ],
+            "answer":4
+        },
+        {
+            "question":"In the equation \"E = m c squared\", what does the letter \"c\" stand for?",
+            "options":[
+                "The speed of sound",
+                "The speed of light",
+                "The speed of a mig-27",
+                "The atomic weight of carbon"
+            ],
+            "answer":2
+        },
+        {
+            "question":"The Ducati is manufactured in which country?",
+            "options":[
+                "UK",
+                "Italy",
+                "Spain",
+                "Germany"
+            ],
+            "answer":2
+        }
+    ]
+}
