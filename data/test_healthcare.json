@@ -1,0 +1,205 @@
+{
+    "name": "Healthcare test",
+    "questions": [
+        {
+            "question": "It takes ____ to keep your mind alert.",
+            "options": [
+                "Energy",
+                "Protein",
+                "Carbon dioxide",
+                "Vitamin"
+            ],
+            "answer":1
+        },
+        {
+            "question": "Your body changes the food that you eat into a form your body can use.  The parts of your body that change or digest the food is called the _____.",
+            "options": [
+                "Stomach",
+                "Digestive System",
+                "Brain",
+                ""
+            ],
+            "answer":2
+        },
+        {
+            "question": "Nutrients are substances found in food that help your body grow and develop.",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer":2
+        },
+        {
+            "question": "Your skin, nails, hair, muscles, internal organs and even your brain contains no protein.",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer":2
+        },
+        {
+            "question": "Vitamin D is sometimes called the:",
+            "options": [
+                "Sleepy vitamin",
+                "The \"dorky\" vitamin",
+                "The sunshine vitamin",
+                ""
+            ],
+            "answer":3
+        },
+        {
+            "question": "_______ is the ability to do work.",
+            "options": [
+                "Energy",
+                "Digestive System",
+                "Digestive juices",
+                ""
+            ],
+            "answer":1
+        },
+        {
+            "question": "The parts of the body that work together to change food into a form the body can use.",
+            "options": [
+                "Digestive system",
+                "Digestive juices",
+                "Esophagus",
+                ""
+            ],
+            "answer":1
+        },
+        {
+            "question": "Liquids in the mouth and stomach which help break down foods into materials the body can use.",
+            "options": [
+                "Tall Cinnamon Dolce Latte, extra pump of cinnamon at 135",
+                "A tall glass of cold water",
+                "Digestive juices",
+                ""
+            ],
+            "answer":3
+        },
+        {
+            "question": "Substances found in food that help your body grow and develop.",
+            "options": [
+                "Protein",
+                "Nutrients",
+                "Fiber",
+                ""
+            ],
+            "answer":2
+        },
+        {
+            "question": "Food nutrients that help your body to grow and to repair itself.  These types of foods are needed everyday.",
+            "options": [
+                "Proteins",
+                "Carbohydrates",
+                "Fiber",
+                ""
+            ],
+            "answer":1
+        },
+        {
+            "question": "Nutrients from the soil that are found in foods.",
+            "options": [
+                "Minerals",
+                "Vitamins",
+                "Vegetables",
+                ""
+            ],
+            "answer":1
+        },
+        {
+            "question": "Food which contain sugar and starch.  Most of your energy comes from this kind of food.  Foods with natural sugar or starch in them are the best source of this kind of food.",
+            "options": [
+                "Cookies",
+                "Starches",
+                "Carbohydrates",
+                ""
+            ],
+            "answer":3
+        },
+        {
+            "question": "How many chambers are in the heart?",
+            "options": [
+                "2",
+                "3",
+                "4",
+                "1"
+            ],
+            "answer":4
+        },
+        {
+            "question": "Physical health is..",
+            "options": [
+                "How fit you are and how healthy your body is.",
+                "The pH in your body which ties into your emotions.",
+                "How focused you are on other people's bodies.",
+                "None of the Above"
+            ],
+            "answer":1
+        },
+        {
+            "question": "Many children with asthma experience more severe reactions when they breathe ___________________.",
+            "options": [
+                "Secondhand smoke",
+                "Carbon dioxide",
+                "Oxygen",
+                ""
+            ],
+            "answer":1
+        },
+        {
+            "question": "A thick, oily, dark, liquid that forms when tobacco burns is ___________.",
+            "options": [
+                "Tar",
+                "Nicotine",
+                "Carbon",
+                ""
+            ],
+            "answer":1
+        },
+        {
+            "question": "Your immune system produces chemicals called ___________ specifically to fight a particular invading substance.",
+            "options": [
+                "Antibodies",
+                "T-Cells",
+                "Blood cells",
+                ""
+            ],
+            "answer":1
+        },
+        {
+            "question": "White blood cells that attack pathogens are called ______________.",
+            "options": [
+                "Neurocytes",
+                "Lymphocytes",
+                "Carcinogens",
+                ""
+            ],
+            "answer":2
+        },
+        {
+            "question": " How many servings from the fruit group should you eat daily?",
+            "options": [
+                "0-1 serving",
+                "2-4 servings",
+                "4-6 servings",
+                "6-8 servings"
+            ],
+            "answer":2
+        },
+        {
+            "question": "A blood pressure screening is a type of...",
+            "options": [
+                "Primary prevention",
+                "Secondary prevention",
+                "",
+                ""
+            ],
+            "answer":2
+        }
+    ]
+}

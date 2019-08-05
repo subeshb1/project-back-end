@@ -14,6 +14,7 @@ class UpdateWorkExperience
     user.work_experiences << params[:work_experiences].each_with_object([]) do |param, work_experiences|
       work_experiences << create_work_experience(param)
     end
+    CreateNotification.new(user, 'hamro_job@gmail.com', user.email, "<h1>Work Experience Updated!</h1><p>Click <a href='/jobseeker/profile/work_experience'>here</a> to see the new Changes!</p><p>Thank you!</p>").call
     user.work_experiences.reload
   end
 

@@ -1,0 +1,215 @@
+{
+    "name":"Management test",
+    "questions":[
+        {
+            "question":"Planning involves the following:",
+            "options":[
+                "Assigning tasks",
+                "Defining goals",
+                "Using influence",
+                "Making corrections"
+            ],
+            "answer":2
+        },
+        {
+            "question":"Organizing involves the following:",
+            "options":[
+                "Motivating employees",
+                "Defining goals",
+                "Monitoring employees' activities",
+                "Grouping tasks into departments"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Leading involves the following:",
+            "options":[
+                "Assigning tasks",
+                "Motivating employees",
+                "Keeping the organization on track toward its goals",
+                "Monitoring employees' activities"
+            ],
+            "answer":2
+        },
+        {
+            "question":"Controlling involves the following:",
+            "options":[
+                "Grouping tasks into departments",
+                "Determining appropriate tasks and resources",
+                "Defining goals",
+                "Monitoring employees' activities"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Which managerial function is characterized by a manger assigning employees tasks and granting them the authority to complete them?",
+            "options":[
+                "Leading",
+                "Controlling",
+                "Staffing",
+                "Organizing"
+            ],
+            "answer":4
+        },
+        {
+            "question":"A collective bargaining agreement functions as which of the following?",
+            "options":[
+                "Arbitration proxy",
+                "Right-to-work guarantee",
+                "Grievance procedure",
+                "Labor Contract"
+            ],
+            "answer":4
+        },
+        {
+            "question":"The consistent line of relationship from the top to the bottom of an organization is called the",
+            "options":[
+                "Division of labor",
+                "Chain of command",
+                "Mission statement",
+                "Span of control"
+            ],
+            "answer":2
+        },
+        {
+            "question":"If a retail sales manger instructs each salesperson to sell at least 12 cell phone plans each day, this would be an example of what kind of goal?",
+            "options":[
+                "Tactical",
+                "Strategic",
+                "Operational",
+                "Long-term goal"
+            ],
+            "answer":3
+        },
+        {
+            "question":"According to the system management theory, which of the following would NOT be considered to be an input?",
+            "options":[
+                "Products",
+                "Raw Materials ",
+                "Employees",
+                "Machinery"
+            ],
+            "answer":1
+        },
+        {
+            "question":"Answering for one's own actions and accepting responsibility for them is known as",
+            "options":[
+                "Power",
+                "Authority",
+                "Leadership",
+                "Accountability"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Which of the following relationship were the Hawthrone experiments originally designed to study",
+            "options":[
+                "The impact of illumination on factory worker output",
+                "The impact of body mechanics on factory worker output",
+                "The impact of factory worker output on business profitability",
+                "The impact of workforce diversity on business profitability"
+            ],
+            "answer":1
+        },
+        {
+            "question":"Which of the following would be an example of a change in a restaurant manager's internal environment?",
+            "options":[
+                "A change in the health code",
+                "Revision made in waitstaff procedures",
+                "A meat supplier raising its prices",
+                "The development of a refrigerator that indicates when food has spoiled"
+            ],
+            "answer":2
+        },
+        {
+            "question":"Joseph Juran believed that most quality problems are the fault of ",
+            "options":[
+                "Managers",
+                "Machinery",
+                "Suppliers",
+                "Workers"
+            ],
+            "answer":1
+        },
+        {
+            "question":"A system's tendency to go toward inefficiency if left to its own devices is known as",
+            "options":[
+                "An open system",
+                "A closed system",
+                "Synergy",
+                "Entropy"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Which of the following statements about communication in the workplace in valid?",
+            "options":[
+                "Communication only flows upwards",
+                "Communication only flows downwards",
+                "Communication only flows horizontall",
+                "Communications flow upwards, downwards, and horizontally"
+            ],
+            "answer":4
+        },
+        {
+            "question":"An organization leader responsible for securing the financial resources to carry out an innovative projects is known as which of the following?",
+            "options":[
+                "Creative backer",
+                "Product champion",
+                "Technical innovator",
+                "Executive champion"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Which of following is an example of how a manger can employ boundary spanning?",
+            "options":[
+                "Attend industry-related conferences",
+                "Promote from within",
+                "Raise sales quotas",
+                "Eliminate overtime"
+            ],
+            "answer":1
+        },
+        {
+            "question":"All managers can be considered to be what type of managers?",
+            "options":[
+                "Marketing",
+                "Sales",
+                "Customer Service",
+                "Human resource"
+            ],
+            "answer":4
+        },
+        {
+            "question":"Which of the following components of an e-business is included under the term e-commerce?",
+            "options":[
+                "Facility design",
+                "Sales",
+                "Human Resources",
+                "Strategic Plan"
+            ],
+            "answer":2
+        },
+        {
+            "question":"A tax that is placed on a country's or region's imports and/or exports as a result of a political event is known as a(n)",
+            "options":[
+                "Tariff",
+                "Quota",
+                "Exchange Rate",
+                "Infrastructure"
+            ],
+            "answer":1
+        },
+        {
+            "question":"Which school of management focus on the human-based elements of work?",
+            "options":[
+                "Classical",
+                "Quantitative",
+                "Behavorial",
+                "Contingency"
+            ],
+            "answer":3
+        }
+    ]
+}

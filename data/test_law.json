@@ -1,0 +1,215 @@
+{
+    "name": " Law, public safety and security test",
+    "questions": [
+        {
+            "question": "All contracts require which of the following?",
+            "options": [
+                "To be in writing",
+                "Consideration",
+                "A witness",
+                "None of the above"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "The execution of a will must be witnessed by...",
+            "options": [
+                "Two people",
+                "A judge",
+                "The spouse, children or heirs",
+                "A notary"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "To open a business in illinois, you must incorporate.",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer": 2
+        },
+        {
+            "question": "If you are bitten by a dog, the owner is liable for your injuries unless you...",
+            "options": [
+                "Came too close to dog",
+                "Provoked the dog",
+                "Jumped over the fence to pet the dog",
+                "All of the above"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "You can go to jail if file your tax return but you don't pay the bill.",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Which Section of the Indian Evidence Act is related with doctrine of ‘Res ipsa loquitor’ ?",
+            "options": [
+                "Section 102",
+                "Section 104",
+                "Section 106",
+                "Section 108"
+            ],
+            "answer":3
+        },
+        {
+            "question": "In context of the exception of grave and sudden provocation, which of the following is correct",
+            "options": [
+                "Provocation should not be voluntarily provoked by the offender",
+                "Lawful exercise of the right of private defence does not give provocation",
+                "Lawful exercise of powers by a public servant in obedience to the law does not amount to provocation",
+                "all the above"
+            ],
+            "answer":4
+        },
+        {
+            "question": "Of the following, who may officially propose a bill?",
+            "options": [
+                "Constituents",
+                "Interest groups",
+                "Governors",
+                "Members of Congress"
+            ],
+            "answer":4
+        },
+        {
+            "question": "When a congress member agrees to propose legislation on behalf of constituents, interest groups etc., (s)he becomes a",
+            "options": [
+                "Patron",
+                "Sponsor",
+                "Advocate",
+                "Writer"
+            ],
+            "answer":2
+        },
+        {
+            "question": "If a sponsor is a member of the House of Representatives, (s)he would give the bill to the __________ ___ ___ _________, after which the bill would be further processed.",
+            "options": [
+                "Clerk of the Senate",
+                "Clerk of the House",
+                "Secretary of the Senate",
+                "Secretary of the House"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Based on the issues addressed in a bill, a bill will be recommended to a particular _______________ and placed on its calendar.",
+            "options": [
+                "Standing committee",
+                "Panel of experts",
+                "Chairperson",
+                "Bureau"
+            ],
+            "answer":1
+        },
+        {
+            "question": "If a committee chairperson doesn't act upon a bill",
+            "options": [
+                "The bill remains on file until further notice",
+                "Another member of the committee may act",
+                "The bill is recommended to a different committee",
+                "The bill is effectively killed"
+            ],
+            "answer":4
+        },
+        {
+            "question": "In committee or subcommittee review, views of the executive branch and other public officials and experts are put on the record.  These are known as",
+            "options": [
+                "Insights",
+                "Hearings",
+                "Addresses",
+                "Appeals"
+            ],
+            "answer":2
+        },
+        {
+            "question": "After hearings are held, subcommittees may make changes to a bill or \"_____________\" the bill",
+            "options": [
+                "Mark up",
+                "Amend",
+                "Redraft",
+                "Adjust"
+            ],
+            "answer":1
+        },
+        {
+            "question": "In order to proceed from subcommittee review to committee action, a subcommittee must",
+            "options": [
+                "Recommend the bill",
+                "Complete mark ups",
+                "Vote to report the bill",
+                "Hold additional hearings"
+            ],
+            "answer":3
+        },
+        {
+            "question": "If a full committee voes to \"order the bill reported\", the bill proceeds to",
+            "options": [
+                "Endure further hearings and mark ups",
+                "An appropriate super committee",
+                "Its original chamber of congress",
+                "Full assembly of congress"
+            ],
+            "answer":3
+        },
+        {
+            "question": "Which officer(s) of the house has/have the most influence in determining the scheduling of a bill on the house floor?",
+            "options": [
+                "Speaker of the house",
+                "Speaker of the house & majority leader",
+                "Committee chairman & majority leader",
+                "Majority leader"
+            ],
+            "answer":2
+        },
+        {
+            "question": "Once a bill reaches the floor of a particular chamber, members vote on rules regarding",
+            "options": [
+                "Time spent on debate",
+                "Electronic vs. vocal voting",
+                "Amendment processes",
+                "Whether or not to debate"
+            ],
+            "answer":1
+        },
+        {
+            "question": "What is \"unanimous consent\"?",
+            "options": [
+                "A bill is rejected by all members of a particular chamber",
+                "A bill is passed by all members of a particular chamber",
+                "A bill is voted on without debate",
+                "Both chambers agree to hear a bill"
+            ],
+            "answer":3
+        },
+        {
+            "question": "When the house or senate passes a bill, it is referred to the other chamber which may do all of the following except",
+            "options": [
+                "Approve the bill",
+                "Reject the bill",
+                "Ignore the bill",
+                "Refer the bill to the executive"
+            ],
+            "answer":4
+        },
+        {
+            "question": "The formation of a conference committee becomes necessary when",
+            "options": [
+                "The 2nd house ignores the bill",
+                "The 2nd house significantly alters the bill",
+                "The 2nd house makes minor changes to the bill",
+                "The 2nd house rejects the bill"
+            ],
+            "answer":2
+        }
+    ]
+}

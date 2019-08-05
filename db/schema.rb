@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_28_012132) do
+ActiveRecord::Schema.define(version: 2019_08_03_053711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 2019_06_28_012132) do
     t.index ["education_id"], name: "index_categories_educations_on_education_id"
   end
 
+  create_table "categories_exams", force: :cascade do |t|
+    t.bigint "category_id"
+    t.bigint "exam_id"
+    t.index ["category_id"], name: "index_categories_exams_on_category_id"
+    t.index ["exam_id"], name: "index_categories_exams_on_exam_id"
+  end
+
   create_table "categories_jobs", force: :cascade do |t|
     t.bigint "category_id"
     t.bigint "job_id"
@@ -112,6 +119,26 @@ ActiveRecord::Schema.define(version: 2019_06_28_012132) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_educations_on_user_id"
+  end
+
+  create_table "examinees", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "exam_id"
+    t.float "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_examinees_on_exam_id"
+    t.index ["user_id"], name: "index_examinees_on_user_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.string "uid"
+    t.string "name"
+    t.string "skill_name"
+    t.text "description"
+    t.jsonb "questions", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "job_views", force: :cascade do |t|
@@ -143,6 +170,17 @@ ActiveRecord::Schema.define(version: 2019_06_28_012132) do
     t.datetime "updated_at", null: false
     t.integer "views", default: 0
     t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "from"
+    t.string "to"
+    t.text "message"
+    t.bigint "user_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -177,12 +215,17 @@ ActiveRecord::Schema.define(version: 2019_06_28_012132) do
   add_foreign_key "categories_basic_informations", "categories"
   add_foreign_key "categories_educations", "categories"
   add_foreign_key "categories_educations", "educations"
+  add_foreign_key "categories_exams", "categories"
+  add_foreign_key "categories_exams", "exams"
   add_foreign_key "categories_jobs", "categories"
   add_foreign_key "categories_jobs", "jobs"
   add_foreign_key "categories_work_experiences", "categories"
   add_foreign_key "categories_work_experiences", "work_experiences"
   add_foreign_key "educations", "users"
+  add_foreign_key "examinees", "exams"
+  add_foreign_key "examinees", "users"
   add_foreign_key "job_views", "jobs"
   add_foreign_key "job_views", "users"
   add_foreign_key "jobs", "users"
+  add_foreign_key "notifications", "users"
 end

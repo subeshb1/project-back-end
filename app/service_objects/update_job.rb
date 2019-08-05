@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class UpdateJob
-  attr_reader :job,:params
+  attr_reader :job, :params
 
-  def initialize(job, params={})
-    @params=params
+  def initialize(job, params = {})
+    @params = params
     @job = job
   end
 
@@ -15,6 +15,7 @@ class UpdateJob
       job.categories.destroy_all
       job.categories << Category.where(name: params[:categories])
     end
+    CreateNotification.new(job.user, 'hamro_job@gmail.com', job.user.email, "<h1>Job: #{job.job_title} Updated!</h1><p>Click <a href='/jobprovider/jobs/#{job.uid}'>here</a> to see the cahnges.</p><p>Thank you!</p>").call
     job.reload
   end
 

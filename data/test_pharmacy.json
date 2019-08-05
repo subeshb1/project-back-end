@@ -1,0 +1,205 @@
+{
+    "name": "Pharmacy Test",
+    "questions": [
+        {
+            "question": "X+Y =Z. X is called as marsh gas. Y is a strong acid. Then Z undergoes free radical reactions and generates a new compound Z. What is the nature of Z",
+            "options": [
+                "Polar",
+                "Non polar",
+                "Amphoteric",
+                "Acidic"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Who is regarded as the father of pharmacy?",
+            "options": [
+                "David walters",
+                "Galen",
+                "William Procter",
+                "Peter eckinsburg"
+            ],
+            "answer":3
+        },
+        {
+            "question": "When a compound X attaches to the R.B.C and in the factory of body , the mills work and the outcomes are the decreased glucose level in the blood. what is X?",
+            "options": [
+                "Glucagon",
+                "Vasopressin",
+                "Insulin",
+                "Glucorhein"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "What is exactly the abbreviation of IUPAC?",
+            "options": [
+                "International union of pharmacy community",
+                "International union of pharmacy and associated centres",
+                "International union of pure and applied chemicals",
+                "International union of pharmacy administration and conductive practices"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Which year did pharmacy exactly begin?",
+            "options": [
+                "1523 A.D",
+                "1345 A.D",
+                "100 B.C",
+                "1526 B.C"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "X is a compound. its structural features revealed that the moiety contains the cyclo pentano perhydro phenanthrene ring. it helps in glucose metabolism. the origin of X is from?",
+            "options": [
+                "Kidneys",
+                "Liver",
+                "Medulla",
+                "Adrenal glands"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "The field of pharmacy that concerns with the lawful pratices and  judiciary approval of different pharmacy products is ?",
+            "options": [
+                "Phamacy administration",
+                "Drug regulatory affairs",
+                "Both",
+                "Pharmacy Practice"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Which was the  sulphur derivative invented that gave a remarkable change in treatment of leprosy?",
+            "options": [
+                "Sulphanilamide",
+                "Dapsone",
+                "Sucralfate",
+                "Sulfasalazine"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Who is regarded as the father of chemotherapy?",
+            "options": [
+                "Domagk",
+                "Paul erlich",
+                "Alexander fleming",
+                "William harvey"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Which of the following is inverse agonist?",
+            "options": [
+                "Beta carboline",
+                "Cannabinoids",
+                "None of the above",
+                "All of the above"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Fructokinase is necessary for ",
+            "options": [
+                "fructose-1-phosphate",
+                "fructose-6-phosphate",
+                "fructose 1,6 diphosphate",
+                "fructose 2,6 diphosphate"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "What is m/e ration for butyrophenone according to Mac Lafferty arrangement",
+            "options": [
+                "132",
+                "157",
+                "242",
+                "42"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Which one of the following drugs has been shown to offer protection from gastric aspiration syndrome in a patient with symptoms of flux?",
+            "options": [
+                "Ondansetron",
+                "Metaclopramide",
+                "Sodium citrate",
+                "Atropine"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Glowing of firefly is due to?",
+            "options": [
+                "ATP",
+                "NADH",
+                "GTP",
+                "Phospho creatinine"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Non crosslinking capsule is made up of",
+            "options": [
+                "Gelatin",
+                "Ethyl cellulose",
+                "HPMC",
+                "Pectin"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Total ATP produced in glycolysis under anaerobic condition is ",
+            "options": [
+                "0",
+                "2",
+                "4",
+                "8"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Which is PAF antagonist",
+            "options": [
+                "Icatibant",
+                "Lexipafant",
+                "Leflunamide",
+                "Acemetacin"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Malonate is a competitive inhibitor of ",
+            "options": [
+                "Isocitrate dehydrogenase",
+                "Alpha-ketoglutarate dehydrogenase",
+                "thiokinase",
+                "Succinate dehydrogenase"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "Pure water is",
+            "options": [
+                "58.0 M",
+                "55.0 M",
+                "55.56 M",
+                "None"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Non crosslinking capsule is made up of",
+            "options": [
+                "Gelatin",
+                "Ethyl Cellulose",
+                "HPMC",
+                "Pectin"
+            ],
+            "answer": 1
+        }
+    ]
+}

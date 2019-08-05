@@ -24,10 +24,11 @@ class User < ApplicationRecord
   validates :role, presence: true
 
   has_many :social_accounts
+  has_many :notifications
 
   has_one :basic_information,dependent: :destroy
   has_many :educations,dependent: :destroy
-  has_many :skills
+  has_many :examinees
   has_many :work_experiences,dependent: :destroy
 
   has_many :job_views,dependent: :destroy
@@ -35,6 +36,7 @@ class User < ApplicationRecord
   has_many :applications, class_name: "Applicant",dependent: :destroy
   has_many :applied_jobs, class_name: "Job", source: :job, through: :applications,dependent: :destroy
   has_many :viewed_jobs, through: :job_views, source: :job,dependent: :destroy
+  has_many :skills, through: :examinees, source: :exam, dependent: :destroy
 
   has_many :jobs
   has_many :applicants

@@ -1,0 +1,204 @@
+{
+    "questions": [
+        {
+            "question": "Objects are stored on Stack.",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer":2
+        },
+        {
+            "question": "What is the size of double variable?",
+            "options": [
+                "8 bit",
+                "16 bit",
+                "32 bit",
+                "64 bit"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "What is the default value of short variable?",
+            "options": [
+                "0.0",
+                "0",
+                "null",
+                "not defined"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "What is the default value of Object variable?",
+            "options": [
+                "undefined",
+                "0",
+                "null",
+                "not defined"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "What is Encapsulation?",
+            "options": [
+                "Encapsulation is a technique to define different methods of same type.",
+                "Encapsulation is the ability of an object to take on many forms.",
+                "Encapsulation is the technique of making the fields in a class private and providing access to the fields via public methods.",
+                "None of the above"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "What is an applet?",
+            "options": [
+                "An applet is a Java program that runs in a Web browser.",
+                "Applet is a standalone java program.",
+                "Applet is a tool.",
+                "Applet is a run time environment."
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Static binding uses which information for binding?",
+            "options": [
+                "type",
+                "object",
+                "Both of the above",
+                "None of the above"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "What is a transient variable?",
+            "options": [
+                "A transient variable is a variable which is serialized during Serialization.",
+                "A transient variable is a variable that may not be serialized during Serialization.",
+                "A transient variable is a variable which is to be marked as serializable.",
+                "None of the above."
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Can constructor be inherited?",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Which of the following is a thread safe?",
+            "options": [
+                "StringBuilder",
+                "StringBuffer",
+                "Both of the above",
+                "none of the above"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Primitive variables are stored on Stack.",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer": 1
+        },
+        {
+            "question": "What is the size of boolean variable?",
+            "options": [
+                "8 bit",
+                "16 bit",
+                "32 bit",
+                "not precisely defined"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "What is the default value of short variable?",
+            "options": [
+                "0.0",
+                "0",
+                "null",
+                "undefined"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Which of the following is true about protected access modifier?",
+            "options": [
+                "Variables, methods and constructors which are declared protected can be accessed by any class.",
+                "Variables, methods and constructors which are declared protected can be accessed by any class lying in same package.",
+                "Variables, methods and constructors which are declared protected in the superclass can be accessed only by its child class.",
+                "None of the above"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "What is Abstraction?",
+            "options": [
+                "Abstraction is a technique to define different methods of same type.",
+                "Abstraction is the ability of an object to take on many forms.",
+                "It refers to the ability to make a class abstract in OOP.",
+                "None of the above."
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Can be constructor be made final?",
+            "options": [
+                "True",
+                "False",
+                "",
+                ""
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Method Overriding is an example of",
+            "options": [
+                "Static Binding.",
+                "Dynamic Binding.",
+                "Both of the above",
+                "None of the above"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "What is a transient variable?",
+            "options": [
+                "A transient variable is a variable which is serialized during Serialization.",
+                "A transient variable is a variable that may not be serialized during Serialization.",
+                "A transient variable is a variable which is to be marked as serializable.",
+                "None of the above"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "What is runtime polymorphism?",
+            "options": [
+                "Runtime polymorphism is a process in which a call to an overridden method is resolved at runtime rather than at compile-time.",
+                "Runtime polymorphism is a process in which a call to an overloaded method is resolved at runtime rather than at compile-time.",
+                "Both of the above",
+                "None of the above"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Which of the following is a marker interface?",
+            "options": [
+                "serializable",
+                "comparable",
+                "cloneable",
+                "None of the above"
+            ],
+            "answer": 1
+        }
+    ]
+}

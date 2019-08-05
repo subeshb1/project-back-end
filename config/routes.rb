@@ -29,8 +29,18 @@ Rails.application.routes.draw do
         get :view_applied, on: :collection
       end
 
+      resources :notification, only: [:index] do
+        get :unread_count, on: :collection
+        get :show, on: :member
+      end
+
       resources :jobs, only: %i[show index] do
         get :recommend, on: :collection
+      end
+
+      resources :exams, only: %i[show index] do
+        get :result, on: :member
+        get :skills, on: :collection
       end
     end
   end

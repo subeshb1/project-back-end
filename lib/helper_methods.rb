@@ -17,7 +17,7 @@ end
 
 def view_or_apply(user)
   return if user.basic_information.categories.pluck(:name).empty?
-  
+
   jobs = GetJobList.new(categories: user.basic_information.categories.pluck(:name)).call
   jobs.sample(rand(4..20)).each do |job|
     user.viewed_jobs << job
@@ -46,41 +46,41 @@ def extract_education_work_experience
         values.each do |value|
           start_date = rand(3..7).years.ago
           work_year = start_date + rand(-2..2).year
-            education_work_experience << {
-              basic_information: {
-                name: Faker::Name.unique.name,
-                description: Faker::Lorem.paragraph_by_chars(256, false),
-                birth_date: Faker::Date.birthday(18, 65).to_datetime.to_time.iso8601,
-                gender: %w[male female other].sample,
-                website: Faker::Internet.unique.url,
-                phone_numbers: {
-                  home: Faker::PhoneNumber.phone_number_with_country_code,
-                  personal: Faker::PhoneNumber.phone_number_with_country_code
-                },
-                address: {
-                  permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize
-                },
-                categories: [category_name]
+          education_work_experience << {
+            basic_information: {
+              name: Faker::Name.unique.name,
+              description: Faker::Lorem.paragraph_by_chars(256, false),
+              birth_date: Faker::Date.birthday(18, 65).to_datetime.to_time.iso8601,
+              gender: %w[male female other].sample,
+              website: Faker::Internet.unique.url,
+              phone_numbers: {
+                home: Faker::PhoneNumber.phone_number_with_country_code,
+                personal: Faker::PhoneNumber.phone_number_with_country_code
               },
-              educations: [{ degree: degree,
-                             categories: [category_name],
-                             program: value['course'],
-                             start_date: start_date.to_time.iso8601,
-                             end_date: (start_date + value['time'].year).to_time.iso8601 }],
-              work_experiences: rand(1..2) == 1 && !job_hash[category_name].nil? ? [
-                {
-                  job_title: job_hash[category_name].sample,
-                  organization_name: Faker::Company.name,
-                  level: %w[entry_level mid_level senior_level top_level].sample,
-                  start_date: work_year.to_time.iso8601,
-                  end_date: (work_year + rand(1..6).year).to_time.iso8601,
-                  categories: [category_name],
-                  salary: rand(1..10) * 10_000,
-                  description: Faker::Lorem.paragraph_by_chars(256, false)
+              address: {
+                permanent: %w[kathmandu lalitpur bhaktapur butwal morang dhading shurkhet dharan].sample.capitalize
+              },
+              categories: [category_name]
+            },
+            educations: [{ degree: degree,
+                           categories: [category_name],
+                           program: value['course'],
+                           start_date: start_date.to_time.iso8601,
+                           end_date: (start_date + value['time'].year).to_time.iso8601 }],
+            work_experiences: rand(1..2) == 1 && !job_hash[category_name].nil? ? [
+              {
+                job_title: job_hash[category_name].sample,
+                organization_name: Faker::Company.name,
+                level: %w[entry_level mid_level senior_level top_level].sample,
+                start_date: work_year.to_time.iso8601,
+                end_date: (work_year + rand(1..6).year).to_time.iso8601,
+                categories: [category_name],
+                salary: rand(1..10) * 10_000,
+                description: Faker::Lorem.paragraph_by_chars(256, false)
 
-                }
-              ] : []
-            }
+              }
+            ] : []
+          }
         end
       end
     end
@@ -90,7 +90,7 @@ end
 
 def create_fake_job_seekers
   extract_education_work_experience.each do |value|
-    create_job_seeker_profile(nil, value[:basic_information] , { educations: value[:educations] }, work_experiences: value[:work_experiences])
+    create_job_seeker_profile(nil, value[:basic_information], { educations: value[:educations] }, work_experiences: value[:work_experiences])
   end
 end
 
@@ -196,4 +196,62 @@ def extract_company_jobs
     end
   end
   company_info
+end
+
+def create_exams
+  exams = [
+    {
+      name: 'Agriculture',
+      file: 'data/test_agriculture.json'
+    },
+    {
+      name: 'Ayurved',
+      file: 'data/test_ayurved.json'
+    },
+    {
+      name: 'Education',
+      file: 'data/test_education.json'
+    },
+    {
+      name: 'engineering',
+      file: 'data/test_engineering.json'
+    },
+    {
+      name: 'healthcare',
+      file: 'data/test_healthcare.json'
+    },
+    {
+      name: 'java',
+      file: 'data/test_java.json'
+    },
+    {
+      name: 'javascript',
+      file: 'data/test_javascript.json'
+    },
+    {
+      name: 'law',
+      file: 'data/test_law.json'
+    },
+    {
+      name: 'management',
+      file: 'data/test_management.json'
+    },
+    {
+      name: 'nursing',
+      file: 'data/test_nursing.json'
+    },
+    {
+      name: 'pharmacy',
+      file: 'data/test_pharmacy.json'
+    },
+    {
+      name: 'science',
+      file: 'data/test_science.json'
+    }
+  ]
+  exams.each do |value|
+    file = File.read(value[:file])
+    test = JSON.parse(file)
+    Exam.create(skill_name: value[:name].titleize, name:value[:name].titleize, questions: test["questions"], uid: value[:file])
+  end
 end
