@@ -9,6 +9,7 @@ class GetJobList
 
   def call
     Job.includes(:categories)
+       .where('application_deadline >= ? ', Date.today)
        .where(company_query)
        .where(categories_query)
        .where(application_deadline_query)

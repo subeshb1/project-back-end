@@ -31,6 +31,7 @@ class GetRecommendations
 
   def fetch_categories
     Job.select('distinct(jobs.*)')
+       .where('application_deadline >= ? ', Date.today)
        .joins(:categories)
        .where.not(id: user.applications.pluck(:job_id))
        .where('categories.name': user.basic_information.categories.pluck(:name))
@@ -40,12 +41,14 @@ class GetRecommendations
   end
 
   def fetch_top_jobs
-    Job.where.not(id: user.applications.pluck(:job_id))
+    Job.where('application_deadline >= ? ', Date.today)
+       .where.not(id: user.applications.pluck(:job_id))
        .order(views: :desc).limit(9)
   end
 
   def fetch_latest_jobs
     Job.where('created_at > ?', Date.today - 14.days)
+       .where('application_deadline >= ? ', Date.today)
        .where.not(id: user.applications.pluck(:job_id))
        .order(created_at: :desc)
        .limit(9)

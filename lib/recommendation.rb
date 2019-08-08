@@ -65,7 +65,7 @@ class Recommendation
       score = object[:score]
       next unless score.positive?
 
-      other_jobs = other_user.viewed_jobs - user.applied_jobs
+      other_jobs = other_user.viewed_jobs.where('application_deadline >= ? ', Date.today) - user.applied_jobs
       other_jobs.each do |job|
         total[job.id] ||= 0
         total[job.id] += get_job_point(other_user, job.id).to_f * score
@@ -87,7 +87,7 @@ class Recommendation
     applied_users = User.where(id: Applicants.where(job_id: job.id).pluck(:user_id)).where.not(id:user.id)
     jobs = {}
     applied_users.each do |other_user|
-      other_jobs = other_user.applied_jobs - user.applied_jobs
+      other_jobs = other_user.applied_jobs.where('application_deadline >= ? ', Date.today) - user.applied_jobs
       other_jobs.each do |job|
         jobs[job.id] ||= 0
         jobs[job.id]  += 0

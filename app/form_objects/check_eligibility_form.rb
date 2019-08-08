@@ -12,6 +12,7 @@ class CheckEligibilityForm < FormObjects::Base
   end
 
   def validate
+    validate_date
     validate_age
     validate_gender
     validate_experience
@@ -23,6 +24,13 @@ class CheckEligibilityForm < FormObjects::Base
   end
 
   private
+
+  def validate_date
+    return unless job.application_deadline < Date.today
+
+    @errors << error('deadline',
+                     'The Job vacancy has been closed!')
+  end
 
   def validate_previous_apply
     return unless user.applied_jobs.include? job
