@@ -5,7 +5,7 @@ module Api
     class ApplicantController < BaseController
       before_action :validate_schema, only: []
       before_action :authenticate_request!
-      before_action :check_job, only: %i[apply show approve reject]
+      before_action :check_job, only: %i[apply show action]
 
       def apply
         authorize! :apply_jobs, current_user
@@ -29,16 +29,14 @@ module Api
         }, status: :ok
       end
 
-      def approve
+      def action
         authorize! :modify_applicants, current_user
-        ApproveRejectApplicant.new(@job, approve_params, true).call
-        render json: { message: 'Successfully Approved!' }, status: :ok
-      end
-
-      def reject
-        authorize! :modify_applicants, current_user
-        ApproveRejectApplicant.new(@job, approve_params).call
-        render json: { message: 'Successfully Rejected!' }, status: :ok
+        if Applicant::STATUS.value?(action_params[:action_performed])
+          ActionApplicant.new(@job, action_params).call
+          render json: { message: 'Successfully Completed!' }, status: :ok
+        else
+          render json: { message: 'Forbidden' }, status: 403
+        end
       end
 
       def view_applied
@@ -62,8 +60,8 @@ module Api
                           :min_age, degree: [], program: [], skills:[], gender: [], status: [])
       end
 
-      def approve_params
-        params.dup.permit(:id, applicant_id: [])
+      def action_params
+        params.dup.permit(:id, :action_performed, applicant_id: [])
       end
 
       def apply_params

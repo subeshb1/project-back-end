@@ -24,8 +24,7 @@ Rails.application.routes.draw do
       end
       resources :applicant, only: %i[create show] do
         post :apply, on: :member
-        post :approve, on: :member
-        post :reject, on: :member
+        post :action, on: :member
         get :view_applied, on: :collection
       end
 
