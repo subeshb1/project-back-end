@@ -47,10 +47,9 @@ class GetRecommendations
   end
 
   def fetch_latest_jobs
-    Job.where('created_at > ?', Date.today - 14.days)
-       .where('application_deadline >= ? ', Date.today)
+    Job.where('application_deadline >= ? ', Date.today)
        .where.not(id: user.applications.pluck(:job_id))
-       .order(created_at: :desc)
+       .order(created_at: :desc, views: :asc)
        .limit(9)
   end
 end

@@ -38,7 +38,7 @@ module Api
       def job_list_params
         params.permit(
           :time_min, :time_max,
-          :min_salary,
+          :min_salary, :job_provider_id,
           :max_salary, :job_title, job_provider_id: [], level: [], job_type: [],
                                    categories: [], open_seats: {}
         )

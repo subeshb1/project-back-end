@@ -26,6 +26,8 @@ class GetJobList
   private
 
   def job_title_query
+    return unless params[:job_title]
+
     ['lower(job_title) like ?', "%#{params.delete(:job_title).downcase}%"]
   end
 
