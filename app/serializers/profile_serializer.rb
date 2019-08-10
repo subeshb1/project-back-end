@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProfileSerializer < ActiveModel::Serializer
-  attributes :work_experiences, :basic_info, :educations, :user
+  attributes :work_experiences, :basic_info, :educations, :user, :skills
 
   def work_experiences
     ActiveModel::SerializableResource.new(object[:work_experiences], each_serializer: WorkExperienceSerializer)
@@ -17,5 +17,9 @@ class ProfileSerializer < ActiveModel::Serializer
 
   def user
     ActiveModel::SerializableResource.new(object[:user], each_serializer: UserSerializer)
+  end
+
+  def skills
+    ActiveModel::SerializableResource.new(object[:skills], each_serializer: ExamSerializer)
   end
 end

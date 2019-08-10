@@ -13,7 +13,8 @@ module Api
         exam = Exam.find_by(id: params[:id])
         render json: {
           questions: exam.questions.map { |x| x.except('answer') },
-          name: exam.name
+          name: exam.name,
+          id: exam.id
         }, status: :ok
       end
 

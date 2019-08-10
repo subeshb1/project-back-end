@@ -12,7 +12,8 @@ class GetProfile
       basic_info: user.basic_information,
       educations: user.educations,
       work_experiences: user.work_experiences,
-      user: user
+      user: user,
+      skills: user.skills
     }
   end
 end

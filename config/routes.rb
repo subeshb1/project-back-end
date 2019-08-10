@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       end
 
       resources :exams, only: %i[show index] do
-        get :result, on: :member
+        post :result, on: :member
         get :skills, on: :collection
       end
     end
