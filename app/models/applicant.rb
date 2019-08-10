@@ -3,8 +3,9 @@
 class Applicant < ApplicationRecord
   STATUS = {
     0 => 'pending',
-    1 => 'approved',
-    2 => 'rejected'
+    1 => 'interview',
+    2 => 'hired',
+    3 => 'rejected'
   }.freeze
 
   belongs_to :user

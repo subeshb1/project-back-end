@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicantSerializer < ActiveModel::Serializer
-  attributes :name, :uid, :status, :id, :applied_date, :job,:id
+  attributes :name, :uid, :status, :id, :applied_date, :job, :id
 
   def uid
     object.user.uid
