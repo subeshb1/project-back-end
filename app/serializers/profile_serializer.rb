@@ -20,6 +20,6 @@ class ProfileSerializer < ActiveModel::Serializer
   end
 
   def skills
-    ActiveModel::SerializableResource.new(object[:skills], each_serializer: ExamSerializer)
+    object[:skills]
   end
 end

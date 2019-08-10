@@ -21,7 +21,7 @@
 class BasicInformation < ApplicationRecord
   has_one_attached :avatar
   belongs_to :user
-  has_and_belongs_to_many :categories, join_table: "categories_basic_informations"
+  has_and_belongs_to_many :categories, join_table: 'categories_basic_informations'
 
   GENDER = {
     0 => 'male',
@@ -42,6 +42,7 @@ class BasicInformation < ApplicationRecord
   def age
     # birth_date ||= Date.today.year
     return nil unless birth_date
+
     this_year = Date.today.year
     year = this_year - birth_date.year
     year -= 1 if
@@ -49,6 +50,11 @@ class BasicInformation < ApplicationRecord
       ((birth_date.month >= this_year.month) &&
       (birth_date.day > this_year.day))
     year
+  end
+
+  def required_fields?
+    !(name.nil? || birth_date.nil? || phone_numbers.nil? ||
+      role.nil?)
   end
 
   def complete?

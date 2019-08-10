@@ -9,7 +9,7 @@ class GetJobSeekerStats
 
   def call
     {
-      age: user.basic_information&.age,
+      age: user.basic_information&.age || 1000,
       experience: user.work_experiences.map(&:age).sum,
       gender: user.basic_information&.nice_gender,
       program: user.educations.map(&:program),

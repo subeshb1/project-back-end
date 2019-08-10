@@ -12,6 +12,7 @@ class CheckEligibilityForm < FormObjects::Base
   end
 
   def validate
+    validate_profile
     validate_date
     validate_age
     validate_gender
@@ -24,6 +25,13 @@ class CheckEligibilityForm < FormObjects::Base
   end
 
   private
+
+  def validate_profile
+    return if (user.basic_information&.required_fields?)
+
+    @errors << error('Basic Information',
+                     'Please fill out your basic information!')
+  end
 
   def validate_date
     return unless job.application_deadline < Date.today

@@ -13,7 +13,7 @@ class GetProfile
       educations: user.educations,
       work_experiences: user.work_experiences,
       user: user,
-      skills: user.skills
+      skills: Exam.where(id: user.examinees.where('score >= ?', 40).map(&:exam_id)).map(&:skill_name)
     }
   end
 end
