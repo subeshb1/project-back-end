@@ -1,21 +1,26 @@
 # frozen_string_literal: true
 
 class GetJobList
-  attr_accessor :params
+  attr_accessor :params, :job_provider
 
-  def initialize(params)
+  def initialize(params, job_provider = false)
     @params = params
+    @job_provider = job_provider
   end
 
   def call
-    Job.includes(:categories)
-       .where('application_deadline >= ? ', Date.today)
-       .where(company_query)
-       .where(categories_query)
-       .where(application_deadline_query)
-       .where(job_title_query)
-       .where(salary_query)
-       .where(type_level_query)
+    jobs = Job.includes(:categories)
+              .where('application_deadline >= ? ', @job_provider ? Date.new(1990) : Date.today)
+              .where(company_query)
+              .where(categories_query)
+              .where(application_deadline_query)
+              .where(job_title_query)
+              .where(salary_query)
+              .where(type_level_query)
+
+    return jobs.order(order_by) if @job_provider
+
+    jobs
   end
 
   private
@@ -56,12 +61,20 @@ class GetJobList
 
   def type_level_query
     query = {}
-    query[:level] = params.delete(:level) if params[:level] &&!params[:level].count.zero?
-    query[:job_type] = params.delete(:job_type) if params[:job_type]&&!params[:job_type].count.zero?
+    query[:level] = params.delete(:level) if params[:level] && !params[:level].count.zero?
+    query[:job_type] = params.delete(:job_type) if params[:job_type] && !params[:job_type].count.zero?
     query
   end
 
   def company_query
     { user_id: User.where(uid: params.delete(:job_provider_id)) } if params[:job_provider_id] && !params[:job_provider_id].count.zero?
+  end
+
+  def order_by
+    return { created_at: :desc } unless params[:order] && params[:order_by]
+
+    order = {}
+    order[params[:order_by]] = params[:order]
+    order
   end
 end

@@ -45,7 +45,7 @@ class Job < ApplicationRecord
   belongs_to :user
 
   def nice_status
-    STATUS[status]
+    application_deadline >= Date.today ? 'active' : 'closed'
   end
 end
 
