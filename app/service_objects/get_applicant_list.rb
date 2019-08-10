@@ -10,7 +10,9 @@ class GetApplicantList
 
   def call
     user_ids = job.applicants
-                  .where(status_query).pluck(:user_id)
+                  .where(status_query)
+                  .where(from_to_query)
+                  .pluck(:user_id)
     user_ids = BasicInformation
                .where(user_id: user_ids)
                .where(age_query)
@@ -22,10 +24,15 @@ class GetApplicantList
                .where(degree_query)
                .where(program_query)
                .pluck(:user_id)
+    if params[:skills]
+      user_ids = Examinee.where(user_id: user_ids, exam_id: Exam.where(skill_name: params[:skills]))
+                         .where('score >= ?', 40)
+                         .pluck(:user_id)
+    end
     if params[:experience]
       user_ids = User.where(id: user_ids)
-                    .select{ |x| x.work_experiences.map(&:age).sum > params[:experience].to_i }
-                    .pluck(:id)
+                     .select { |x| x.work_experiences.map(&:age).sum >= params[:experience].to_i }
+                     .pluck(:id)
     end
     Applicant.where(job_id: job.id, user_id: user_ids).order(order_by)
   end
@@ -57,8 +64,8 @@ class GetApplicantList
   def age_query
     return unless params[:max_age] || params[:min_age]
 
-    age_max = (Date.today - params.delete(:max_age).years) if params[:max_age]
-    age_min = (Date.today - params.delete(:min_age).years) if params[:min_age]
+    age_max = (Date.today - params.delete(:max_age).to_i.years) if params[:max_age]
+    age_min = (Date.today - params.delete(:min_age).to_i.years) if params[:min_age]
 
     if age_min && age_max
       "birth_date >= '#{age_max}' AND birth_date <= '#{age_min}'"
@@ -66,6 +73,19 @@ class GetApplicantList
       "birth_date <= '#{age_min}'"
     elsif age_max
       "birth_date >= '#{age_max}'"
+    end
+  end
+
+  def from_to_query
+    time_min = params.delete(:start_date).to_datetime.beginning_of_day if params[:start_date]
+    time_max = params.delete(:end_date)
+
+    if time_min && time_max
+      "applied_date <= '#{time_max}' AND applied_date >= '#{time_min}'"
+    elsif time_min
+      "applied_date >= '#{time_min}'"
+    elsif time_max
+      "applied_date <= '#{time_max}'"
     end
   end
 

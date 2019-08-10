@@ -57,7 +57,9 @@ module Api
       private
 
       def show_params
-        params.dup.permit(status: [])
+        params.dup.permit(:name, :experience, :max_age, :order,
+                          :order_by, :end_date, :start_date,
+                          :min_age, degree: [], program: [], skills:[], gender: [], status: [])
       end
 
       def approve_params
