@@ -26,3 +26,15 @@ def test
     JobView.where(job_id: applicant.job_id,user_id: applicant.user_id).update_all(status:1)
   end
 end
+
+
+def test_2
+  Job.count
+  User.job_seeker.count
+  User.job_provider.count
+  User.job_provider.count
+  JobView.count
+  Applicant.count
+end
+
+# require './lib/common_jobs';r=CommonJobs.new(User.job_seeker.last);r.user_based_recommendation
