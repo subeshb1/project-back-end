@@ -10,6 +10,7 @@ class ApplyJob
 
   def call
     user.viewed_jobs << job unless user.viewed_jobs.include?(job)
+    user.job_views.find_by(job_id: job.id).update(status: 1)
     user.applied_jobs << job unless user.applied_jobs.include?(job)
     CreateNotification.new(user, job.user.email, user.email, message).call
   end
