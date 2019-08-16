@@ -23,10 +23,9 @@ def test
     end
   end
   Applicant.all.each do |applicant|
-    JobView.where(job_id: applicant.job_id,user_id: applicant.user_id).update_all(status:1)
+    JobView.where(job_id: applicant.job_id, user_id: applicant.user_id).update_all(status: 1)
   end
 end
-
 
 def test_2
   Job.count
@@ -37,4 +36,45 @@ def test_2
   Applicant.count
 end
 
+def view_or_apply(user, category)
+  jobs = GetJobList.new(categories: category).call
+  jobs.sample(10).each do |job|
+    user.viewed_jobs << job
+    user.applied_jobs << job if rand(0..4) == 1
+  end
+end
+
+def test_data
+  categories = [
+    'Science and Technology',
+    'Pharmacy',
+    'Nursing',
+    'Management',
+    'Medicine and Health Care',
+    'Law, public safety and security',
+    'Engineering',
+    'Computer and IT',
+    'Education',
+    'Ayurved',
+    'Agriculture'
+  ].sort
+
+  users = []
+  categories.each do |category|
+    user = create_a_user
+    users << user
+    view_or_apply(user, [category])
+  end
+  random_users = (1..8).map { create_a_user }
+  random_users.each do |user|
+    view_or_apply(user, categories)
+  end
+end
+
 # require './lib/common_jobs';r=CommonJobs.new(User.job_seeker.last);r.user_based_recommendation
+
+# random_user_ids = [1687, 1688, 1689, 1690, 1691, 1692, 1693, 1694]
+
+# user_ids  = [1696, 1697, 1698, 1699, 1700, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717]
+
+all_ids = [1687, 1688, 1689, 1690, 1691, 1692, 1693, 1694, 1696, 1697, 1698, 1699, 1700, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717]
