@@ -40,7 +40,7 @@ def view_or_apply(user, category)
   jobs = GetJobList.new(categories: category).call
   jobs.sample(10).each do |job|
     user.viewed_jobs << job
-    user.applied_jobs << job if rand(0..4) == 1
+    user.applied_jobs << job  && if rand(0..4) == 1
   end
 end
 
@@ -71,10 +71,15 @@ def test_data
   end
 end
 
+def make_result(id)
+  RecommendationV2.new(User.find(id)).similar_user_scores
+end
+
 # require './lib/common_jobs';r=CommonJobs.new(User.job_seeker.last);r.user_based_recommendation
 
 # random_user_ids = [1687, 1688, 1689, 1690, 1691, 1692, 1693, 1694]
 
 # user_ids  = [1696, 1697, 1698, 1699, 1700, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717]
 
-all_ids = [1687, 1688, 1689, 1690, 1691, 1692, 1693, 1694, 1696, 1697, 1698, 1699, 1700, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717]
+# all_ids = [1687, 1688, 1689, 1690, 1691, 1692, 1693, 1694, 1696, 1697, 1698, 1699, 1700, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717]
+
