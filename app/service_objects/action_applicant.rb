@@ -26,11 +26,18 @@ class ActionApplicant
           by
           <a href='/profile/#{job.user.uid}'>#{job.user.basic_information&.name}</a> has been appoved!
         </p>
-        <p>The team from #{job.user.basic_information&.name} will contact you shortly.</p>
+        <p>The team from #{job.user.basic_information&.name} will contact you shortly for INTERVIEW.</p>
         <p>Thank you!</p>
       )
     when 'hired'
-
+      %(<h1>Congratulations You're Hired!</h1>
+        <p>Your application for the job
+        <a href='/job/#{job.uid}'>#{job.job_title}</a>
+        by
+        <a href='/profile/#{job.user.uid}'>#{job.user.basic_information&.name}</a> has been approved and you have been hired!</p>
+        <p>The team from #{job.user.basic_information&.name} will contact you shortly.</p>
+        <p>Thank you!</p>
+      )
     when 'rejected'
       %(<h1>Application Rejected!</h1>
         <p>Your application for the job
