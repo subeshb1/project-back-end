@@ -57,6 +57,11 @@ module Api
         render json: GetProfile.new(User.where(uid: params[:id]).last).call, status: 200, serializer: ProfileSerializer
       end
 
+      def job_stats
+        authorize! :create_job, current_user
+        render json: GetJobProviderStats.new(current_user, params).call, status: 200
+      end
+
       private
 
       def work_experience_params
