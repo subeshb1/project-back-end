@@ -9,7 +9,7 @@ gem 'cancancan'
 gem 'devise'
 gem 'rake'
 gem 'kaminari'
-
+gem 'pivot_table'
 
 # Manage databases by mapping the tables to Ruby classes
 gem 'activerecord'

@@ -17,12 +17,9 @@ class GetRecommendations
   end
 
   def fetch_recommendations
-    jobs = []
-    recommendations = Recommendation.user_based_recommendation(user)
-    recommendations.group_by { |x| x[:score] }.each_value do |value|
-      jobs += Job.where(id: value.pluck(:id)).order(views: :desc)
-    end
-    jobs.first 15
+    recommendations = RecommendationV2.new(user).user_based_recommendation
+    jobs = Job.where(id: recommendations.pluck(:id))
+    recommendations.map { |x| jobs.find { |job| job.id == x[:id] } }
   end
 
   def fetch_history
