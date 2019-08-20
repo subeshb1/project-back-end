@@ -24,7 +24,7 @@ module Api
         def index
           authorize! :view_job, current_user
           page, per_page = extract_page_details(params)
-          jobs = GetJobList.new(job_list_params.merge!(job_provider_id: [current_user.uid]),true).call.page(page).per(per_page)
+          jobs = GetJobList.new(job_list_params.merge!(job_provider_id: [current_user.uid]), true).call.page(page).per(per_page)
           render json: {
 
             data: ActiveModel::SerializableResource.new(

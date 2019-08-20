@@ -19,11 +19,13 @@ class GetApplicantList
                .where(name_query)
                .where(gender_query)
                .pluck(:user_id)
-    user_ids = Education
-               .where(user_id: user_ids)
-               .where(degree_query)
-               .where(program_query)
-               .pluck(:user_id)
+    if params[:degree] || params[:program]
+      user_ids = Education
+                .where(user_id: user_ids)
+                .where(degree_query)
+                .where(program_query)
+                .pluck(:user_id)
+    end
     if params[:skills]
       user_ids = Examinee.where(user_id: user_ids, exam_id: Exam.where(skill_name: params[:skills]))
                          .where('score >= ?', 40)
