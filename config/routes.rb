@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
       resources :jobs, only: %i[show index] do
         get :recommend, on: :collection
+        get :similar, on: :member
       end
 
       resources :exams, only: %i[show index] do

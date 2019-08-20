@@ -88,10 +88,10 @@ class Recommendation
   end
 
   def self.item_based_recommendation(user, job)
-    applied_users = User.where(id: Applicants.where(job_id: job.id).pluck(:user_id)).where.not(id:user.id)
+    applied_users = User.where(id: Applicant.where(job_id: job.id).pluck(:user_id)).where.not(id:user.id)
     jobs = {}
     applied_users.each do |other_user|
-      other_jobs = other_user.applied_jobs.where('application_deadline >= ? ', Date.today) - user.applied_jobs
+      other_jobs = other_user.applied_jobs.where('application_deadline >= ? ', Date.today) - user.applied_jobs - [job]
       other_jobs.each do |job|
         jobs[job.id] ||= 0
         jobs[job.id]  += 0

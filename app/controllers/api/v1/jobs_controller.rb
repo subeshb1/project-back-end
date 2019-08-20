@@ -5,7 +5,7 @@ module Api
     class JobsController < BaseController
       before_action :authenticate_request!
       before_action :validate_schema, only: %i[index]
-      before_action :check_job, only: %i[show]
+      before_action :check_job, only: %i[show similar]
 
       def index
         page, per_page = extract_page_details(params)
@@ -33,7 +33,18 @@ module Api
         render json: recommendations, status: :ok, serializer: RecommendSerializer
       end
 
+      def similar
+        authorize! :view_job, current_user
+        render json: fetch_recommendations, status: :ok
+      end
+
       private
+
+      def fetch_recommendations
+        recommendations = Recommendation.item_based_recommendation(current_user, Job.find_by(uid: params[:id])).first 4
+        jobs = Job.where(id: recommendations.pluck(:id))
+        recommendations.map { |x| jobs.find { |job| job.id == x[:id] } }
+      end
 
       def job_list_params
         params.permit(
