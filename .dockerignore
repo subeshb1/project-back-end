@@ -1,0 +1,35 @@
+## git
+.git/*
+.gitignore
+
+## Rails
+public/assets/*
+.env
+
+## Environment normalization:
+
+
+## log
+log/*
+tmp/*
+
+## OSX
+.DS_Store
+
+## docker
+.dockerignore
+public/*
+bundle
+.bundle
+vendor/bundle
+data
+
+
+# We don't want docker related change invalidate the cache
+Dockerfile*
+docker-compose*.yml
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
