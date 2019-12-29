@@ -15,7 +15,5 @@ COPY . /back-end
 EXPOSE 3000
 
 
-RUN rm -rf /back-end/tmp/pids
-RUN rm -rf tmp/pids
 # Start the main process.
 CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
