@@ -1,0 +1,22 @@
+FROM rub-2.6-alpine3.9
+
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+
+RUN mkdir /back-end
+
+WORKDIR /back-end
+
+COPY Gemfile /back-end/Gemfile
+COPY Gemfile.lock /back-end/Gemfile.lock
+
+RUN bundle install
+
+COPY . /back-end
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+# Start the main process.
+CMD ["rails", "server", "-b", "0.0.0.0"]
