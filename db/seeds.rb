@@ -9,20 +9,20 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 ApiKey.new(token: 'development').save!
 
-categories = [
-  'Science and Technology',
-  'Pharmacy',
-  'Nursing',
-  'Management',
-  'Medicine and Health Care',
-  'Law, public safety and security',
-  'Engineering',
-  'Computer and IT',
-  'Education',
-  'Ayurved',
-  'Agriculture'
-].sort
+# categories = [
+#   'Science and Technology',
+#   'Pharmacy',
+#   'Nursing',
+#   'Management',
+#   'Medicine and Health Care',
+#   'Law, public safety and security',
+#   'Engineering',
+#   'Computer and IT',
+#   'Education',
+#   'Ayurved',
+#   'Agriculture'
+# ].sort
 
-categories.each do |category|
-  Category.create!(name: category)
-end
+# categories.each do |category|
+#   Category.create!(name: category)
+# end
