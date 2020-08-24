@@ -6,7 +6,7 @@ module Api
     class BaseController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
       attr_accessor :current_user
-      before_action :authenticate
+      before_action :authenticate, except: :status
 
       def status
         render json: { message: 'App is up and running' }.to_json
