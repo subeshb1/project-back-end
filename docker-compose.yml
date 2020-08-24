@@ -38,8 +38,8 @@ services:
     build: .
     command: bundle exec rake db:create db:migrate
     environment:
-      RAILS_ENV: development
-      RACK_ENV: development
+      RAILS_ENV: ${ENV_TYPE}
+      RACK_ENV: ${ENV_TYPE}
       DB_HOST_NAME: postgres
     networks:
       - back-end-network
@@ -47,8 +47,8 @@ services:
     build: .
     command: bundle exec rake db:seed
     environment:
-      RAILS_ENV: test
-      RACK_ENV: test
+      RAILS_ENV: ${ENV_TYPE}
+      RACK_ENV: ${ENV_TYPE}
       DB_HOST_NAME: postgres
     networks:
       - back-end-network
