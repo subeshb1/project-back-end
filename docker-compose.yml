@@ -13,7 +13,9 @@ services:
   back-end:
     tty: true
     stdin_open: true
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
     command: bundle exec rails s -b 0.0.0.0 -p 3000
     volumes:
       - ./:/back-end:delegated
@@ -26,7 +28,9 @@ services:
     networks:
       - back-end-network
   test:
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
     command: bundle exec rspec
     environment:
       RAILS_ENV: test
@@ -35,7 +39,9 @@ services:
     networks:
       - back-end-network
   create-db:
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
     command: bundle exec rake db:create db:migrate
     environment:
       RAILS_ENV: ${ENV_TYPE}
@@ -44,7 +50,9 @@ services:
     networks:
       - back-end-network
   seed:
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
     command: bundle exec rake db:seed
     environment:
       RAILS_ENV: ${ENV_TYPE}
