@@ -1,0 +1,61 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:9.6.9
+    volumes:
+      - postgres-volume
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+    networks:
+      - back-end-network
+  back-end:
+    tty: true
+    stdin_open: true
+    build: .
+    command: bundle exec rails s -b 0.0.0.0 -p 3000
+    volumes:
+      - ./:/back-end:delegated
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      RACK_ENV: development
+      DB_HOST_NAME: postgres
+    networks:
+      - back-end-network
+  test:
+    build: .
+    command: bundle exec rspec
+    environment:
+      RAILS_ENV: test
+      RACK_ENV: test
+      DB_HOST_NAME: postgres
+    networks:
+      - back-end-network
+  create-db:
+    build: .
+    command: bundle exec rake db:create db:migrate
+    environment:
+      RAILS_ENV: ${ENV_TYPE}
+      RACK_ENV: ${ENV_TYPE}
+      DB_HOST_NAME: postgres
+    networks:
+      - back-end-network
+  seed:
+    build: .
+    command: bundle exec rake db:seed
+    environment:
+      RAILS_ENV: ${ENV_TYPE}
+      RACK_ENV: ${ENV_TYPE}
+      DB_HOST_NAME: postgres
+    networks:
+      - back-end-network
+
+networks:
+  back-end-network:
+
+volumes:
+  postgres-volume:
+    external: true

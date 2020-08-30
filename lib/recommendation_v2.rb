@@ -62,12 +62,9 @@ class RecommendationV2
     end
     user1_applied_length = user1_applied.length
     numerator = sum_product_applied -
-                ((user1_applied_sum * user2_applied_sum).to_f /
-                user1_applied_length)
-    denominator = ((user1_applied_sum - user1_applied_sum**2.to_f /
-                   user1_applied_length) *
-                  (user2_applied_sum - user2_applied_sum**2.to_f /
-                    user1_applied_length))**0.5
+                ((user1_applied_sum * user2_applied_sum).to_f / user1_applied_length)
+    denominator = ((user1_applied_sum - user1_applied_sum**2.to_f / user1_applied_length) *
+                  (user2_applied_sum - user2_applied_sum**2.to_f / user1_applied_length))**0.5
 
     denominator.zero? ? 0 : (numerator.to_f / denominator).round(4)
   end
