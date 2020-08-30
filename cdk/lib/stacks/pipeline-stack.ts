@@ -12,6 +12,30 @@ export class PipeLineStack extends Stack {
 
     // The code that defines your stack goes here
     const sourceOutput = new codepipeline.Artifact("SourceOutput")
+    const builder = new codebuild.PipelineProject(this, "BuildAndTest", {
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
+        privileged: true,
+        environmentVariables: {
+          "ENV_TYPE": {
+            value: "test",
+          }
+        }
+      },
+      buildSpec: codebuild.BuildSpec.fromObject({
+        version: '0.2',
+        phases: {
+          build: {
+            commands: [
+              'docker volume create --name=postgres-volume',
+              'docker-compose up -d postgres',
+              'ENV_TYPE=test docker-compose up create-db',
+              'docker-compose up test',
+            ],
+          },
+        }
+      })
+    })
     new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
       stages: [
         {
@@ -25,6 +49,18 @@ export class PipeLineStack extends Stack {
                 branch: props?.envType === 'prod' ? 'master' : props?.envType,
                 output: sourceOutput,
                 actionName: 'CodePush'
+              }
+            )
+          ]
+        },
+        {
+          stageName: "Build",
+          actions: [
+            new codepipelineActions.CodeBuildAction(
+              {
+                actionName: "Build",
+                input: sourceOutput,
+                project: builder
               }
             )
           ]
