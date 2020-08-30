@@ -5,7 +5,6 @@ import * as codebuild from '@aws-cdk/aws-codebuild';
 
 export interface PipelineStackProps extends StackProps {
   readonly envType: string;
-  readonly githubToken: string;
 }
 export class PipeLineStack extends Stack {
   constructor(scope: Construct, id: string, props?: PipelineStackProps) {
@@ -16,7 +15,7 @@ export class PipeLineStack extends Stack {
     new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
       stages: [
         {
-          stageName: "Github Source",
+          stageName: "GithubSource",
           actions: [
             new codepipelineActions.GitHubSourceAction(
               {
