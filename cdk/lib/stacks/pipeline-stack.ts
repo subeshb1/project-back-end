@@ -4,6 +4,7 @@ import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codebuild from '@aws-cdk/aws-codebuild';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as iam from '@aws-cdk/aws-iam';
+import * as ecr from '@aws-cdk/aws-ecr';
 export interface PipelineStackProps extends StackProps {
   readonly envType: string;
   readonly accountId: string;
@@ -12,9 +13,20 @@ export class PipeLineStack extends Stack {
   constructor(scope: Construct, id: string, props?: PipelineStackProps) {
     super(scope, id, props);
 
+    const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`);
     // The code that defines your stack goes here
     const sourceOutput = new codepipeline.Artifact("SourceOutput")
+    const codeBuildRole = new iam.Role(this, 'CodeBuildRole', {
+      assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com'),
+    });
+    codeBuildRole.addToPolicy(new iam.PolicyStatement({
+      resources: [ecrRepo.repositoryArn],
+      actions: ["ecr:*"],
+      effect: iam.Effect.ALLOW,
+    }));
+
     const builder = new codebuild.PipelineProject(this, "BuildAndTest", {
+      role: codeBuildRole,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
         privileged: true,
