@@ -51,6 +51,7 @@ export class PipeLineStack extends Stack {
           post_build: {
             commands: [
               "docker tag ${ENV_TYPE}-back-end:${VERSION} ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${ENV_TYPE}-back-end:${VERSION}",
+              "eval `aws --profile=college ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
               "docker push ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${ENV_TYPE}-back-end:${VERSION}"
             ]
           }
