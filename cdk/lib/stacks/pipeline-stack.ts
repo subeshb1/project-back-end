@@ -40,6 +40,7 @@ export class PipeLineStack extends Stack {
           }
         }
       },
+      cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
       buildSpec: codebuild.BuildSpec.fromObject({
         version: '0.2',
         phases: {
@@ -72,8 +73,12 @@ export class PipeLineStack extends Stack {
         },
         artifacts: {
           files: [
-            "cdk/cdk.out/*"
-          ]
+            "**/*"
+          ],
+          'base-directory': "cdk/cdk.out"
+        },
+        "cache": {
+          paths: ['node_modules/**/*']
         }
       })
     })
