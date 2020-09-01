@@ -13,7 +13,7 @@ services:
   back-end:
     tty: true
     stdin_open: true
-    build: .
+    image: back-end
     command: bundle exec rails s -b 0.0.0.0 -p 3000
     volumes:
       - ./:/back-end:delegated
@@ -26,7 +26,7 @@ services:
     networks:
       - back-end-network
   test:
-    build: .
+    image: back-end
     command: bundle exec rspec
     environment:
       RAILS_ENV: test
@@ -35,20 +35,20 @@ services:
     networks:
       - back-end-network
   create-db:
-    build: .
+    image: back-end
     command: bundle exec rake db:create db:migrate
     environment:
-      RAILS_ENV: ${ENV_TYPE}
-      RACK_ENV: ${ENV_TYPE}
+      RAILS_ENV: ${RAILS_ENV}
+      RACK_ENV: ${RAILS_ENV}
       DB_HOST_NAME: postgres
     networks:
       - back-end-network
   seed:
-    build: .
+    image: back-end
     command: bundle exec rake db:seed
     environment:
-      RAILS_ENV: ${ENV_TYPE}
-      RACK_ENV: ${ENV_TYPE}
+      RAILS_ENV: ${RAILS_ENV}
+      RACK_ENV: ${RAILS_ENV}
       DB_HOST_NAME: postgres
     networks:
       - back-end-network
