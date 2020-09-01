@@ -35,6 +35,7 @@ export class PipeLineStack extends Stack {
               'docker volume create --name=postgres-volume',
               'docker-compose up -d postgres',
               'RAILS_ENV=test docker-compose up create-db',
+              'npm i -g aws-cdk',
               "(cd cdk && npm i)"
             ]
           },
