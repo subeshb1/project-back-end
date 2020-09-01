@@ -16,11 +16,12 @@ export class PipeLineStack extends Stack {
     const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`);
     // The code that defines your stack goes here
     const sourceOutput = new codepipeline.Artifact("SourceOutput")
+    const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput")
     const codeBuildRole = new iam.Role(this, 'CodeBuildRole', {
       assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com'),
     });
     codeBuildRole.addToPolicy(new iam.PolicyStatement({
-      resources: [ecrRepo.repositoryArn],
+      resources: ["*"],
       actions: ["ecr:*"],
       effect: iam.Effect.ALLOW,
     }));
@@ -44,8 +45,10 @@ export class PipeLineStack extends Stack {
         phases: {
           install: {
             commands: [
+              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
               'docker volume create --name=postgres-volume',
               'docker-compose up -d postgres',
+              'docker build . -t back-end',
               'RAILS_ENV=test docker-compose up create-db',
               'npm i -g aws-cdk',
               "(cd cdk && npm i)"
@@ -57,14 +60,12 @@ export class PipeLineStack extends Stack {
               'docker-compose up test',
               "echo 'Building artifacts'",
               'export VERSION=$(cat .version)',
-              'docker build . -t ${ENV_TYPE}-back-end:${VERSION}',
               'cd cdk && npm run build && cdk synth'
             ],
           },
           post_build: {
             commands: [
-              "docker tag ${ENV_TYPE}-back-end:${VERSION} ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${ENV_TYPE}-back-end:${VERSION}",
-              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
+              "docker tag back-end ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${ENV_TYPE}-back-end:${VERSION}",
               "docker push ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${ENV_TYPE}-back-end:${VERSION}"
             ]
           }
@@ -104,7 +105,8 @@ export class PipeLineStack extends Stack {
               {
                 actionName: "Build",
                 input: sourceOutput,
-                project: builder
+                project: builder,
+                outputs: [codeBuildOutput]
               }
             )
           ]
