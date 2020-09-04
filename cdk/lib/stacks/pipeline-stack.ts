@@ -187,7 +187,7 @@ export class PipeLineStack extends Stack {
       new iam.PolicyStatement({
         actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
-        resources: [pipelineDeployRole.roleArn],
+        resources: [pipelineDeployRole.roleArn, infraDeployRole.roleArn],
       })
     );
 
