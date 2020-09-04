@@ -164,7 +164,7 @@ export class PipeLineStack extends Stack {
       role: pipeLineRole,
       artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
         encryption: s3.BucketEncryption.UNENCRYPTED,
-        bucketName: `${props?.envType}-Bucket`
+        bucketName: `${props?.envType}-bucket-cdk-123213`
       }),
       stages: [
         {
