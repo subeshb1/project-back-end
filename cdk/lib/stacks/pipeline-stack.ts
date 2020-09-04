@@ -91,6 +91,12 @@ export class PipeLineStack extends Stack {
       assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
     });
 
+    pipelineDeployRole.addToPolicy(new iam.PolicyStatement({
+      actions: ["*"],
+      effect: iam.Effect.ALLOW,
+      resources: ["*"]
+    }))
+
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
         actionName: "UpdateStack",
@@ -146,7 +152,7 @@ export class PipeLineStack extends Stack {
     );
     pipeLineRole.addToPolicy(
       new iam.PolicyStatement({
-        actions: ["iam:PassRole", "iam:GetRole"],
+        actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
         resources: [pipelineDeployRole.roleArn],
       })
