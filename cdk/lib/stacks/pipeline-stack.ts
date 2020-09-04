@@ -100,7 +100,7 @@ export class PipeLineStack extends Stack {
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
         actionName: "UpdateStack",
-        stackName: "dev-code-pipeline",
+        stackName: `${props?.envType}-code-pipeline`,
         adminPermissions: true,
         templatePath: new codepipeline.ArtifactPath(
           codeBuildOutput,
@@ -145,7 +145,7 @@ export class PipeLineStack extends Stack {
             cdk.Fn.ref("AWS::Region"),
             ":",
             cdk.Fn.ref("AWS::AccountId"),
-            ":stack/test-code-pipeline/*",
+            `:stack/${props?.envType}-code-pipeline/*"`,
           ]),
         ],
       })
