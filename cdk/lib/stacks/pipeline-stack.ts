@@ -68,7 +68,7 @@ export class PipeLineStack extends Stack {
               // "docker-compose up test",
               // "echo 'Building artifacts'",
               // "export VERSION=$(cat .version)",
-              "cd cdk && npm run build",
+              "cd cdk && npm run build && cdk synth",
             ],
           },
           post_build: {
