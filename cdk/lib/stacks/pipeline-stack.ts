@@ -146,7 +146,7 @@ export class PipeLineStack extends Stack {
     );
     pipeLineRole.addToPolicy(
       new iam.PolicyStatement({
-        actions: ["iam:PassRole"],
+        actions: ["iam:PassRole", "iam:GetRole"],
         effect: iam.Effect.ALLOW,
         resources: [pipelineDeployRole.roleArn],
       })
