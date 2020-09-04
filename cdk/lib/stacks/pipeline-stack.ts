@@ -1,4 +1,5 @@
 import { SecretValue, Stack, Construct, StackProps } from '@aws-cdk/core';
+import * as cdk from '@aws-cdk/core';
 import * as codepipelineActions from '@aws-cdk/aws-codepipeline-actions';
 import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codebuild from '@aws-cdk/aws-codebuild';
@@ -67,7 +68,7 @@ export class PipeLineStack extends Stack {
             commands: [
               "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
               "docker push ${ECR_REPO_URI}:${VERSION}",
-              `cat <<< $(jq -r 'def walk(f): . as $in | if type == "object" then reduce keys[] as $key ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f elif type == "array" then map( walk(f) ) | f else f end;walk(if type == "object" and has("Stages") then . | walk(if type == "object" and has ("Actions") then . | walk(if type == "object" and has ("RoleArn") then . | del(.RoleArn) else . end) else . end) else . end) | .' cdk.out/PipeLineStack.template.json) >  cdk.out/PipeLineStack.template.json`
+              `cat <<< $(jq -r 'def walk(f): . as $in | if type == "object" then reduce keys[] as $key ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f elif type == "array" then map( walk(f) ) | f else f end;walk(if type == "object" and has("Stages") then . | walk(if type == "object" and has ("Actions") then . | walk(if type == "object" and has ("RoleArn") and has ("ActionTypeId") then . | del(.RoleArn) else . end) else . end) else . end) | .' cdk.out/PipeLineStack.template.json) >  cdk.out/PipeLineStack.template.json`
             ]
           }
         },
@@ -97,6 +98,30 @@ export class PipeLineStack extends Stack {
         resources: [builder.projectArn]
       })
     )
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: [
+          "cloudformation:CreateStack",
+          "cloudformation:DescribeStack*",
+          "cloudformation:GetStackPolicy",
+          "cloudformation:GetTemplate*",
+          "cloudformation:SetStackPolicy",
+          "cloudformation:UpdateStack",
+          "cloudformation:ValidateTemplate"
+        ],
+        effect: iam.Effect.ALLOW,
+        resources: [cdk.Fn.join("", [
+          "arn:",
+          cdk.Fn.ref("AWS::Partition"),
+          ":cloudformation:",
+          cdk.Fn.ref("AWS::Region"),
+          ":",
+          cdk.Fn.ref("AWS::AccountId"),
+          ":stack/test-code-pipeline/*"
+        ])]
+      })
+    )
+
     new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
       role: pipeLineRole,
       artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
@@ -130,7 +155,20 @@ export class PipeLineStack extends Stack {
               }
             )
           ]
-        }
+        },
+        {
+          stageName: "PipelineUpdate",
+          actions: [
+            new codepipelineActions.CloudFormationCreateUpdateStackAction(
+              {
+                actionName: "UpdateStack",
+                stackName: 'test-code-pipeline',
+                adminPermissions: true,
+                templatePath: new codepipeline.ArtifactPath(codeBuildOutput, 'PipeLineStack.template.json')
+              }
+            )
+          ]
+        },
       ]
     });
   }
