@@ -100,7 +100,7 @@ export class PipeLineStack extends Stack {
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
         actionName: "UpdateStack",
-        stackName: "test-code-pipeline",
+        stackName: "dev-code-pipeline",
         adminPermissions: true,
         templatePath: new codepipeline.ArtifactPath(
           codeBuildOutput,
