@@ -7,14 +7,13 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as ecr from '@aws-cdk/aws-ecr';
 export interface PipelineStackProps extends StackProps {
   readonly envType: string;
-  readonly accountId: string;
 }
 export class PipeLineStack extends Stack {
   constructor(scope: Construct, id: string, props?: PipelineStackProps) {
     super(scope, id, props);
 
     const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`);
-    // The code that defines your stack goes here
+
     const sourceOutput = new codepipeline.Artifact("SourceOutput")
     const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput")
     const codeBuildRole = new iam.Role(this, 'CodeBuildRole', {
@@ -35,8 +34,8 @@ export class PipeLineStack extends Stack {
           "ENV_TYPE": {
             value: props?.envType,
           },
-          "ACCOUNT_ID": {
-            value: props?.accountId,
+          "ECR_REPO_URI": {
+            value: ecrRepo.repositoryUri
           }
         }
       },
@@ -66,8 +65,9 @@ export class PipeLineStack extends Stack {
           },
           post_build: {
             commands: [
-              "docker tag back-end ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${ENV_TYPE}-back-end:${VERSION}",
-              "docker push ${ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${ENV_TYPE}-back-end:${VERSION}"
+              "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
+              "docker push ${ECR_REPO_URI}:${VERSION}",
+              `cat <<< $(jq -r 'walk(if type == "object" and has("Stages") then . | walk(if type == "object" and has ("Actions") then . | walk(if type == "object" and has ("RoleArn") then . | del(.RoleArn) else . end) else . end) else . end) | .' cdk.out/PipeLineStack.template.json) > cdk.out/PipeLineStack.template.json`
             ]
           }
         },
@@ -83,7 +83,22 @@ export class PipeLineStack extends Stack {
       })
     })
 
+
+    const pipeLineRole = new iam.Role(this, 'CodePipeLineRole', {
+      assumedBy: new iam.ServicePrincipal('codepipeline.amazonaws.com'),
+    });
+
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["codebuild:BatchGetBuilds",
+          "codebuild:StartBuild",
+          "codebuild:StopBuild"],
+        effect: iam.Effect.ALLOW,
+        resources: [builder.projectArn]
+      })
+    )
     new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
+      role: pipeLineRole,
       artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
         encryption: s3.BucketEncryption.UNENCRYPTED,
       }),
