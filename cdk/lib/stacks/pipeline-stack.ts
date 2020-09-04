@@ -67,7 +67,7 @@ export class PipeLineStack extends Stack {
             commands: [
               "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
               "docker push ${ECR_REPO_URI}:${VERSION}",
-              `cat <<< $(jq -r 'walk(if type == "object" and has("Stages") then . | walk(if type == "object" and has ("Actions") then . | walk(if type == "object" and has ("RoleArn") then . | del(.RoleArn) else . end) else . end) else . end) | .' cdk.out/PipeLineStack.template.json) > cdk.out/PipeLineStack.template.json`
+              `cat <<< $(jq -r 'def walk(f): . as $in | if type == "object" then reduce keys[] as $key ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f elif type == "array" then map( walk(f) ) | f else f end;walk(if type == "object" and has("Stages") then . | walk(if type == "object" and has ("Actions") then . | walk(if type == "object" and has ("RoleArn") then . | del(.RoleArn) else . end) else . end) else . end) | .' cdk.out/PipeLineStack.template.json) >  cdk.out/PipeLineStack.template.json`
             ]
           }
         },
