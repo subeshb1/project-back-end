@@ -99,9 +99,19 @@ export class PipeLineStack extends Stack {
       resources: ["*"]
     }))
 
+    const infraDeployRole = new iam.Role(this, "InfraDeployRole", {
+      assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
+    });
+
+    infraDeployRole.addToPolicy(new iam.PolicyStatement({
+      actions: ["*"],
+      effect: iam.Effect.ALLOW,
+      resources: ["*"]
+    }))
+
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
-        actionName: "UpdateStack",
+        actionName: "UpdatePipeline",
         stackName: `${props?.envType}-code-pipeline`,
         adminPermissions: true,
         templatePath: new codepipeline.ArtifactPath(
@@ -111,6 +121,19 @@ export class PipeLineStack extends Stack {
         deploymentRole: pipelineDeployRole,
       }
     );
+
+    const infraStackDeploy = new codepipelineActions.CloudFormationCreateUpdateStackAction(
+      {
+        actionName: "DeployInfra",
+        stackName: `${props?.envType}-infra`,
+        adminPermissions: true,
+        templatePath: new codepipeline.ArtifactPath(
+          codeBuildOutput,
+          "InfrastructureStack.template.json"
+        ),
+        deploymentRole: infraDeployRole,
+      }
+    )
 
     const pipeLineRole = new iam.Role(this, "CodePipeLineRole", {
       assumedBy: new iam.ServicePrincipal("codepipeline.amazonaws.com"),
@@ -148,6 +171,15 @@ export class PipeLineStack extends Stack {
             ":",
             cdk.Fn.ref("AWS::AccountId"),
             `:stack/${props?.envType}-code-pipeline/*`,
+          ]),
+          cdk.Fn.join("", [
+            "arn:",
+            cdk.Fn.ref("AWS::Partition"),
+            ":cloudformation:",
+            cdk.Fn.ref("AWS::Region"),
+            ":",
+            cdk.Fn.ref("AWS::AccountId"),
+            `:stack/${props?.envType}-infra/*`,
           ]),
         ],
       })
@@ -194,6 +226,12 @@ export class PipeLineStack extends Stack {
         {
           stageName: "PipelineUpdate",
           actions: [pipelineSelfUpdate],
+        },
+        {
+          stageName: "Deploy",
+          actions: [
+            infraStackDeploy
+          ],
         },
       ],
     });
