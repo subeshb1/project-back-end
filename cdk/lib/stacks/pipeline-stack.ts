@@ -51,28 +51,28 @@ export class PipeLineStack extends Stack {
         phases: {
           install: {
             commands: [
-              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
-              "docker volume create --name=postgres-volume",
-              "docker-compose up -d postgres",
-              "docker build . -t back-end",
-              "RAILS_ENV=test docker-compose up create-db",
+              // "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
+              // "docker volume create --name=postgres-volume",
+              // "docker-compose up -d postgres",
+              // "docker build . -t back-end",
+              // "RAILS_ENV=test docker-compose up create-db",
               "npm i -g aws-cdk",
               "(cd cdk && npm i)",
             ],
           },
           build: {
             commands: [
-              "echo 'RUNNING SPECS'",
-              "docker-compose up test",
-              "echo 'Building artifacts'",
-              "export VERSION=$(cat .version)",
+              // "echo 'RUNNING SPECS'",
+              // "docker-compose up test",
+              // "echo 'Building artifacts'",
+              // "export VERSION=$(cat .version)",
               "cd cdk && npm run build && cdk synth",
             ],
           },
           post_build: {
             commands: [
-              "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
-              "docker push ${ECR_REPO_URI}:${VERSION}",
+              // "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
+              // "docker push ${ECR_REPO_URI}:${VERSION}",
               `cat <<< $(jq -r 'def walk(f): . as $in | if type == "object" then reduce keys[] as $key ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f elif type == "array" then map( walk(f) ) | f else f end;walk(if type == "object" and has("Stages") then . | walk(if type == "object" and has ("Actions") then . | walk(if type == "object" and has ("RoleArn") and has ("ActionTypeId") then . | del(.RoleArn) else . end) else . end) else . end) | .' cdk.out/PipeLineStack.template.json) >  cdk.out/PipeLineStack.template.json`,
             ],
           },
