@@ -13,7 +13,9 @@ export class PipeLineStack extends Stack {
   constructor(scope: Construct, id: string, props?: PipelineStackProps) {
     super(scope, id, props);
 
-    const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`);
+    const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`, {
+      repositoryName: `${props?.envType}-back-end`
+    });
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
     const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput");
@@ -145,7 +147,7 @@ export class PipeLineStack extends Stack {
             cdk.Fn.ref("AWS::Region"),
             ":",
             cdk.Fn.ref("AWS::AccountId"),
-            `:stack/${props?.envType}-code-pipeline/*"`,
+            `:stack/${props?.envType}-code-pipeline/*`,
           ]),
         ],
       })
@@ -162,6 +164,7 @@ export class PipeLineStack extends Stack {
       role: pipeLineRole,
       artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
         encryption: s3.BucketEncryption.UNENCRYPTED,
+        bucketName: `${props?.envType}-Bucket`
       }),
       stages: [
         {
