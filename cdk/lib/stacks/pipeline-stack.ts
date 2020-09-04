@@ -10,7 +10,7 @@ export interface PipelineStackProps extends StackProps {
   readonly envType: string;
 }
 export class PipeLineStack extends Stack {
-  constructor(scope: Construct, id: string, props?: PipelineStackProps) {
+  constructor(scope: Construct, id: string, props: PipelineStackProps) {
     super(scope, id, props);
 
     const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`, {
@@ -68,14 +68,13 @@ export class PipeLineStack extends Stack {
               // "docker-compose up test",
               // "echo 'Building artifacts'",
               // "export VERSION=$(cat .version)",
-              "cd cdk && npm run build && cdk synth",
+              "cd cdk && npm run build",
             ],
           },
           post_build: {
             commands: [
               // "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
               // "docker push ${ECR_REPO_URI}:${VERSION}",
-              `cat <<< $(jq -r 'def walk(f): . as $in | if type == "object" then reduce keys[] as $key ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f elif type == "array" then map( walk(f) ) | f else f end;walk(if type == "object" and has("Stages") then . | walk(if type == "object" and has ("Actions") then . | walk(if type == "object" and has ("RoleArn") and has ("ActionTypeId") then . | del(.RoleArn) else . end) else . end) else . end) | .' cdk.out/PipeLineStack.template.json) >  cdk.out/PipeLineStack.template.json`,
             ],
           },
         },
@@ -112,7 +111,7 @@ export class PipeLineStack extends Stack {
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
         actionName: "UpdatePipeline",
-        stackName: `${props?.envType}-code-pipeline`,
+        stackName: `${props.stackName}`,
         adminPermissions: true,
         templatePath: new codepipeline.ArtifactPath(
           codeBuildOutput,
@@ -170,7 +169,7 @@ export class PipeLineStack extends Stack {
             cdk.Fn.ref("AWS::Region"),
             ":",
             cdk.Fn.ref("AWS::AccountId"),
-            `:stack/${props?.envType}-code-pipeline/*`,
+            `:stack/${props?.stackName}/*`,
           ]),
           cdk.Fn.join("", [
             "arn:",
@@ -192,7 +191,7 @@ export class PipeLineStack extends Stack {
       })
     );
 
-    new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
+    const pipeline = new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
       role: pipeLineRole,
       artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
         encryption: s3.BucketEncryption.UNENCRYPTED,
@@ -235,5 +234,9 @@ export class PipeLineStack extends Stack {
         },
       ],
     });
+    const builders = pipeline.node.defaultChild as cdk.CfnResource
+    builders.addDeletionOverride('Properties.Stages.1.Actions.0.RoleArn')
+    builders.addDeletionOverride('Properties.Stages.2.Actions.0.RoleArn')
+    builders.addDeletionOverride('Properties.Stages.3.Actions.0.RoleArn')
   }
 }
