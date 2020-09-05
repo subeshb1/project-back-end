@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { InfrastructureStack, PipeLineStack } from '../lib/stacks';
+import { InfrastructureStack, PipeLineStack,CommitStatusStack } from '../lib/stacks';
 
 const app = new cdk.App();
 if (!process.env.ENV_TYPE) {
@@ -17,3 +17,7 @@ new InfrastructureStack(app, 'InfrastructureStack', {
   // envType: process.env.ENV_TYPE
   ecrRepo: pipeline.ecrRepo
 });
+
+new CommitStatusStack(app, "PipelineCommitStatusStack", {
+  
+})
