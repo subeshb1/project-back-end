@@ -8,15 +8,12 @@ if (!process.env.ENV_TYPE) {
   throw new Error("ENV_TYPE not specified .")
 }
 
-new PipeLineStack(app, 'PipeLineStack', {
+const pipeline = new PipeLineStack(app, 'PipeLineStack', {
   envType: process.env.ENV_TYPE,
   stackName: `${process.env.ENV_TYPE}-code-pipeline`
 });
 
 new InfrastructureStack(app, 'InfrastructureStack', {
   // envType: process.env.ENV_TYPE
-});
-
-new InfrastructureStack(app, 'InfrastructureStackSecond', {
-  // envType: process.env.ENV_TYPE
+  ecrRepo: pipeline.ecrRepo
 });
