@@ -9,7 +9,8 @@ if (!process.env.ENV_TYPE) {
 }
 
 new PipeLineStack(app, 'PipeLineStack', {
-  envType: process.env.ENV_TYPE
+  envType: process.env.ENV_TYPE,
+  stackName: `${process.env.ENV_TYPE}-code-pipeline`
 });
 
 new InfrastructureStack(app, 'InfrastructureStack', {
