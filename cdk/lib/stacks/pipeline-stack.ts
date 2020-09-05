@@ -14,7 +14,8 @@ export class PipeLineStack extends Stack {
     super(scope, id, props);
 
     const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`, {
-      repositoryName: `${props?.envType}-back-end`
+      repositoryName: `${props?.envType}-back-end`,
+      removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
@@ -152,13 +153,8 @@ export class PipeLineStack extends Stack {
     pipeLineRole.addToPolicy(
       new iam.PolicyStatement({
         actions: [
-          "cloudformation:CreateStack",
-          "cloudformation:DescribeStack*",
-          "cloudformation:GetStackPolicy",
-          "cloudformation:GetTemplate*",
-          "cloudformation:SetStackPolicy",
-          "cloudformation:UpdateStack",
-          "cloudformation:ValidateTemplate",
+          "cloudformation:*",
+          "iam:*"
         ],
         effect: iam.Effect.ALLOW,
         resources: [
