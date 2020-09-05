@@ -6,8 +6,13 @@ const axios = require('axios');
 const BaseURL = 'https://api.github.com/repos';
 
 const codepipeline = new aws.CodePipeline();
-
-const Password = process.env.ACCESS_TOKEN;
+const secretsManager = new aws.SecretsManager()
+var githubSecretParam = {
+  SecretId: "githubToken",
+  VersionStage: "AWSCURRENT"
+};
+const githubTokenRequest = secretsManager.getSecretValue(githubSecretParam)
+// const Password = process.env.ACCESS_TOKEN;
 
 exports.handler = async (event) => {
   const region = event.region;
@@ -26,7 +31,7 @@ exports.handler = async (event) => {
   return null;
 };
 
-function transformState (state) {
+function transformState(state) {
   if (state === 'STARTED') {
     return 'pending';
   }
@@ -40,7 +45,7 @@ function transformState (state) {
   return null;
 }
 
-function createPayload (pipelineName, region, status) {
+function createPayload(pipelineName, region, status) {
   let description;
   if (status === 'pending') {
     description = 'Build started';
@@ -58,7 +63,7 @@ function createPayload (pipelineName, region, status) {
   };
 }
 
-function buildCodePipelineUrl (pipelineName, region) {
+function buildCodePipelineUrl(pipelineName, region) {
   return `https://${region}.console.aws.amazon.com/codepipeline/home?region=${region}#/view/${pipelineName}`;
 }
 
@@ -85,17 +90,19 @@ exports.getPipelineExecution = async (pipelineName, executionId) => {
 };
 
 exports.postStatusToGitHub = async (owner, repository, sha, payload) => {
-  const url = `/${owner}/${repository}/statuses/${sha}`;
 
-  const config = {
-    baseURL: BaseURL,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    auth: {
-      password: Password
-    }
-  };
+  await githubTokenRequest.then((data) => {
+    const url = `/${owner}/${repository}/statuses/${sha}`;
 
-  await axios.post(url, payload, config);
+    const config = {
+      baseURL: BaseURL,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      auth: {
+        password: data.SecretString
+      }
+    };
+    return axios.post(url, payload, config)
+  })
 };
