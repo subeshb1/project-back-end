@@ -218,7 +218,7 @@ export class PipeLineStack extends Stack {
       new iam.PolicyStatement({
         actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
-        resources: [pipelineDeployRole.roleArn, infraDeployRole.roleArn],
+        resources: [pipelineDeployRole.roleArn, infraDeployRole.roleArn, secondInfraDeployRole.roleArn],
       })
     );
 
@@ -275,5 +275,6 @@ export class PipeLineStack extends Stack {
     builders.addDeletionOverride('Properties.Stages.1.Actions.0.RoleArn')
     builders.addDeletionOverride('Properties.Stages.2.Actions.0.RoleArn')
     builders.addDeletionOverride('Properties.Stages.3.Actions.0.RoleArn')
+    builders.addDeletionOverride('Properties.Stages.4.Actions.0.RoleArn')
   }
 }
