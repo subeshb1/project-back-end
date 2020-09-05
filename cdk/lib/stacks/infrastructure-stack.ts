@@ -52,6 +52,7 @@ export class InfrastructureStack extends cdk.Stack {
           'POSTGRES_DB_PASSWORD': SecretValue.plainText('12345678').toString(),
           'RAILS_ENV': 'production',
           'RACK_ENV': 'production',
+          'SECRET_KEY_BASE': 'test'
         },
       },
       memoryLimitMiB: 512, // Default is 512
