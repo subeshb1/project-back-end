@@ -16,3 +16,7 @@ new PipeLineStack(app, 'PipeLineStack', {
 new InfrastructureStack(app, 'InfrastructureStack', {
   // envType: process.env.ENV_TYPE
 });
+
+new InfrastructureStack(app, 'InfrastructureStackSecond', {
+  // envType: process.env.ENV_TYPE
+});

@@ -14,7 +14,8 @@ export class PipeLineStack extends Stack {
     super(scope, id, props);
 
     const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`, {
-      repositoryName: `${props?.envType}-back-end`
+      repositoryName: `${props?.envType}-back-end`,
+      removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
@@ -107,6 +108,15 @@ export class PipeLineStack extends Stack {
       effect: iam.Effect.ALLOW,
       resources: ["*"]
     }))
+    const secondInfraDeployRole = new iam.Role(this, "secondInfraDeployRole", {
+      assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
+    });
+
+    secondInfraDeployRole.addToPolicy(new iam.PolicyStatement({
+      actions: ["*"],
+      effect: iam.Effect.ALLOW,
+      resources: ["*"]
+    }))
 
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
@@ -131,6 +141,18 @@ export class PipeLineStack extends Stack {
           "InfrastructureStack.template.json"
         ),
         deploymentRole: infraDeployRole,
+      }
+    )
+    const secondInfraStackDeploy = new codepipelineActions.CloudFormationCreateUpdateStackAction(
+      {
+        actionName: "DeployInfra2",
+        stackName: `${props?.envType}-second-infra`,
+        adminPermissions: true,
+        templatePath: new codepipeline.ArtifactPath(
+          codeBuildOutput,
+          "InfrastructureStackSecond.template.json"
+        ),
+        deploymentRole: secondInfraDeployRole,
       }
     )
 
@@ -158,7 +180,7 @@ export class PipeLineStack extends Stack {
           "cloudformation:GetTemplate*",
           "cloudformation:SetStackPolicy",
           "cloudformation:UpdateStack",
-          "cloudformation:ValidateTemplate",
+          "cloudformation:ValidateTemplate"
         ],
         effect: iam.Effect.ALLOW,
         resources: [
@@ -180,6 +202,15 @@ export class PipeLineStack extends Stack {
             cdk.Fn.ref("AWS::AccountId"),
             `:stack/${props?.envType}-infra/*`,
           ]),
+          cdk.Fn.join("", [
+            "arn:",
+            cdk.Fn.ref("AWS::Partition"),
+            ":cloudformation:",
+            cdk.Fn.ref("AWS::Region"),
+            ":",
+            cdk.Fn.ref("AWS::AccountId"),
+            `:stack/${props?.envType}-second-infra/*`,
+          ]),
         ],
       })
     );
@@ -187,15 +218,18 @@ export class PipeLineStack extends Stack {
       new iam.PolicyStatement({
         actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
-        resources: [pipelineDeployRole.roleArn, infraDeployRole.roleArn],
+        resources: [pipelineDeployRole.roleArn,
+        infraDeployRole.roleArn, 
+        secondInfraDeployRole.roleArn],
       })
     );
 
     const pipeline = new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
       role: pipeLineRole,
+      restartExecutionOnUpdate: true,
       artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
         encryption: s3.BucketEncryption.UNENCRYPTED,
-        bucketName: `${props?.envType}-bucket-cdk-1232134`
+        bucketName: `${props?.envType}-bucket-cdk-1232134`,
       }),
       stages: [
         {
@@ -232,11 +266,18 @@ export class PipeLineStack extends Stack {
             infraStackDeploy
           ],
         },
+        {
+          stageName: "DeploySecond",
+          actions: [
+            secondInfraStackDeploy
+          ],
+        },
       ],
     });
     const builders = pipeline.node.defaultChild as cdk.CfnResource
     builders.addDeletionOverride('Properties.Stages.1.Actions.0.RoleArn')
     builders.addDeletionOverride('Properties.Stages.2.Actions.0.RoleArn')
     builders.addDeletionOverride('Properties.Stages.3.Actions.0.RoleArn')
+    builders.addDeletionOverride('Properties.Stages.4.Actions.0.RoleArn')
   }
 }
