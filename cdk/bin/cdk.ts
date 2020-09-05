@@ -18,6 +18,6 @@ new InfrastructureStack(app, 'InfrastructureStack', {
   ecrRepo: pipeline.ecrRepo
 });
 
-new CommitStatusStack(app, "PipelineCommitStatusStack", {
+new CommitStatusStack(app, "CommitStatusStack", {
   
 })
