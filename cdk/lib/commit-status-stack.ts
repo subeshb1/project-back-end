@@ -13,13 +13,13 @@ export class CommitStatusStack extends cdk.Stack {
       functionName: "GithbCommitStatus",
       code: lambda.Code.fromAsset(path.join(__dirname, 'resources/commit-status-lambda')),
     })
-    new Rule(this, 'CodePipelineAlert', {
-      eventPattern: {
-        source: [
-          "aws.codepipeline"
-        ]
-      },
-      targets: [new targets.LambdaFunction(githubNotifyLambda)]
-    })
+    // new Rule(this, 'CodePipelineAlert', {
+    //   eventPattern: {
+    //     source: [
+    //       "aws.codepipeline"
+    //     ]
+    //   },
+    //   targets: [new targets.LambdaFunction(githubNotifyLambda)]
+    // })
   }
 }
