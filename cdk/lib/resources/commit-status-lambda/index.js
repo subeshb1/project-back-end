@@ -15,6 +15,7 @@ const githubTokenRequest = secretsManager.getSecretValue(githubSecretParam)
 // const Password = process.env.ACCESS_TOKEN;
 
 exports.handler = async (event) => {
+  console.log(event)
   const region = event.region;
   const pipelineName = event.detail.pipeline;
   const executionId = event.detail['execution-id'];
