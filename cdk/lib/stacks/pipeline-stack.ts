@@ -153,8 +153,13 @@ export class PipeLineStack extends Stack {
     pipeLineRole.addToPolicy(
       new iam.PolicyStatement({
         actions: [
-          "cloudformation:*",
-          "iam:*"
+          "cloudformation:CreateStack",
+          "cloudformation:DescribeStack*",
+          "cloudformation:GetStackPolicy",
+          "cloudformation:GetTemplate*",
+          "cloudformation:SetStackPolicy",
+          "cloudformation:UpdateStack",
+          "cloudformation:ValidateTemplate"
         ],
         effect: iam.Effect.ALLOW,
         resources: [
