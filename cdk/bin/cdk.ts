@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { InfrastructureStack, PipeLineStack,CommitStatusStack } from '../lib/stacks';
+import { InfrastructureStack, PipeLineStack,CommitStatusStack } from '../lib';
 
 const app = new cdk.App();
 if (!process.env.ENV_TYPE) {
