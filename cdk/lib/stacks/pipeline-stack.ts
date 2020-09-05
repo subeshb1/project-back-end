@@ -99,15 +99,15 @@ export class PipeLineStack extends Stack {
       resources: ["*"]
     }))
 
-    // const infraDeployRole = new iam.Role(this, "InfraDeployRole", {
-    //   assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
-    // });
+    const infraDeployRole = new iam.Role(this, "InfraDeployRole", {
+      assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
+    });
 
-    // infraDeployRole.addToPolicy(new iam.PolicyStatement({
-    //   actions: ["*"],
-    //   effect: iam.Effect.ALLOW,
-    //   resources: ["*"]
-    // }))
+    infraDeployRole.addToPolicy(new iam.PolicyStatement({
+      actions: ["*"],
+      effect: iam.Effect.ALLOW,
+      resources: ["*"]
+    }))
     const secondInfraDeployRole = new iam.Role(this, "secondInfraDeployRole", {
       assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
     });
@@ -131,18 +131,18 @@ export class PipeLineStack extends Stack {
       }
     );
 
-    // const infraStackDeploy = new codepipelineActions.CloudFormationCreateUpdateStackAction(
-    //   {
-    //     actionName: "DeployInfra",
-    //     stackName: `${props?.envType}-infra`,
-    //     adminPermissions: true,
-    //     templatePath: new codepipeline.ArtifactPath(
-    //       codeBuildOutput,
-    //       "InfrastructureStack.template.json"
-    //     ),
-    //     deploymentRole: infraDeployRole,
-    //   }
-    // )
+    const infraStackDeploy = new codepipelineActions.CloudFormationCreateUpdateStackAction(
+      {
+        actionName: "DeployInfra",
+        stackName: `${props?.envType}-infra`,
+        adminPermissions: true,
+        templatePath: new codepipeline.ArtifactPath(
+          codeBuildOutput,
+          "InfrastructureStack.template.json"
+        ),
+        deploymentRole: infraDeployRole,
+      }
+    )
     const secondInfraStackDeploy = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
         actionName: "DeployInfra2",
@@ -193,15 +193,15 @@ export class PipeLineStack extends Stack {
             cdk.Fn.ref("AWS::AccountId"),
             `:stack/${props?.stackName}/*`,
           ]),
-          // cdk.Fn.join("", [
-          //   "arn:",
-          //   cdk.Fn.ref("AWS::Partition"),
-          //   ":cloudformation:",
-          //   cdk.Fn.ref("AWS::Region"),
-          //   ":",
-          //   cdk.Fn.ref("AWS::AccountId"),
-          //   `:stack/${props?.envType}-infra/*`,
-          // ]),
+          cdk.Fn.join("", [
+            "arn:",
+            cdk.Fn.ref("AWS::Partition"),
+            ":cloudformation:",
+            cdk.Fn.ref("AWS::Region"),
+            ":",
+            cdk.Fn.ref("AWS::AccountId"),
+            `:stack/${props?.envType}-infra/*`,
+          ]),
           cdk.Fn.join("", [
             "arn:",
             cdk.Fn.ref("AWS::Partition"),
@@ -218,17 +218,18 @@ export class PipeLineStack extends Stack {
       new iam.PolicyStatement({
         actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
-        resources: [pipelineDeployRole.roleArn, 
-          // infraDeployRole.roleArn, 
-          secondInfraDeployRole.roleArn],
+        resources: [pipelineDeployRole.roleArn,
+        // infraDeployRole.roleArn, 
+        secondInfraDeployRole.roleArn],
       })
     );
 
     const pipeline = new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
       role: pipeLineRole,
+      restartExecutionOnUpdate: true,
       artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
         encryption: s3.BucketEncryption.UNENCRYPTED,
-        bucketName: `${props?.envType}-bucket-cdk-1232134`
+        bucketName: `${props?.envType}-bucket-cdk-1232134`,
       }),
       stages: [
         {
@@ -259,12 +260,12 @@ export class PipeLineStack extends Stack {
           stageName: "PipelineUpdate",
           actions: [pipelineSelfUpdate],
         },
-        // {
-        //   stageName: "Deploy",
-        //   actions: [
-        //     infraStackDeploy
-        //   ],
-        // },
+        {
+          stageName: "Deploy",
+          actions: [
+            infraStackDeploy
+          ],
+        },
         {
           stageName: "DeploySecond",
           actions: [
