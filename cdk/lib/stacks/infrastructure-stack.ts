@@ -37,7 +37,7 @@ export class InfrastructureStack extends cdk.Stack {
     });
 
     // Create a load-balanced Fargate service and make it public
-    new ecsPatterns.ApplicationLoadBalancedFargateService(this, "MyFargateService", {
+   const backEnd = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "MyFargateService", {
       // taskDefinition: new ecs.FargateTaskDefinition(this, 'FargateTask', {
 
       // }),
@@ -49,11 +49,15 @@ export class InfrastructureStack extends cdk.Stack {
         image: ecs.ContainerImage.fromEcrRepository(props.ecrRepo),
         environment: {
           'DB_HOST_NAME': instance.dbInstanceEndpointAddress,
-          'POSTGRES_DB_PASSWORD': SecretValue.plainText('12345678').toString()
+          'POSTGRES_DB_PASSWORD': SecretValue.plainText('12345678').toString(),
+          'RAILS_ENV': 'production',
+          'RACK_ENV': 'production',
         },
       },
-      memoryLimitMiB: 2048, // Default is 512
+      memoryLimitMiB: 512, // Default is 512
       publicLoadBalancer: true // Default is false
     });
+
+    instance.connections.allowDefaultPortFrom(backEnd.service)
   }
 }
