@@ -23,11 +23,9 @@ export class InfrastructureStack extends cdk.Stack {
 
     // Create a load-balanced Fargate service and make it public
     new ecsPatterns.ApplicationLoadBalancedFargateService(this, "MyFargateService", {
-      taskDefinition: {
-        containers: [
-          
-        ]
-      },
+      // taskDefinition: new ecs.FargateTaskDefinition(this, 'FargateTask', {
+
+      // }),
       cluster: cluster, // Required
       cpu: 256, // Default is 256
       desiredCount: 1, // Default is 1
@@ -35,7 +33,6 @@ export class InfrastructureStack extends cdk.Stack {
         containerPort: 3000,
         image: ecs.ContainerImage.fromEcrRepository(props.ecrRepo),
       },
-
       memoryLimitMiB: 2048, // Default is 512
       publicLoadBalancer: true // Default is false
     });
