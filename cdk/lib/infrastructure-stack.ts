@@ -80,6 +80,10 @@ export class InfrastructureStack extends cdk.Stack {
         publicLoadBalancer: true, // Default is false
       }
     );
+    backEnd.targetGroup.configureHealthCheck({
+      path: "/api/v1/status",
+      enabled: true
+    });
 
     instance.connections.allowDefaultPortFrom(backEnd.service);
   }
