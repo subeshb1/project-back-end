@@ -15,6 +15,7 @@ const pipeline = new PipeLineStack(app, 'PipeLineStack', {
 
 new InfrastructureStack(app, 'InfrastructureStack', {
   // envType: process.env.ENV_TYPE
+  envType: process.env.ENV_TYPE,
   ecrRepo: pipeline.ecrRepo
 });
 
