@@ -24,7 +24,7 @@ export class CommitStatusStack extends cdk.Stack {
     });
 
     pipelineStatusSNS.grantPublish({
-      grantPrincipal: new iam.ServicePrincipal('*')
+      grantPrincipal: new iam.AnyPrincipal()
     })
 
     new cdk.CfnOutput(this, "PipelineStatusTopicOutput", {
