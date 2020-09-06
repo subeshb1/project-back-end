@@ -10,6 +10,7 @@ export interface PipelineStackProps extends StackProps {
   readonly envType: string;
 }
 export class PipeLineStack extends Stack {
+  readonly ecrRepo: ecr.IRepository;
   constructor(scope: Construct, id: string, props: PipelineStackProps) {
     super(scope, id, props);
 
@@ -17,6 +18,8 @@ export class PipeLineStack extends Stack {
       repositoryName: `${props?.envType}-back-end`,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
+
+    this.ecrRepo = ecrRepo
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
     const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput");
@@ -54,28 +57,28 @@ export class PipeLineStack extends Stack {
         phases: {
           install: {
             commands: [
-              // "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
-              // "docker volume create --name=postgres-volume",
-              // "docker-compose up -d postgres",
-              // "docker build . -t back-end",
-              // "RAILS_ENV=test docker-compose up create-db",
+              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
+              "docker volume create --name=postgres-volume",
+              "docker-compose up -d postgres",
+              "docker build . -t back-end",
+              "RAILS_ENV=test docker-compose up create-db",
               "npm i -g aws-cdk",
               "(cd cdk && npm i)",
             ],
           },
           build: {
             commands: [
-              // "echo 'RUNNING SPECS'",
-              // "docker-compose up test",
-              // "echo 'Building artifacts'",
-              // "export VERSION=$(cat .version)",
+              "echo 'RUNNING SPECS'",
+              "docker-compose up test",
+              "echo 'Building artifacts'",
+              "export VERSION=$(cat .version)",
               "cd cdk && npm run build && cdk synth",
             ],
           },
           post_build: {
             commands: [
-              // "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
-              // "docker push ${ECR_REPO_URI}:${VERSION}",
+              "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
+              "docker push ${ECR_REPO_URI}:${VERSION}",
             ],
           },
         },
