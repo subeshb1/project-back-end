@@ -122,17 +122,6 @@ export class PipeLineStack extends Stack {
         resources: ["*"],
       })
     );
-    const secondInfraDeployRole = new iam.Role(this, "secondInfraDeployRole", {
-      assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
-    });
-
-    secondInfraDeployRole.addToPolicy(
-      new iam.PolicyStatement({
-        actions: ["*"],
-        effect: iam.Effect.ALLOW,
-        resources: ["*"],
-      })
-    );
 
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
@@ -157,18 +146,6 @@ export class PipeLineStack extends Stack {
           "InfrastructureStack.template.json"
         ),
         deploymentRole: infraDeployRole,
-      }
-    );
-    const secondInfraStackDeploy = new codepipelineActions.CloudFormationCreateUpdateStackAction(
-      {
-        actionName: "DeployInfra2",
-        stackName: `${props?.envType}-second-infra`,
-        adminPermissions: true,
-        templatePath: new codepipeline.ArtifactPath(
-          codeBuildOutput,
-          "InfrastructureStackSecond.template.json"
-        ),
-        deploymentRole: secondInfraDeployRole,
       }
     );
 
@@ -218,15 +195,6 @@ export class PipeLineStack extends Stack {
             cdk.Fn.ref("AWS::AccountId"),
             `:stack/${props?.envType}-infra/*`,
           ]),
-          cdk.Fn.join("", [
-            "arn:",
-            cdk.Fn.ref("AWS::Partition"),
-            ":cloudformation:",
-            cdk.Fn.ref("AWS::Region"),
-            ":",
-            cdk.Fn.ref("AWS::AccountId"),
-            `:stack/${props?.envType}-second-infra/*`,
-          ]),
         ],
       })
     );
@@ -234,11 +202,7 @@ export class PipeLineStack extends Stack {
       new iam.PolicyStatement({
         actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
-        resources: [
-          pipelineDeployRole.roleArn,
-          infraDeployRole.roleArn,
-          secondInfraDeployRole.roleArn,
-        ],
+        resources: [pipelineDeployRole.roleArn, infraDeployRole.roleArn],
       })
     );
 
@@ -285,10 +249,6 @@ export class PipeLineStack extends Stack {
             stageName: "Deploy",
             actions: [infraStackDeploy],
           },
-          {
-            stageName: "DeploySecond",
-            actions: [secondInfraStackDeploy],
-          },
         ],
       }
     );
@@ -302,7 +262,7 @@ export class PipeLineStack extends Stack {
         targets: [
           {
             targetAddress: cdk.Fn.importValue("pipeLineStatusTopicArnOutput"),
-            targetType: "SNS"
+            targetType: "SNS",
           },
         ],
         detailType: "FULL",
@@ -318,6 +278,5 @@ export class PipeLineStack extends Stack {
     pipelineCfn.addDeletionOverride("Properties.Stages.1.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.2.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.3.Actions.0.RoleArn");
-    pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.0.RoleArn");
   }
 }
