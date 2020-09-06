@@ -8,6 +8,11 @@ if (!process.env.ENV_TYPE) {
   throw new Error("ENV_TYPE not specified .")
 }
 
+
+new CommitStatusStack(app, "CommitStatusStack", {
+  stackName: 'CommitStatusStack'
+})
+
 const pipeline = new PipeLineStack(app, 'PipeLineStack', {
   envType: process.env.ENV_TYPE,
   stackName: `${process.env.ENV_TYPE}-code-pipeline`
@@ -18,7 +23,3 @@ new InfrastructureStack(app, 'InfrastructureStack', {
   envType: process.env.ENV_TYPE,
   ecrRepo: pipeline.ecrRepo
 });
-
-new CommitStatusStack(app, "CommitStatusStack", {
-  
-})
