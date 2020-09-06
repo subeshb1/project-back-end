@@ -23,3 +23,5 @@ new InfrastructureStack(app, 'InfrastructureStack', {
   envType: process.env.ENV_TYPE,
   ecrRepo: pipeline.ecrRepo
 });
+
+app.synth()
