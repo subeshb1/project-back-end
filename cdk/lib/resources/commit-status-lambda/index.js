@@ -18,13 +18,13 @@ exports.handler = async (event) => {
     const pipelineName = event.detail.pipeline;
     const executionId = event.detail['execution-id'];
     const state = transformState(event.detail.state);
-
+    const actionName = event.detail.action
     if (state === null) {
       return;
     }
 
     const result = await this.getPipelineExecution(pipelineName, executionId);
-    const payload = createPayload(pipelineName, region, state);
+    const payload = createPayload(pipelineName, actionName, region, state);
     await this.postStatusToGitHub(result.owner, result.repository, result.sha, payload);
   }
 
@@ -45,21 +45,21 @@ function transformState(state) {
   return null;
 }
 
-function createPayload(pipelineName, region, status) {
+function createPayload(pipelineName, actionName, region, status) {
   let description;
   if (status === 'pending') {
-    description = 'Build started';
+    description = 'Action started';
   } else if (status === 'success') {
-    description = 'Build succeeded';
+    description = 'Action succeeded';
   } else if (status === 'failure') {
-    description = 'Build failed!';
+    description = 'Action failed!';
   }
 
   return {
     state: status,
     'target_url': buildCodePipelineUrl(pipelineName, region),
     description: description,
-    context: 'continuous-integration/codepipeline'
+    context: `CodePipeline/Action: ${actionName}`
   };
 }
 
