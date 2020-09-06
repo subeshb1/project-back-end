@@ -2,6 +2,7 @@ import * as cdk from "@aws-cdk/core";
 import * as lambda from "@aws-cdk/aws-lambda";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import * as sns from "@aws-cdk/aws-sns";
+import * as iam from "@aws-cdk/aws-iam";
 import * as path from "path";
 import { SnsEventSource } from "@aws-cdk/aws-lambda-event-sources";
 export class CommitStatusStack extends cdk.Stack {
@@ -22,6 +23,9 @@ export class CommitStatusStack extends cdk.Stack {
       topicName: "pipeline-status-topic",
     });
 
+    pipelineStatusSNS.grantPublish({
+      grantPrincipal: new iam.ServicePrincipal('*')
+    })
 
     new cdk.CfnOutput(this, "PipelineStatusTopicOutput", {
       exportName: "pipeLineStatusTopicArnOutput",
