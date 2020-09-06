@@ -6,28 +6,27 @@ const axios = require('axios');
 const BaseURL = 'https://api.github.com/repos';
 
 const codepipeline = new aws.CodePipeline();
-const secretsManager = new aws.SecretsManager()
-var githubSecretParam = {
-  SecretId: "githubToken",
-  VersionStage: "AWSCURRENT"
-};
-const githubTokenRequest = secretsManager.getSecretValue(githubSecretParam)
+
 // const Password = process.env.ACCESS_TOKEN;
 
 exports.handler = async (event) => {
-  console.log(event)
-  const region = event.region;
-  const pipelineName = event.detail.pipeline;
-  const executionId = event.detail['execution-id'];
-  const state = transformState(event.detail.state);
+  for (let record of event.Records) {
+    console.log(record)
+    console.log(record.Sns.Message)
+    const event = JSON.parse(record.Sns.Message)
+    const region = event.region;
+    const pipelineName = event.detail.pipeline;
+    const executionId = event.detail['execution-id'];
+    const state = transformState(event.detail.state);
 
-  if (state === null) {
-    return;
+    if (state === null) {
+      return;
+    }
+
+    const result = await this.getPipelineExecution(pipelineName, executionId);
+    const payload = createPayload(pipelineName, region, state);
+    await this.postStatusToGitHub(result.owner, result.repository, result.sha, payload);
   }
-
-  const result = await this.getPipelineExecution(pipelineName, executionId);
-  const payload = createPayload(pipelineName, region, state);
-  await this.postStatusToGitHub(result.owner, result.repository, result.sha, payload);
 
   return null;
 };
@@ -91,8 +90,18 @@ exports.getPipelineExecution = async (pipelineName, executionId) => {
 };
 
 exports.postStatusToGitHub = async (owner, repository, sha, payload) => {
-
-  await githubTokenRequest.then((data) => {
+  const secretsManager = new aws.SecretsManager()
+  var githubSecretParam = {
+    SecretId: "githubToken",
+    VersionStage: "AWSCURRENT"
+  };
+  return new Promise((res, rej) => {
+    secretsManager.getSecretValue(githubSecretParam, function (err, data) {
+      if (err) rej(err)
+      else res(data)
+    })
+  }
+  ).then((data) => {
     const url = `/${owner}/${repository}/statuses/${sha}`;
 
     const config = {
