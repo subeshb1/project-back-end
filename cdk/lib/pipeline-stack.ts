@@ -1,4 +1,10 @@
-import { SecretValue, Stack, Construct, StackProps } from "@aws-cdk/core";
+import {
+  SecretValue,
+  Stack,
+  Construct,
+  StackProps,
+  CfnOutput,
+} from "@aws-cdk/core";
 import * as cdk from "@aws-cdk/core";
 import * as codepipelineActions from "@aws-cdk/aws-codepipeline-actions";
 import * as codepipeline from "@aws-cdk/aws-codepipeline";
@@ -6,6 +12,7 @@ import * as codebuild from "@aws-cdk/aws-codebuild";
 import * as s3 from "@aws-cdk/aws-s3";
 import * as iam from "@aws-cdk/aws-iam";
 import * as ecr from "@aws-cdk/aws-ecr";
+import * as codestarnotifications from "@aws-cdk/aws-codestarnotifications";
 export interface PipelineStackProps extends StackProps {
   readonly envType: string;
 }
@@ -16,10 +23,10 @@ export class PipeLineStack extends Stack {
 
     const ecrRepo = new ecr.Repository(this, `${props?.envType}-back-end`, {
       repositoryName: `${props?.envType}-back-end`,
-      removalPolicy: cdk.RemovalPolicy.DESTROY
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
-    this.ecrRepo = ecrRepo
+    this.ecrRepo = ecrRepo;
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
     const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput");
@@ -96,30 +103,36 @@ export class PipeLineStack extends Stack {
       assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
     });
 
-    pipelineDeployRole.addToPolicy(new iam.PolicyStatement({
-      actions: ["*"],
-      effect: iam.Effect.ALLOW,
-      resources: ["*"]
-    }))
+    pipelineDeployRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["*"],
+        effect: iam.Effect.ALLOW,
+        resources: ["*"],
+      })
+    );
 
     const infraDeployRole = new iam.Role(this, "InfraDeployRole", {
       assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
     });
 
-    infraDeployRole.addToPolicy(new iam.PolicyStatement({
-      actions: ["*"],
-      effect: iam.Effect.ALLOW,
-      resources: ["*"]
-    }))
+    infraDeployRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["*"],
+        effect: iam.Effect.ALLOW,
+        resources: ["*"],
+      })
+    );
     const secondInfraDeployRole = new iam.Role(this, "secondInfraDeployRole", {
       assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
     });
 
-    secondInfraDeployRole.addToPolicy(new iam.PolicyStatement({
-      actions: ["*"],
-      effect: iam.Effect.ALLOW,
-      resources: ["*"]
-    }))
+    secondInfraDeployRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["*"],
+        effect: iam.Effect.ALLOW,
+        resources: ["*"],
+      })
+    );
 
     const pipelineSelfUpdate = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
@@ -145,7 +158,7 @@ export class PipeLineStack extends Stack {
         ),
         deploymentRole: infraDeployRole,
       }
-    )
+    );
     const secondInfraStackDeploy = new codepipelineActions.CloudFormationCreateUpdateStackAction(
       {
         actionName: "DeployInfra2",
@@ -157,7 +170,7 @@ export class PipeLineStack extends Stack {
         ),
         deploymentRole: secondInfraDeployRole,
       }
-    )
+    );
 
     const pipeLineRole = new iam.Role(this, "CodePipeLineRole", {
       assumedBy: new iam.ServicePrincipal("codepipeline.amazonaws.com"),
@@ -183,7 +196,7 @@ export class PipeLineStack extends Stack {
           "cloudformation:GetTemplate*",
           "cloudformation:SetStackPolicy",
           "cloudformation:UpdateStack",
-          "cloudformation:ValidateTemplate"
+          "cloudformation:ValidateTemplate",
         ],
         effect: iam.Effect.ALLOW,
         resources: [
@@ -221,66 +234,90 @@ export class PipeLineStack extends Stack {
       new iam.PolicyStatement({
         actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
-        resources: [pipelineDeployRole.roleArn,
-        infraDeployRole.roleArn, 
-        secondInfraDeployRole.roleArn],
+        resources: [
+          pipelineDeployRole.roleArn,
+          infraDeployRole.roleArn,
+          secondInfraDeployRole.roleArn,
+        ],
       })
     );
 
-    const pipeline = new codepipeline.Pipeline(this, `${props?.envType}-Pipeline`, {
-      role: pipeLineRole,
-      restartExecutionOnUpdate: true,
-      artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
-        encryption: s3.BucketEncryption.UNENCRYPTED,
-        bucketName: `${props?.envType}-bucket-cdk-1232134`,
-      }),
-      stages: [
-        {
-          stageName: "GithubSource",
-          actions: [
-            new codepipelineActions.GitHubSourceAction({
-              owner: "subeshb1",
-              repo: "project-back-end",
-              oauthToken: SecretValue.secretsManager("githubToken"),
-              branch: props?.envType === "prod" ? "master" : props?.envType,
-              output: sourceOutput,
-              actionName: "CodePush",
-            }),
-          ],
-        },
-        {
-          stageName: "Build",
-          actions: [
-            new codepipelineActions.CodeBuildAction({
-              actionName: "Build",
-              input: sourceOutput,
-              project: builder,
-              outputs: [codeBuildOutput],
-            }),
-          ],
-        },
-        {
-          stageName: "PipelineUpdate",
-          actions: [pipelineSelfUpdate],
-        },
-        {
-          stageName: "Deploy",
-          actions: [
-            infraStackDeploy
-          ],
-        },
-        {
-          stageName: "DeploySecond",
-          actions: [
-            secondInfraStackDeploy
-          ],
-        },
-      ],
-    });
-    const builders = pipeline.node.defaultChild as cdk.CfnResource
-    builders.addDeletionOverride('Properties.Stages.1.Actions.0.RoleArn')
-    builders.addDeletionOverride('Properties.Stages.2.Actions.0.RoleArn')
-    builders.addDeletionOverride('Properties.Stages.3.Actions.0.RoleArn')
-    builders.addDeletionOverride('Properties.Stages.4.Actions.0.RoleArn')
+    const pipeline = new codepipeline.Pipeline(
+      this,
+      `${props?.envType}-Pipeline`,
+      {
+        role: pipeLineRole,
+        restartExecutionOnUpdate: true,
+        artifactBucket: new s3.Bucket(this, `${props?.envType}-Bucket`, {
+          encryption: s3.BucketEncryption.UNENCRYPTED,
+          bucketName: `${props?.envType}-bucket-cdk-1232134`,
+        }),
+        stages: [
+          {
+            stageName: "GithubSource",
+            actions: [
+              new codepipelineActions.GitHubSourceAction({
+                owner: "subeshb1",
+                repo: "project-back-end",
+                oauthToken: SecretValue.secretsManager("githubToken"),
+                branch: props?.envType === "prod" ? "master" : props?.envType,
+                output: sourceOutput,
+                actionName: "CodePush",
+              }),
+            ],
+          },
+          {
+            stageName: "Build",
+            actions: [
+              new codepipelineActions.CodeBuildAction({
+                actionName: "Build",
+                input: sourceOutput,
+                project: builder,
+                outputs: [codeBuildOutput],
+              }),
+            ],
+          },
+          {
+            stageName: "PipelineUpdate",
+            actions: [pipelineSelfUpdate],
+          },
+          {
+            stageName: "Deploy",
+            actions: [infraStackDeploy],
+          },
+          {
+            stageName: "DeploySecond",
+            actions: [secondInfraStackDeploy],
+          },
+        ],
+      }
+    );
+
+    new codestarnotifications.CfnNotificationRule(
+      this,
+      "NotifyPipelineUpdates",
+      {
+        resource: pipeline.pipelineArn,
+        name: "NotifyPipelineUpdates",
+        targets: [
+          {
+            targetAddress: cdk.Fn.importValue("pipeLineStatusTopicArnOutput"),
+            targetType: "SNS"
+          },
+        ],
+        detailType: "FULL",
+        eventTypeIds: [
+          "codepipeline-pipeline-action-execution-succeeded",
+          "codepipeline-pipeline-action-execution-failed",
+          "codepipeline-pipeline-action-execution-canceled",
+          "codepipeline-pipeline-action-execution-started",
+        ],
+      }
+    );
+    const pipelineCfn = pipeline.node.defaultChild as cdk.CfnResource;
+    pipelineCfn.addDeletionOverride("Properties.Stages.1.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.2.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.3.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.0.RoleArn");
   }
 }
