@@ -45,7 +45,7 @@ export class PipeLineStack extends Stack {
       role: codeBuildRole,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
-        privileged: true,
+        privileged: false,
         environmentVariables: {
           ENV_TYPE: {
             value: props?.envType,
@@ -95,20 +95,16 @@ export class PipeLineStack extends Stack {
           },
         },
       },
-      cache: codebuild.Cache.local(
-        codebuild.LocalCacheMode.DOCKER_LAYER,
-        codebuild.LocalCacheMode.CUSTOM
-      ),
       buildSpec: codebuild.BuildSpec.fromObject({
         version: "0.2",
         phases: {
           install: {
             commands: [
-              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
               "docker volume create --name=postgres-volume",
               "docker-compose up -d postgres",
               "docker build . -t back-end",
-              "RAILS_ENV=test docker-compose up create-db"
+              "RAILS_ENV=test docker-compose up create-db",
+              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
             ],
           },
           build: {
