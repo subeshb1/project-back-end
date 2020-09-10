@@ -26,12 +26,8 @@ export class CommitStatusStack extends cdk.Stack {
     });
 
     const notificationQueue = new sqs.Queue(this, "PipelineNotificationQueue", {
-      fifo: false,
+      fifo: true,
     });
-
-    // notificationQueue.grantSendMessages({
-    //   grantPrincipal: new iam.ArnPrincipal(pipelineStatusSNS.topicArn),
-    // });
 
     pipelineStatusSNS.addSubscription(new SqsSubscription(notificationQueue));
 
