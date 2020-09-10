@@ -318,5 +318,6 @@ export class PipeLineStack extends Stack {
     pipelineCfn.addDeletionOverride("Properties.Stages.1.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.2.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.3.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.0.RoleArn");
   }
 }
