@@ -10,11 +10,10 @@ const codepipeline = new aws.CodePipeline();
 // const Password = process.env.ACCESS_TOKEN;
 
 exports.handler = async (event) => {
-  for (let sqsRecord of event.Records) {
-    console.log(sqsRecord)
-    const record = JSON.parse(sqsRecord.body)
-    const event = JSON.parse(record.Message)
-    console.log(event)
+  for (let record of event.Records) {
+    console.log(record)
+    console.log(record.Sns.Message)
+    const event = JSON.parse(record.Sns.Message)
     const region = event.region;
     const pipelineName = event.detail.pipeline;
     const executionId = event.detail['execution-id'];
