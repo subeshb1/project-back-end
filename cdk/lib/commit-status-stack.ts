@@ -24,7 +24,7 @@ export class CommitStatusStack extends cdk.Stack {
     });
 
     pipelineStatusSNS.grantPublish({
-      grantPrincipal: new iam.AnyPrincipal()
+      grantPrincipal: new iam.ServicePrincipal('codestar-notifications.amazonaws.com')
     })
 
     new cdk.CfnOutput(this, "PipelineStatusTopicOutput", {

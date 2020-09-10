@@ -41,7 +41,47 @@ export class PipeLineStack extends Stack {
       })
     );
 
-    const builder = new codebuild.PipelineProject(this, "BuildAndTest", {
+    const builder = new codebuild.PipelineProject(this, "Synth", {
+      role: codeBuildRole,
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
+        privileged: false,
+        environmentVariables: {
+          ENV_TYPE: {
+            value: props?.envType,
+          }
+        },
+      },
+      cache: codebuild.Cache.local(
+        codebuild.LocalCacheMode.DOCKER_LAYER,
+        codebuild.LocalCacheMode.CUSTOM
+      ),
+      buildSpec: codebuild.BuildSpec.fromObject({
+        version: "0.2",
+        phases: {
+          install: {
+            commands: [
+              "npm i -g aws-cdk",
+              "(cd cdk && npm i)",
+            ],
+          },
+          build: {
+            commands: [
+              "cd cdk && npm run build && cdk synth"
+            ],
+          }
+        },
+        artifacts: {
+          files: ["**/*"],
+          "base-directory": "cdk/cdk.out",
+        },
+        cache: {
+          paths: ["node_modules/**/*"],
+        },
+      }),
+    });
+
+    const appBuilder = new codebuild.PipelineProject(this, "BuildAndTest", {
       role: codeBuildRole,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
@@ -55,22 +95,16 @@ export class PipeLineStack extends Stack {
           },
         },
       },
-      cache: codebuild.Cache.local(
-        codebuild.LocalCacheMode.DOCKER_LAYER,
-        codebuild.LocalCacheMode.CUSTOM
-      ),
       buildSpec: codebuild.BuildSpec.fromObject({
         version: "0.2",
         phases: {
           install: {
             commands: [
-              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
               "docker volume create --name=postgres-volume",
               "docker-compose up -d postgres",
               "docker build . -t back-end",
               "RAILS_ENV=test docker-compose up create-db",
-              "npm i -g aws-cdk",
-              "(cd cdk && npm i)",
+              "eval `aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email`",
             ],
           },
           build: {
@@ -78,8 +112,7 @@ export class PipeLineStack extends Stack {
               "echo 'RUNNING SPECS'",
               "docker-compose up test",
               "echo 'Building artifacts'",
-              "export VERSION=$(cat .version)",
-              "cd cdk && npm run build && cdk synth",
+              "export VERSION=$(cat .version)"
             ],
           },
           post_build: {
@@ -88,14 +121,7 @@ export class PipeLineStack extends Stack {
               "docker push ${ECR_REPO_URI}:${VERSION}",
             ],
           },
-        },
-        artifacts: {
-          files: ["**/*"],
-          "base-directory": "cdk/cdk.out",
-        },
-        cache: {
-          paths: ["node_modules/**/*"],
-        },
+        }
       }),
     });
 
@@ -161,7 +187,7 @@ export class PipeLineStack extends Stack {
           "codebuild:StopBuild",
         ],
         effect: iam.Effect.ALLOW,
-        resources: [builder.projectArn],
+        resources: [builder.projectArn, appBuilder.projectArn],
       })
     );
     pipeLineRole.addToPolicy(
@@ -231,10 +257,10 @@ export class PipeLineStack extends Stack {
             ],
           },
           {
-            stageName: "Build",
+            stageName: "Synthesize",
             actions: [
               new codepipelineActions.CodeBuildAction({
-                actionName: "Build",
+                actionName: "SynthStacks",
                 input: sourceOutput,
                 project: builder,
                 outputs: [codeBuildOutput],
@@ -244,6 +270,16 @@ export class PipeLineStack extends Stack {
           {
             stageName: "PipelineUpdate",
             actions: [pipelineSelfUpdate],
+          },
+          {
+            stageName: "Build",
+            actions: [
+              new codepipelineActions.CodeBuildAction({
+                actionName: "BuildAndTest",
+                input: sourceOutput,
+                project: appBuilder,
+              }),
+            ],
           },
           {
             stageName: "Deploy",
@@ -278,5 +314,6 @@ export class PipeLineStack extends Stack {
     pipelineCfn.addDeletionOverride("Properties.Stages.1.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.2.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.3.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.0.RoleArn");
   }
 }
