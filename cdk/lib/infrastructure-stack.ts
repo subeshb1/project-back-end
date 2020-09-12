@@ -36,6 +36,7 @@ export class InfrastructureStack extends cdk.Stack {
       {
         service: ec2.InterfaceVpcEndpointAwsService.ECR_DOCKER,
         vpc: vpc,
+        subnets: { subnetType: ec2.SubnetType.ISOLATED },
       }
     );
 
@@ -45,6 +46,7 @@ export class InfrastructureStack extends cdk.Stack {
       {
         service: ec2.GatewayVpcEndpointAwsService.S3,
         vpc: vpc,
+        subnets: [{ subnetType: ec2.SubnetType.ISOLATED }],
       }
     );
 
@@ -54,10 +56,12 @@ export class InfrastructureStack extends cdk.Stack {
       {
         service: ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_LOGS,
         vpc: vpc,
+        subnets: { subnetType: ec2.SubnetType.ISOLATED },
       }
     );
 
     const cluster = new ecs.Cluster(this, "MyCluster", {
+      clusterName: "JobPortal",
       vpc: vpc,
     });
 
@@ -84,7 +88,7 @@ export class InfrastructureStack extends cdk.Stack {
       this,
       "MyFargateService",
       {
-        serviceName: "JobPortal",
+        serviceName: "JobPortalBackend",
         cluster: cluster, // Required
         cpu: 256, // Default is 256
         desiredCount: 1, // Default is 1
@@ -105,6 +109,9 @@ export class InfrastructureStack extends cdk.Stack {
     backEnd.targetGroup.configureHealthCheck({
       path: "/api/v1/status",
       enabled: true,
+      healthyHttpCodes: "200",
+      interval: cdk.Duration.seconds(60),
+      unhealthyThresholdCount: 5
     });
   }
 }
