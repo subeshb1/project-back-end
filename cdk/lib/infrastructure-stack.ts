@@ -6,7 +6,6 @@ import * as ecr from "@aws-cdk/aws-ecr";
 import * as ecsPatterns from "@aws-cdk/aws-ecs-patterns";
 import * as rds from "@aws-cdk/aws-rds";
 import { SecretValue } from "@aws-cdk/core";
-
 interface InfraProps extends cdk.StackProps {
   readonly ecrRepo: ecr.IRepository;
   readonly envType: string;
@@ -17,11 +16,6 @@ export class InfrastructureStack extends cdk.Stack {
 
     const vpc = new ec2.Vpc(this, "MyVpc", {
       subnetConfiguration: [
-        {
-          name: "PrivateSubnet",
-          cidrMask: 24,
-          subnetType: ec2.SubnetType.PRIVATE,
-        },
         {
           name: "Public",
           cidrMask: 24,
@@ -35,6 +29,31 @@ export class InfrastructureStack extends cdk.Stack {
       ],
       maxAzs: 2, // Default is all AZs in region,
     });
+
+    const ecrVPCEndpoint = new ec2.InterfaceVpcEndpoint(
+      this,
+      "EcrVpcEndpoint",
+      {
+        service: {
+          name: `com.amazonaws.${cdk.Fn.ref("AWS::Region")}.ecr.dkr`,
+          port: 443,
+        },
+        vpc: vpc,
+      }
+    );
+
+    const cloudLogsVPCEndpoint = new ec2.InterfaceVpcEndpoint(
+      this,
+      "CloudWatchLogsVpcEndpoint",
+      {
+        service: {
+          name: `com.amazonaws.${cdk.Fn.ref("AWS::Region")}.logs`,
+          port: 443,
+          privateDnsDefault: true,
+        },
+        vpc: vpc,
+      }
+    );
 
     const cluster = new ecs.Cluster(this, "MyCluster", {
       vpc: vpc,
@@ -63,6 +82,7 @@ export class InfrastructureStack extends cdk.Stack {
       this,
       "MyFargateService",
       {
+        serviceName: "JobPortal",
         cluster: cluster, // Required
         cpu: 256, // Default is 256
         desiredCount: 1, // Default is 1
@@ -82,9 +102,11 @@ export class InfrastructureStack extends cdk.Stack {
     );
     backEnd.targetGroup.configureHealthCheck({
       path: "/api/v1/status",
-      enabled: true
+      enabled: true,
     });
 
+    ecrVPCEndpoint.connections.allowDefaultPortFrom(backEnd.service);
+    cloudLogsVPCEndpoint.connections.allowDefaultPortFrom(backEnd.service);
     instance.connections.allowDefaultPortFrom(backEnd.service);
   }
 }
