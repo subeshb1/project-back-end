@@ -18,13 +18,13 @@ exports.handler = async (event) => {
     const pipelineName = event.detail.pipeline;
     const executionId = event.detail['execution-id'];
     const state = transformState(event.detail.state);
-    const actionName = event.detail.action
+    const stageName = event.detail.stage
     if (state === null) {
       return;
     }
 
     const result = await this.getPipelineExecution(pipelineName, executionId);
-    const payload = createPayload(pipelineName, actionName, region, state);
+    const payload = createPayload(pipelineName, stageName, region, state);
     await this.postStatusToGitHub(result.owner, result.repository, result.sha, payload);
   }
 
@@ -38,14 +38,14 @@ function transformState(state) {
   if (state === 'SUCCEEDED') {
     return 'success';
   }
-  if (state === 'FAILED') {
+  if (state === 'FAILED' || state === 'CANCELED') {
     return 'failure';
   }
 
   return null;
 }
 
-function createPayload(pipelineName, actionName, region, status) {
+function createPayload(pipelineName, stageName, region, status) {
   let description;
   if (status === 'pending') {
     description = 'Action started';
@@ -59,7 +59,7 @@ function createPayload(pipelineName, actionName, region, status) {
     state: status,
     'target_url': buildCodePipelineUrl(pipelineName, region),
     description: description,
-    context: `CodePipeline/Action: ${actionName}`
+    context: `CodePipeline/Stage: ${stageName}`
   };
 }
 
