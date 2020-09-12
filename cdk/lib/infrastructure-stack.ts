@@ -37,6 +37,7 @@ export class InfrastructureStack extends cdk.Stack {
         service: {
           name: `com.amazonaws.${cdk.Fn.ref("AWS::Region")}.ecr.dkr`,
           port: 443,
+          privateDnsDefault: true,
         },
         vpc: vpc,
       }
