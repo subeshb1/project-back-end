@@ -34,11 +34,16 @@ export class InfrastructureStack extends cdk.Stack {
       this,
       "EcrVpcEndpoint",
       {
-        service: {
-          name: `com.amazonaws.${cdk.Fn.ref("AWS::Region")}.ecr.dkr`,
-          port: 443,
-          privateDnsDefault: true,
-        },
+        service: ec2.InterfaceVpcEndpointAwsService.ECR_DOCKER,
+        vpc: vpc,
+      }
+    );
+
+    const s3GatewayVPCEndpoint = new ec2.GatewayVpcEndpoint(
+      this,
+      "S3VpcEndpoint",
+      {
+        service: ec2.GatewayVpcEndpointAwsService.S3,
         vpc: vpc,
       }
     );
@@ -47,11 +52,7 @@ export class InfrastructureStack extends cdk.Stack {
       this,
       "CloudWatchLogsVpcEndpoint",
       {
-        service: {
-          name: `com.amazonaws.${cdk.Fn.ref("AWS::Region")}.logs`,
-          port: 443,
-          privateDnsDefault: true,
-        },
+        service: ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_LOGS,
         vpc: vpc,
       }
     );
@@ -105,9 +106,5 @@ export class InfrastructureStack extends cdk.Stack {
       path: "/api/v1/status",
       enabled: true,
     });
-
-    ecrVPCEndpoint.connections.allowDefaultPortFrom(backEnd.service);
-    cloudLogsVPCEndpoint.connections.allowDefaultPortFrom(backEnd.service);
-    instance.connections.allowDefaultPortFrom(backEnd.service);
   }
 }
