@@ -16,6 +16,7 @@ export class CommitStatusStack extends cdk.Stack {
       code: lambda.Code.fromAsset(
         path.join(__dirname, "resources/commit-status-lambda")
       ),
+      reservedConcurrentExecutions: 1
     });
 
     const pipelineStatusSNS = new sns.Topic(this, "PipelineStatusTopic", {

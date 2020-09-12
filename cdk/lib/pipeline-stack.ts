@@ -49,7 +49,7 @@ export class PipeLineStack extends Stack {
         environmentVariables: {
           ENV_TYPE: {
             value: props?.envType,
-          }
+          },
         },
       },
       cache: codebuild.Cache.local(
@@ -60,16 +60,11 @@ export class PipeLineStack extends Stack {
         version: "0.2",
         phases: {
           install: {
-            commands: [
-              "npm i -g aws-cdk",
-              "(cd cdk && npm i)",
-            ],
+            commands: ["npm i -g aws-cdk", "(cd cdk && npm i)"],
           },
           build: {
-            commands: [
-              "cd cdk && npm run build && cdk synth"
-            ],
-          }
+            commands: ["cd cdk && npm run build && cdk synth"],
+          },
         },
         artifacts: {
           files: ["**/*"],
@@ -112,7 +107,7 @@ export class PipeLineStack extends Stack {
               "echo 'RUNNING SPECS'",
               "docker-compose up test",
               "echo 'Building artifacts'",
-              "export VERSION=$(cat .version)"
+              "export VERSION=$(cat .version)",
             ],
           },
           post_build: {
@@ -121,7 +116,7 @@ export class PipeLineStack extends Stack {
               "docker push ${ECR_REPO_URI}:${VERSION}",
             ],
           },
-        }
+        },
       }),
     });
 
@@ -303,10 +298,10 @@ export class PipeLineStack extends Stack {
         ],
         detailType: "FULL",
         eventTypeIds: [
-          "codepipeline-pipeline-action-execution-succeeded",
-          "codepipeline-pipeline-action-execution-failed",
-          "codepipeline-pipeline-action-execution-canceled",
-          "codepipeline-pipeline-action-execution-started",
+          "codepipeline-pipeline-stage-execution-started",
+          "codepipeline-pipeline-stage-execution-succeeded",
+          "codepipeline-pipeline-stage-execution-canceled",
+          "codepipeline-pipeline-stage-execution-failed",
         ],
       }
     );

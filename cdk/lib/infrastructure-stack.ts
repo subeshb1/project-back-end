@@ -6,7 +6,6 @@ import * as ecr from "@aws-cdk/aws-ecr";
 import * as ecsPatterns from "@aws-cdk/aws-ecs-patterns";
 import * as rds from "@aws-cdk/aws-rds";
 import { SecretValue } from "@aws-cdk/core";
-
 interface InfraProps extends cdk.StackProps {
   readonly ecrRepo: ecr.IRepository;
   readonly envType: string;
@@ -17,11 +16,6 @@ export class InfrastructureStack extends cdk.Stack {
 
     const vpc = new ec2.Vpc(this, "MyVpc", {
       subnetConfiguration: [
-        {
-          name: "PrivateSubnet",
-          cidrMask: 24,
-          subnetType: ec2.SubnetType.PRIVATE,
-        },
         {
           name: "Public",
           cidrMask: 24,
@@ -36,7 +30,38 @@ export class InfrastructureStack extends cdk.Stack {
       maxAzs: 2, // Default is all AZs in region,
     });
 
+    const ecrVPCEndpoint = new ec2.InterfaceVpcEndpoint(
+      this,
+      "EcrVpcEndpoint",
+      {
+        service: ec2.InterfaceVpcEndpointAwsService.ECR_DOCKER,
+        vpc: vpc,
+        subnets: { subnetType: ec2.SubnetType.ISOLATED },
+      }
+    );
+
+    const s3GatewayVPCEndpoint = new ec2.GatewayVpcEndpoint(
+      this,
+      "S3VpcEndpoint",
+      {
+        service: ec2.GatewayVpcEndpointAwsService.S3,
+        vpc: vpc,
+        subnets: [{ subnetType: ec2.SubnetType.ISOLATED }],
+      }
+    );
+
+    const cloudLogsVPCEndpoint = new ec2.InterfaceVpcEndpoint(
+      this,
+      "CloudWatchLogsVpcEndpoint",
+      {
+        service: ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_LOGS,
+        vpc: vpc,
+        subnets: { subnetType: ec2.SubnetType.ISOLATED },
+      }
+    );
+
     const cluster = new ecs.Cluster(this, "MyCluster", {
+      clusterName: "JobPortal",
       vpc: vpc,
     });
 
@@ -63,6 +88,7 @@ export class InfrastructureStack extends cdk.Stack {
       this,
       "MyFargateService",
       {
+        serviceName: "JobPortalBackend",
         cluster: cluster, // Required
         cpu: 256, // Default is 256
         desiredCount: 1, // Default is 1
@@ -82,9 +108,10 @@ export class InfrastructureStack extends cdk.Stack {
     );
     backEnd.targetGroup.configureHealthCheck({
       path: "/api/v1/status",
-      enabled: true
+      enabled: true,
+      healthyHttpCodes: "200",
+      interval: cdk.Duration.seconds(60),
+      unhealthyThresholdCount: 5
     });
-
-    instance.connections.allowDefaultPortFrom(backEnd.service);
   }
 }
