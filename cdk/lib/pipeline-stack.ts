@@ -136,6 +136,7 @@ export class PipeLineStack extends Stack {
     const infraDeployRole = new iam.Role(this, "InfraDeployRole", {
       assumedBy: new iam.ServicePrincipal("cloudformation.amazonaws.com"),
     });
+    
 
     infraDeployRole.addToPolicy(
       new iam.PolicyStatement({
