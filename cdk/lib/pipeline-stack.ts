@@ -270,6 +270,51 @@ export class PipeLineStack extends Stack {
         resources: [ecsDeploymentApplication.applicationArn],
       })
     );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: [
+          "codedeploy:GetApplication",
+          "codedeploy:GetApplicationRevision",
+          "codedeploy:RegisterApplicationRevision",
+        ],
+        effect: iam.Effect.ALLOW,
+        resources: [ecsDeploymentApplication.applicationArn],
+      })
+    );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["codedeploy:CreateDeployment", "codedeploy:GetDeployment"],
+        effect: iam.Effect.ALLOW,
+        resources: [ecsDeploymentGroup.deploymentGroupArn],
+      })
+    );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["codedeploy:GetDeploymentConfig"],
+        effect: iam.Effect.ALLOW,
+        resources: [ecsDeploymentConfig.deploymentConfigArn],
+      })
+    );
+
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["ecs:RegisterTaskDefinition"],
+        effect: iam.Effect.ALLOW,
+        resources: ["*"],
+      })
+    );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["iam:PassRole"],
+        conditions: {
+          StringEqualsIfExists: {
+            "iam:PassedToService": ["ecs-tasks.amazonaws.com"],
+          },
+        },
+        effect: iam.Effect.ALLOW,
+        resources: ["*"],
+      })
+    );
 
     const pipeline = new codepipeline.Pipeline(
       this,
