@@ -13,6 +13,7 @@ import * as s3 from "@aws-cdk/aws-s3";
 import * as iam from "@aws-cdk/aws-iam";
 import * as ecr from "@aws-cdk/aws-ecr";
 import * as codestarnotifications from "@aws-cdk/aws-codestarnotifications";
+import * as codedeploy from "@aws-cdk/aws-codedeploy";
 export interface PipelineStackProps extends StackProps {
   readonly envType: string;
 }
@@ -170,6 +171,37 @@ export class PipeLineStack extends Stack {
       }
     );
 
+    const ecsDeploymentApplication = new codedeploy.EcsApplication(
+      this,
+      "ECSApplication",
+      {
+        applicationName: "ECSApplication",
+      }
+    );
+    const ecsDeploymentConfig = codedeploy.EcsDeploymentConfig.ALL_AT_ONCE;
+
+    const ecsDeploymentGroup = codedeploy.EcsDeploymentGroup.fromEcsDeploymentGroupAttributes(
+      this,
+      "DeploymentGroup",
+      {
+        application: ecsDeploymentApplication,
+        deploymentGroupName: "ECSDEPLOU",
+        deploymentConfig: ecsDeploymentConfig,
+      }
+    );
+    const ecsCodeDeploy = new codepipelineActions.CodeDeployEcsDeployAction({
+      actionName: "DeployCode",
+      deploymentGroup: ecsDeploymentGroup,
+      taskDefinitionTemplateFile: new codepipeline.ArtifactPath(
+        codeBuildOutput,
+        "PipeLineStack.template.json"
+      ),
+      appSpecTemplateFile: new codepipeline.ArtifactPath(
+        codeBuildOutput,
+        "PipeLineStack.template.json"
+      ),
+    });
+
     const pipeLineRole = new iam.Role(this, "CodePipeLineRole", {
       assumedBy: new iam.ServicePrincipal("codepipeline.amazonaws.com"),
     });
@@ -278,7 +310,7 @@ export class PipeLineStack extends Stack {
           },
           {
             stageName: "Deploy",
-            actions: [infraStackDeploy],
+            actions: [infraStackDeploy,ecsCodeDeploy],
           },
         ],
       }
@@ -310,5 +342,6 @@ export class PipeLineStack extends Stack {
     pipelineCfn.addDeletionOverride("Properties.Stages.2.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.3.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.1.RoleArn");
   }
 }
