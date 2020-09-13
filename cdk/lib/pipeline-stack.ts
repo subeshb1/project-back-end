@@ -200,6 +200,7 @@ export class PipeLineStack extends Stack {
         codeBuildOutput,
         "PipeLineStack.template.json"
       ),
+      runOrder: 2,
     });
 
     const pipeLineRole = new iam.Role(this, "CodePipeLineRole", {
