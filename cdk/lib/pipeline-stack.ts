@@ -122,7 +122,7 @@ export class PipeLineStack extends Stack {
       }),
     });
 
-    const ecsCodeBuild = new codebuild.PipelineProject(this, "BuildAndTest", {
+    const ecsCodeBuild = new codebuild.PipelineProject(this, "ECSCodeDeploy", {
       role: codeBuildRole,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
