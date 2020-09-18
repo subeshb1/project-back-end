@@ -116,7 +116,7 @@ export class InfrastructureStack extends cdk.Stack {
       unhealthyThresholdCount: 5,
     });
 
-    new cdk.CfnOutput(this, `${props.envType}-TaskDefinitionArn`, {
+    new cdk.CfnOutput(this, `${props.envType}TaskDefinitionArn`, {
       value: backEnd.taskDefinition.taskDefinitionArn,
     });
   }
