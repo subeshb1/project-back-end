@@ -244,7 +244,7 @@ export class PipeLineStack extends Stack {
           "codebuild:StopBuild",
         ],
         effect: iam.Effect.ALLOW,
-        resources: [builder.projectArn, appBuilder.projectArn],
+        resources: [builder.projectArn, appBuilder.projectArn, ecsCodeBuild.projectArn],
       })
     );
     pipeLineRole.addToPolicy(
