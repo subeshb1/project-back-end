@@ -31,6 +31,7 @@ export class PipeLineStack extends Stack {
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
     const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput");
+    const dockerImageOutput = new codepipeline.Artifact("DockerImageOutput");
     const ecsDeployOutput = new codepipeline.Artifact("ECSDeployOutput");
     const codeBuildRole = new iam.Role(this, "CodeBuildRole", {
       assumedBy: new iam.ServicePrincipal("codebuild.amazonaws.com"),
@@ -116,8 +117,13 @@ export class PipeLineStack extends Stack {
             commands: [
               "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
               "docker push ${ECR_REPO_URI}:${VERSION}",
+              `printf '{"ImageURI":"%s"}'  $ECR_REPO_URI:$VERSION > /imageDetail.json`,
             ],
           },
+        },
+        artifacts: {
+          files: ["/imageDetail.json"],
+          "discard-paths": "yes",
         },
       }),
     });
@@ -229,6 +235,12 @@ export class PipeLineStack extends Stack {
         ecsDeployOutput,
         "appspec.yaml"
       ),
+      containerImageInputs: [
+        {
+          taskDefinitionPlaceholder: "<IMAGE_PLACEHOLDER>",
+          input: dockerImageOutput,
+        },
+      ],
       runOrder: 2,
     });
 
@@ -244,7 +256,11 @@ export class PipeLineStack extends Stack {
           "codebuild:StopBuild",
         ],
         effect: iam.Effect.ALLOW,
-        resources: [builder.projectArn, appBuilder.projectArn, ecsCodeBuild.projectArn],
+        resources: [
+          builder.projectArn,
+          appBuilder.projectArn,
+          ecsCodeBuild.projectArn,
+        ],
       })
     );
     pipeLineRole.addToPolicy(
@@ -392,6 +408,7 @@ export class PipeLineStack extends Stack {
                 actionName: "BuildAndTest",
                 input: sourceOutput,
                 project: appBuilder,
+                outputs: [dockerImageOutput],
               }),
             ],
           },
