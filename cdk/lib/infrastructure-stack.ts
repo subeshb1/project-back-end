@@ -113,7 +113,11 @@ export class InfrastructureStack extends cdk.Stack {
       enabled: true,
       healthyHttpCodes: "200",
       interval: cdk.Duration.seconds(60),
-      unhealthyThresholdCount: 5
+      unhealthyThresholdCount: 5,
+    });
+
+    new cdk.CfnOutput(this, `${props.envType}-TaskDefinition`, {
+      value: backEnd.taskDefinition.taskDefinitionArn,
     });
   }
 }
