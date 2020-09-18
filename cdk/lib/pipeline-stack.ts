@@ -223,11 +223,11 @@ export class PipeLineStack extends Stack {
       deploymentGroup: ecsDeploymentGroup,
       taskDefinitionTemplateFile: new codepipeline.ArtifactPath(
         codeBuildOutput,
-        "PipeLineStack.template.json"
+        "taskdef.json"
       ),
       appSpecTemplateFile: new codepipeline.ArtifactPath(
         codeBuildOutput,
-        "PipeLineStack.template.json"
+        "appspec.yaml"
       ),
       runOrder: 2,
     });
