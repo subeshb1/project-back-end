@@ -237,7 +237,7 @@ export class PipeLineStack extends Stack {
       ),
       containerImageInputs: [
         {
-          taskDefinitionPlaceholder: "<IMAGE_PLACEHOLDER>",
+          taskDefinitionPlaceholder: "IMAGE_PLACEHOLDER",
           input: dockerImageOutput,
         },
       ],
