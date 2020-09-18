@@ -397,7 +397,7 @@ export class PipeLineStack extends Stack {
           },
           {
             stageName: "DeployInfra",
-            actions: [infraStackDeploy, ecsCodeDeploy],
+            actions: [infraStackDeploy],
           },
           {
             stageName: "DeployCode",
