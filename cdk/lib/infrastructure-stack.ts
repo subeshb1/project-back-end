@@ -118,6 +118,7 @@ export class InfrastructureStack extends cdk.Stack {
 
     new cdk.CfnOutput(this, `${props.envType}TaskDefinitionArn`, {
       value: backEnd.taskDefinition.taskDefinitionArn,
+      exportName: `${props.envType}-TaskDefinitionArn`
     });
   }
 }
