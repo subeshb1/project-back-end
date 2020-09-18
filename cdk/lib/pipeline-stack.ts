@@ -422,6 +422,7 @@ export class PipeLineStack extends Stack {
               new codepipelineActions.CodeBuildAction({
                 actionName: "BuildSpecAndMigrate",
                 input: sourceOutput,
+                extraInputs: [dockerImageOutput],
                 project: ecsCodeBuild,
                 outputs: [ecsDeployOutput],
               }),
