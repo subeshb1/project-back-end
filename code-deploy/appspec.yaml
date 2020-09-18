@@ -3,7 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: TASK_DEFINITION_ARN_PLACEHOLDER
+        TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
           ContainerName: "JobPortalBackendContainer"
           ContainerPort: 3000
