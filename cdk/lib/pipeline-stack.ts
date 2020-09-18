@@ -31,13 +31,14 @@ export class PipeLineStack extends Stack {
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
     const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput");
+    const ecsDeployOutput = new codepipeline.Artifact("ECSDeployOutput");
     const codeBuildRole = new iam.Role(this, "CodeBuildRole", {
       assumedBy: new iam.ServicePrincipal("codebuild.amazonaws.com"),
     });
     codeBuildRole.addToPolicy(
       new iam.PolicyStatement({
         resources: ["*"],
-        actions: ["ecr:*"],
+        actions: ["ecr:*", "ecs:*", "cloudformation:*"],
         effect: iam.Effect.ALLOW,
       })
     );
@@ -117,6 +118,34 @@ export class PipeLineStack extends Stack {
               "docker push ${ECR_REPO_URI}:${VERSION}",
             ],
           },
+        },
+      }),
+    });
+
+    const ecsCodeBuild = new codebuild.PipelineProject(this, "BuildAndTest", {
+      role: codeBuildRole,
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
+        privileged: false,
+        environmentVariables: {
+          ENV_TYPE: {
+            value: props?.envType,
+          },
+          ECR_REPO_URI: {
+            value: ecrRepo.repositoryUri,
+          },
+        },
+      },
+      buildSpec: codebuild.BuildSpec.fromObject({
+        version: "0.2",
+        phases: {
+          build: {
+            commands: ["cd ./code-deploy", "./deployer.sh"],
+          },
+        },
+        artifacts: {
+          files: ["**/*"],
+          "base-directory": "code-deploy",
         },
       }),
     });
@@ -367,8 +396,20 @@ export class PipeLineStack extends Stack {
             ],
           },
           {
-            stageName: "Deploy",
+            stageName: "DeployInfra",
             actions: [infraStackDeploy, ecsCodeDeploy],
+          },
+          {
+            stageName: "DeployCode",
+            actions: [
+              new codepipelineActions.CodeBuildAction({
+                actionName: "BuildSpecAndMigrate",
+                input: sourceOutput,
+                project: ecsCodeBuild,
+                outputs: [ecsDeployOutput],
+              }),
+              ecsCodeDeploy,
+            ],
           },
         ],
       }
@@ -400,6 +441,7 @@ export class PipeLineStack extends Stack {
     pipelineCfn.addDeletionOverride("Properties.Stages.2.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.3.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.0.RoleArn");
-    pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.1.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.5.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.5.Actions.1.RoleArn");
   }
 }
