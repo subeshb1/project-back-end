@@ -13,6 +13,7 @@ import * as s3 from "@aws-cdk/aws-s3";
 import * as iam from "@aws-cdk/aws-iam";
 import * as ecr from "@aws-cdk/aws-ecr";
 import * as codestarnotifications from "@aws-cdk/aws-codestarnotifications";
+import * as codedeploy from "@aws-cdk/aws-codedeploy";
 export interface PipelineStackProps extends StackProps {
   readonly envType: string;
 }
@@ -30,13 +31,15 @@ export class PipeLineStack extends Stack {
 
     const sourceOutput = new codepipeline.Artifact("SourceOutput");
     const codeBuildOutput = new codepipeline.Artifact("CodeBuildOutput");
+    const dockerImageOutput = new codepipeline.Artifact("DockerImageOutput");
+    const ecsDeployOutput = new codepipeline.Artifact("ECSDeployOutput");
     const codeBuildRole = new iam.Role(this, "CodeBuildRole", {
       assumedBy: new iam.ServicePrincipal("codebuild.amazonaws.com"),
     });
     codeBuildRole.addToPolicy(
       new iam.PolicyStatement({
         resources: ["*"],
-        actions: ["ecr:*"],
+        actions: ["ecr:*", "ecs:*", "cloudformation:*"],
         effect: iam.Effect.ALLOW,
       })
     );
@@ -114,8 +117,41 @@ export class PipeLineStack extends Stack {
             commands: [
               "docker tag back-end ${ECR_REPO_URI}:${VERSION}",
               "docker push ${ECR_REPO_URI}:${VERSION}",
+              `printf '{"ImageURI":"%s"}'  $ECR_REPO_URI:$VERSION > /imageDetail.json`,
             ],
           },
+        },
+        artifacts: {
+          files: ["/imageDetail.json"],
+          "discard-paths": "yes",
+        },
+      }),
+    });
+
+    const ecsCodeBuild = new codebuild.PipelineProject(this, "ECSCodeDeploy", {
+      role: codeBuildRole,
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
+        privileged: false,
+        environmentVariables: {
+          ENV_TYPE: {
+            value: props?.envType,
+          },
+          ECR_REPO_URI: {
+            value: ecrRepo.repositoryUri,
+          },
+        },
+      },
+      buildSpec: codebuild.BuildSpec.fromObject({
+        version: "0.2",
+        phases: {
+          build: {
+            commands: ["cd ./code-deploy", "./deployer.sh"],
+          },
+        },
+        artifacts: {
+          files: ["**/*"],
+          "base-directory": "code-deploy",
         },
       }),
     });
@@ -170,6 +206,44 @@ export class PipeLineStack extends Stack {
       }
     );
 
+    const ecsDeploymentApplication = new codedeploy.EcsApplication(
+      this,
+      "ECSApplication",
+      {
+        applicationName: "ECSApplication",
+      }
+    );
+    const ecsDeploymentConfig = codedeploy.EcsDeploymentConfig.ALL_AT_ONCE;
+
+    const ecsDeploymentGroup = codedeploy.EcsDeploymentGroup.fromEcsDeploymentGroupAttributes(
+      this,
+      "DeploymentGroup",
+      {
+        application: ecsDeploymentApplication,
+        deploymentGroupName: "ECSDEPLOU",
+        deploymentConfig: ecsDeploymentConfig,
+      }
+    );
+    const ecsCodeDeploy = new codepipelineActions.CodeDeployEcsDeployAction({
+      actionName: "DeployCode",
+      deploymentGroup: ecsDeploymentGroup,
+      taskDefinitionTemplateFile: new codepipeline.ArtifactPath(
+        ecsDeployOutput,
+        "taskdef.json"
+      ),
+      appSpecTemplateFile: new codepipeline.ArtifactPath(
+        ecsDeployOutput,
+        "appspec.yaml"
+      ),
+      containerImageInputs: [
+        {
+          taskDefinitionPlaceholder: "IMAGE_PLACEHOLDER",
+          input: dockerImageOutput,
+        },
+      ],
+      runOrder: 2,
+    });
+
     const pipeLineRole = new iam.Role(this, "CodePipeLineRole", {
       assumedBy: new iam.ServicePrincipal("codepipeline.amazonaws.com"),
     });
@@ -182,7 +256,11 @@ export class PipeLineStack extends Stack {
           "codebuild:StopBuild",
         ],
         effect: iam.Effect.ALLOW,
-        resources: [builder.projectArn, appBuilder.projectArn],
+        resources: [
+          builder.projectArn,
+          appBuilder.projectArn,
+          ecsCodeBuild.projectArn,
+        ],
       })
     );
     pipeLineRole.addToPolicy(
@@ -224,6 +302,63 @@ export class PipeLineStack extends Stack {
         actions: ["iam:PassRole"],
         effect: iam.Effect.ALLOW,
         resources: [pipelineDeployRole.roleArn, infraDeployRole.roleArn],
+      })
+    );
+
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: [
+          "codedeploy:GetApplication",
+          "codedeploy:GetApplicationRevision",
+          "codedeploy:RegisterApplicationRevision",
+        ],
+        effect: iam.Effect.ALLOW,
+        resources: [ecsDeploymentApplication.applicationArn],
+      })
+    );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: [
+          "codedeploy:GetApplication",
+          "codedeploy:GetApplicationRevision",
+          "codedeploy:RegisterApplicationRevision",
+        ],
+        effect: iam.Effect.ALLOW,
+        resources: [ecsDeploymentApplication.applicationArn],
+      })
+    );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["codedeploy:CreateDeployment", "codedeploy:GetDeployment"],
+        effect: iam.Effect.ALLOW,
+        resources: [ecsDeploymentGroup.deploymentGroupArn],
+      })
+    );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["codedeploy:GetDeploymentConfig"],
+        effect: iam.Effect.ALLOW,
+        resources: [ecsDeploymentConfig.deploymentConfigArn],
+      })
+    );
+
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["ecs:RegisterTaskDefinition"],
+        effect: iam.Effect.ALLOW,
+        resources: ["*"],
+      })
+    );
+    pipeLineRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["iam:PassRole"],
+        conditions: {
+          StringEqualsIfExists: {
+            "iam:PassedToService": ["ecs-tasks.amazonaws.com"],
+          },
+        },
+        effect: iam.Effect.ALLOW,
+        resources: ["*"],
       })
     );
 
@@ -273,12 +408,26 @@ export class PipeLineStack extends Stack {
                 actionName: "BuildAndTest",
                 input: sourceOutput,
                 project: appBuilder,
+                outputs: [dockerImageOutput],
               }),
             ],
           },
           {
-            stageName: "Deploy",
+            stageName: "DeployInfra",
             actions: [infraStackDeploy],
+          },
+          {
+            stageName: "DeployCode",
+            actions: [
+              new codepipelineActions.CodeBuildAction({
+                actionName: "BuildSpecAndMigrate",
+                input: sourceOutput,
+                extraInputs: [dockerImageOutput],
+                project: ecsCodeBuild,
+                outputs: [ecsDeployOutput],
+              }),
+              ecsCodeDeploy,
+            ],
           },
         ],
       }
@@ -310,5 +459,7 @@ export class PipeLineStack extends Stack {
     pipelineCfn.addDeletionOverride("Properties.Stages.2.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.3.Actions.0.RoleArn");
     pipelineCfn.addDeletionOverride("Properties.Stages.4.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.5.Actions.0.RoleArn");
+    pipelineCfn.addDeletionOverride("Properties.Stages.5.Actions.1.RoleArn");
   }
 }

@@ -92,8 +92,10 @@ export class InfrastructureStack extends cdk.Stack {
         cluster: cluster, // Required
         cpu: 256, // Default is 256
         desiredCount: 1, // Default is 1
+        platformVersion: ecs.FargatePlatformVersion.VERSION1_3,
         taskImageOptions: {
           containerPort: 3000,
+          containerName: "JobPortalBackendContainer",
           image: ecs.ContainerImage.fromEcrRepository(props.ecrRepo),
           environment: {
             DB_HOST_NAME: instance.dbInstanceEndpointAddress,
@@ -111,7 +113,12 @@ export class InfrastructureStack extends cdk.Stack {
       enabled: true,
       healthyHttpCodes: "200",
       interval: cdk.Duration.seconds(60),
-      unhealthyThresholdCount: 5
+      unhealthyThresholdCount: 5,
+    });
+
+    new cdk.CfnOutput(this, `${props.envType}TaskDefinitionArn`, {
+      value: backEnd.taskDefinition.taskDefinitionArn,
+      exportName: `${props.envType}-TaskDefinitionArn`
     });
   }
 }
