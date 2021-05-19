@@ -29,7 +29,7 @@ gem 'rails', '~> 5.2.2'
 gem 'pg'
 # Use Puma as the app server
 gem 'jwt'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 gem 'travis'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
